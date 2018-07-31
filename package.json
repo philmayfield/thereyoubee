@@ -1,0 +1,33 @@
+{
+  "name": "thereyoubee",
+  "version": "1.0.0",
+  "description": "A simple map based location tracker",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Phil Mayfield",
+  "license": "MIT",
+  "devDependencies": {
+    "create-react-app": "^1.5.2",
+    "eslint": "^5.2.0",
+    "eslint-plugin-react": "^7.10.0",
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.5",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.4.0"
+  }
+}

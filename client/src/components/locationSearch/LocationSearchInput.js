@@ -5,7 +5,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import PropTypes from "prop-types";
-import { setCurrentPlace } from "../actions/findPlaceActions";
+import { setCurrentPlace } from "../../actions/placeActions";
 
 class LocationSearchInput extends Component {
   constructor(props) {

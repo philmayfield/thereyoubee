@@ -1,0 +1,18 @@
+.map-point {
+  background-color: rgba(255, 255, 255, 0.85);
+  max-width: 150px;
+  min-width: 100px;
+  height: auto;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  position: absolute;
+  transform: translate(12px, -50%);
+  text-align: center;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.map-icon {
+  position: absolute;
+  left: -24px;
+  top: -4px;
+}

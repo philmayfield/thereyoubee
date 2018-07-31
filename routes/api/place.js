@@ -60,39 +60,46 @@ const Place = require("../../models/Place");
 //     });
 // });
 
-// @route   POST api/recipe
-// @desc    Create a recipe
+// @route   POST api/place
+// @desc    Create a place
 // @access  Private
-// router.post(
-//   "/",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     // validate request
-//     const author = req.user.id;
-//     const { body } = req;
-//     const { errors, isValid } = validateRecipeInput(body);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // validate request
+    const author = req.user.id;
+    const { body } = req;
+    console.log("body", body);
+    const { errors, isValid } = validatePlaceInput(body);
 
-//     // check validation
-//     if (!isValid) {
-//       return res.status(400).json(errors);
-//     }
+    // check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
-//     // get fields
-//     const recipeFields = {};
-//     recipeFields.author = author ? author : "";
-//     recipeFields.name = body.name ? body.name : "";
-//     recipeFields.style = body.style ? body.style : "";
+    // get fields
+    const placeFields = {};
+    placeFields.author = author ? author : "";
+    placeFields.address = body.address ? body.address : "";
+    placeFields.suggestion = body.suggestion ? body.suggestion : "";
+    placeFields.place_id = body.place_id ? body.place_id : "";
+    placeFields.latLng = {
+      lat: body.lat ? body.lat : "",
+      lng: body.lng ? body.lng : ""
+    };
 
-//     // save profile
-//     new Recipe(recipeFields)
-//       .save()
-//       .then(profile => res.json(profile))
-//       .catch(() => {
-//         errors.recipeError = "We ran into a problem creating your recipe.";
-//         res.status(400).json(errors);
-//       });
-//   }
-// );
+    // save place to db
+    new Place(placeFields)
+      .save()
+      .then(place => res.json(place))
+      .catch(err => {
+        console.log("err", err);
+        errors.placeError = "We ran into a problem saving this place.";
+        res.status(400).json(errors);
+      });
+  }
+);
 
 // @route   POST api/recipe/:recipe_id
 // @desc    Update a recipe

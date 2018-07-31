@@ -5,18 +5,27 @@ const notEmpty = require("./empty").notEmpty;
 module.exports = function validatePlaceInput(data = {}) {
   let errors = {};
 
-  // data.name = notEmpty(data.name) ? data.name : "";
-  // data.style = notEmpty(data.style) ? data.style : "";
+  data.address = notEmpty(data.address) ? data.address : "";
+  data.place_id = notEmpty(data.place_id) ? data.place_id : "";
+  data.lat = notEmpty(data.lat) ? data.lat : "";
+  data.lng = notEmpty(data.lng) ? data.lng : "";
 
-  // name validations
-  // if (Validator.isEmpty(data.name)) {
-  //   errors.name = "Recipe name is required";
-  // }
-
-  // style validations
-  // if (Validator.isEmpty(data.style)) {
-  //   errors.style = "Recipe style is required";
-  // }
+  // address validations
+  if (Validator.isEmpty(data.address)) {
+    errors.address = "Address is required";
+  }
+  // place_id validations
+  if (Validator.isEmpty(data.place_id)) {
+    errors.place_id = "Place ID is required";
+  }
+  // lat validations
+  if (Validator.isEmpty(data.lat)) {
+    errors.lat = "Latitude is required";
+  }
+  // lng validations
+  if (Validator.isEmpty(data.lng)) {
+    errors.lng = "Longitude is required";
+  }
 
   return {
     errors,

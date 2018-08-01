@@ -88,15 +88,13 @@ class PlacesMap extends Component {
       zoom: 4
     };
 
-    console.log("hasCurrentPlace", hasCurrentPlace);
-
     if (hasCurrentPlace) {
       centerZoom = {
         center: {
           lat: currentPlace.latLng.lat,
           lng: currentPlace.latLng.lng
         },
-        zoom: 15
+        zoom: 17
       };
     } else if (placesArr.length) {
       const widthHeight = {
@@ -105,20 +103,11 @@ class PlacesMap extends Component {
       };
       const bounds = this.makeBounds(placesArr);
       centerZoom = bounds && fitBounds(bounds, widthHeight);
-      console.log("widthHeight", widthHeight);
-      console.log("bounds", bounds);
     }
-
-    console.log("points", points);
-    console.log("centerZoom", centerZoom);
 
     return (
       <div style={{ height: "70vh", width: "100%" }}>
-        <GoogleMapReact
-          // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
-          center={centerZoom.center}
-          zoom={centerZoom.zoom}
-        >
+        <GoogleMapReact center={centerZoom.center} zoom={centerZoom.zoom}>
           {points}
         </GoogleMapReact>
       </div>

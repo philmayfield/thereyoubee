@@ -11,6 +11,7 @@ class LocationSearchInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      focus: false,
       address: "",
       place: {
         address: "",
@@ -22,6 +23,8 @@ class LocationSearchInput extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleChange(address) {
@@ -58,6 +61,13 @@ class LocationSearchInput extends Component {
       .catch(error => console.log("Error", error));
   }
 
+  handleFocus() {
+    this.setState({ focus: true });
+  }
+  handleBlur() {
+    this.setState({ focus: false });
+  }
+
   render() {
     const renderFunc = ({
       getInputProps,
@@ -71,14 +81,22 @@ class LocationSearchInput extends Component {
 
       return (
         <div className="suggestion__root">
-          <label htmlFor="find-a-place">Find a Place</label>
-          <input
-            id="find-a-place"
-            {...getInputProps({
-              placeholder: "Search for a place",
-              className: inputClass
-            })}
-          />
+          <div className="input-field">
+            <input
+              id="find-a-place"
+              onFocusCapture={this.handleFocus}
+              onBlurCapture={this.handleBlur}
+              {...getInputProps({
+                className: inputClass
+              })}
+            />
+            <label
+              className={this.state.focus ? "active" : ""}
+              htmlFor="find-a-place"
+            >
+              Find a Place
+            </label>
+          </div>
           <div className="suggestion__dropdown-container">
             {loading && <div>Loading...</div>}
             {suggestions.map(suggestion => {

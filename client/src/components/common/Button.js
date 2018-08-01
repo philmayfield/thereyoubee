@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Button = props => {
   const {
     children,
-    classes = ["btn-primary"],
+    classes = ["btn", "waves-effect", "waves-light"],
     svgClasses = ["light"],
     clickOrTo,
     icon,
@@ -16,7 +16,7 @@ const Button = props => {
     type = "button"
   } = props;
   const iconPath = icon && getImg(icon);
-  const className = `btn ${classes && classes.join(" ")}`;
+  const className = `${classes && classes.join(" ")}`;
   const svgClassName = `${children && children.length && "mr-2"} ${svgClasses &&
     svgClasses.join(" ")}`;
 

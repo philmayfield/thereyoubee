@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import LocationSearchInput from "./locationSearch/LocationSearchInput";
-import AddCurrentPlace from "./currentPlace/AddCurrentPlace";
-import Map from "./map/Map";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+
+// routes / componenets
+import Shell from "./common/Shell";
+import MapView from "./map/MapView";
+import ListView from "./list/ListView";
 
 class App extends Component {
   constructor(props) {
@@ -11,12 +14,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>App Component</h1>
-        <LocationSearchInput />
-        <AddCurrentPlace />
-        <Map />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <nav>
+            <Link className="" to="/map">
+              Map
+            </Link>
+            <Link className="" to="/list">
+              List
+            </Link>
+          </nav>
+          <h1>There You Bee</h1>
+          <main className="container">
+            <Route path="/map" component={Shell(MapView)} exact />
+            <Route path="/list" component={Shell(ListView)} exact />
+          </main>
+        </div>
+      </BrowserRouter>
     );
   }
 }

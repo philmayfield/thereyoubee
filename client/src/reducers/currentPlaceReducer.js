@@ -1,5 +1,5 @@
 import { SET_CURRENT_PLACE } from "../actions/actionTypes";
-import { notEmpty } from "../common/empty";
+// import { notEmpty } from "../common/empty";
 
 const initialState = {
   address: "",

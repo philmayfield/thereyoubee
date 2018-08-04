@@ -6542,3 +6542,29 @@ input[type=range]::-ms-thumb {
   position: absolute;
   left: -24px;
   top: 0; }
+
+.slide-appear {
+  transform: translateX(100px);
+  opacity: 0; }
+
+.slide-appear.slide-appear-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease-out; }
+
+.slide-enter {
+  transform: translateX(100px);
+  opacity: 0; }
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease-out; }
+
+.slide-leave {
+  opacity: 1;
+  transform: translateX(0); }
+
+.slide-leave.slide-leave-active {
+  transform: translateX(100px);
+  opacity: 0; }

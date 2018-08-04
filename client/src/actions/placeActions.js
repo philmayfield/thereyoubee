@@ -1,6 +1,11 @@
 import axios from "axios";
 import { SET_CURRENT_PLACE, SAVE_CURRENT_PLACE } from "./actionTypes";
-import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
+import {
+  getErrors,
+  // clearErrors,
+  isLoading,
+  notLoading
+} from "./appActions";
 
 export const setCurrentPlace = payload => {
   return {

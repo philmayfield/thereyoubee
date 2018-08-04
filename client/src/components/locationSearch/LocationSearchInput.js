@@ -11,8 +11,9 @@ class LocationSearchInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      focus: false,
+      hasFocus: false,
       address: "",
+      findPlaceInput: "",
       place: {
         address: "",
         suggestion: "",
@@ -23,6 +24,7 @@ class LocationSearchInput extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
   }
@@ -61,11 +63,19 @@ class LocationSearchInput extends Component {
       .catch(error => console.log("Error", error));
   }
 
-  handleFocus() {
-    this.setState({ focus: true });
+  handleInputChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
+
+  handleFocus() {
+    this.setState({ hasFocus: true });
+  }
+
   handleBlur() {
-    this.setState({ focus: false });
+    const { findPlaceInput } = this.state;
+    if (!findPlaceInput.length) {
+      this.setState({ hasFocus: false });
+    }
   }
 
   render() {
@@ -86,12 +96,15 @@ class LocationSearchInput extends Component {
               id="find-a-place"
               onFocusCapture={this.handleFocus}
               onBlurCapture={this.handleBlur}
+              name="findPlaceInput"
+              value={this.state.findPlaceInput}
+              onChangeCapture={this.handleInputChange}
               {...getInputProps({
                 className: inputClass
               })}
             />
             <label
-              className={this.state.focus ? "active" : ""}
+              className={this.state.hasFocus ? "active" : ""}
               htmlFor="find-a-place"
             >
               Find a Place

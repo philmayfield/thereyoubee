@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 // routes / componenets
-import Shell from "./common/Shell";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
 
@@ -14,23 +14,37 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <nav>
-            <Link className="" to="/map">
-              Map
-            </Link>
-            <Link className="" to="/list">
-              List
-            </Link>
-          </nav>
-          <h1>There You Bee</h1>
-          <main className="container">
-            <Route path="/map" component={Shell(MapView)} exact />
-            <Route path="/list" component={Shell(ListView)} exact />
-          </main>
-        </div>
-      </BrowserRouter>
+      <Router>
+        <Route
+          render={({ location }) => (
+            <div className="App">
+              <nav>
+                <Link className="" to="/map">
+                  Map
+                </Link>
+                <Link className="" to="/list">
+                  List
+                </Link>
+              </nav>
+              <h1>There You Bee</h1>
+              <main className="container">
+                <TransitionGroup>
+                  <CSSTransition
+                    key={location.key}
+                    timeout={500}
+                    classNames="slide"
+                  >
+                    <Switch location={location}>
+                      <Route path="/map" component={MapView} exact />
+                      <Route path="/list" component={ListView} exact />
+                    </Switch>
+                  </CSSTransition>
+                </TransitionGroup>
+              </main>
+            </div>
+          )}
+        />
+      </Router>
     );
   }
 }

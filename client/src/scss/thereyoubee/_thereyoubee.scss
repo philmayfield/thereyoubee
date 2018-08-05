@@ -1,2 +1,9 @@
 @import "point";
 @import "transitions";
+
+body {
+  overflow-y: scroll;
+}
+.container {
+  position: relative;
+}

@@ -46,3 +46,17 @@ export const setCurrentUser = payload => {
     payload
   };
 };
+
+// log out current user
+export const logoutUser = () => dispatch => {
+  dispatch(clearErrors());
+
+  // remove jwt token from local storage
+  localStorage.removeItem("jwtToken");
+
+  // remove auth header for future axios calls
+  setAuthToken(false);
+
+  // set current user to empty object
+  dispatch(setCurrentUser({}));
+};

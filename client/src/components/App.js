@@ -11,6 +11,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
 // routes / componenets
+import IsAuth from "../components/common/IsAuth";
 import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
@@ -32,6 +33,7 @@ class App extends Component {
         <Route
           render={({ location, history }) => (
             <div className="App">
+              <IsAuth />
               <Loading />
               <nav>
                 <Link className="" to="/login">

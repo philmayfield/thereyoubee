@@ -1,28 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactSVG from "react-svg";
-import getImg from "../../common/getImg";
 import { Link } from "react-router-dom";
 
 const Button = props => {
   const {
     children,
-    classes = ["btn", "waves-effect", "waves-light"],
-    svgClasses = ["light"],
     clickOrTo,
     icon,
-    value = null,
+    iconSide = "left",
     confirmItem = null,
-    type = "button"
+    value = null,
+    pulse = false,
+    type = "button",
+    classes = []
   } = props;
-  const iconPath = icon && getImg(icon);
-  const className = `${classes && classes.join(" ")}`;
-  const svgClassName = `${children && children.length && "mr-2"} ${svgClasses &&
-    svgClasses.join(" ")}`;
+  const className = `btn waves-effect waves-light ${classes.join(" ")} ${
+    pulse ? "pulse" : ""
+  }`;
 
   return type === "link" ? (
     <Link className={className} to={clickOrTo}>
-      {iconPath && <ReactSVG path={iconPath} svgClassName={svgClassName} />}
+      {icon ? <i className={`material-icons ${iconSide}`}>{icon}</i> : ""}
       {children}
     </Link>
   ) : (
@@ -33,7 +31,7 @@ const Button = props => {
       value={value}
       data-confirm-item={confirmItem}
     >
-      {iconPath && <ReactSVG path={iconPath} svgClassName={svgClassName} />}
+      {icon ? <i className={`material-icons ${iconSide}`}>{icon}</i> : ""}
       {children}
     </button>
   );
@@ -42,12 +40,14 @@ const Button = props => {
 Button.propTypes = {
   type: PropTypes.string,
   icon: PropTypes.string,
+  iconSide: PropTypes.string,
   classes: PropTypes.array,
   svgClasses: PropTypes.array,
   clickOrTo: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.string,
   value: PropTypes.any,
-  confirmItem: PropTypes.string
+  confirmItem: PropTypes.string,
+  pulse: PropTypes.bool
 };
 
 export default Button;

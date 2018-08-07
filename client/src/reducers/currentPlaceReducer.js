@@ -1,4 +1,4 @@
-import { SET_CURRENT_PLACE } from "../actions/actionTypes";
+import { SET_CURRENT_PLACE, SAVE_CURRENT_PLACE } from "../actions/actionTypes";
 // import { notEmpty } from "../common/empty";
 
 const initialState = {
@@ -15,6 +15,10 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload
       };
+
+    case SAVE_CURRENT_PLACE:
+      return initialState;
+
     default:
       return state;
   }

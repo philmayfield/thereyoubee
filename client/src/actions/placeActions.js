@@ -1,21 +1,34 @@
 import axios from "axios";
-import { SET_CURRENT_PLACE, SAVE_CURRENT_PLACE } from "./actionTypes";
 import {
-  getErrors,
-  // clearErrors,
-  isLoading,
-  notLoading
-} from "./appActions";
+  GET_PLACES,
+  SET_CURRENT_PLACE,
+  SAVE_CURRENT_PLACE
+} from "./actionTypes";
+import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 
-export const setCurrentPlace = payload => {
-  return {
-    type: SET_CURRENT_PLACE,
-    payload
-  };
+// get all of the saved places
+export const getAllPlaces = () => dispatch => {
+  dispatch(isLoading("getAllPlaces"));
+
+  axios
+    .get("/api/place/all")
+    .then(res => {
+      dispatch({
+        type: GET_PLACES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      const error = err.response ? err.response.data : err;
+      dispatch(getErrors(error));
+    })
+    .finally(() => dispatch(notLoading("getAllPlaces")));
 };
 
+// save the current place to the server
 export const saveCurrentPlace = place => dispatch => {
   dispatch(isLoading("saveCurrentPlace"));
+  dispatch(clearErrors());
 
   axios
     .post("/api/place/", place)
@@ -29,5 +42,13 @@ export const saveCurrentPlace = place => dispatch => {
       const error = err.response ? err.response.data : err;
       dispatch(getErrors(error));
     })
-    .finally(() => dispatch(notLoading("makeBrew")));
+    .finally(() => dispatch(notLoading("saveCurrentPlace")));
+};
+
+// set the current place on the app
+export const setCurrentPlace = payload => {
+  return {
+    payload,
+    type: SET_CURRENT_PLACE
+  };
 };

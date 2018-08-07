@@ -7,8 +7,8 @@ module.exports = function validatePlaceInput(data = {}) {
 
   data.address = notEmpty(data.address) ? data.address : "";
   data.place_id = notEmpty(data.place_id) ? data.place_id : "";
-  data.lat = notEmpty(data.lat) ? data.lat : "";
-  data.lng = notEmpty(data.lng) ? data.lng : "";
+  data.lat = notEmpty(data.lat) ? `${data.lat}` : "";
+  data.lng = notEmpty(data.lng) ? `${data.lng}` : "";
 
   // address validations
   if (Validator.isEmpty(data.address)) {

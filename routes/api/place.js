@@ -11,31 +11,31 @@ const Place = require("../../models/Place");
 
 // ROUTES --------------------------------------------
 
-// @route   GET api/recipe/all
-// @desc    Read all recipes
+// @route   GET api/place/all
+// @desc    Read all places
 // @access  Public
-// router.get("/all", (req, res) => {
-//   const errors = {};
+router.get("/all", (req, res) => {
+  const errors = {};
 
-//   Recipe.find()
-//     .then(recipes => {
-//       if (notEmpty(recipes)) {
-//         // found some recipes, return with 200 status
-//         return res.json(recipes);
-//       }
+  Place.find()
+    .then(places => {
+      if (notEmpty(places)) {
+        // found some places, return with 200 status
+        return res.json(places);
+      }
 
-//       // no recipes found
-//       errors.recipesError =
-//         "Hey, there arent any recipes here yet.  Why dont you add some!";
-//       return res.status(404).json(errors);
-//     })
-//     .catch(err => {
-//       errors.req = req;
-//       errors.err = err;
-//       errors.recipeError = "There was a problem fetching the recipes :(";
-//       return res.status(404).json(errors);
-//     });
-// });
+      // no places found
+      errors.placesError =
+        "Hey, there arent any places here yet.  Why dont you add some!";
+      return res.status(404).json(errors);
+    })
+    .catch(err => {
+      errors.req = req;
+      errors.err = err;
+      errors.placesError = "There was a problem fetching the places 😢";
+      return res.status(404).json(errors);
+    });
+});
 
 // @route   GET api/recipe/:recipe_id
 // @desc    Read recipe by ID

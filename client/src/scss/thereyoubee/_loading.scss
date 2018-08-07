@@ -1,0 +1,19 @@
+.app-loading {
+  background-color: rgba(white, 0.5);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: opacity 500ms ease;
+}
+.app-loading-in {
+  opacity: 1;
+}
+.app-loading-out {
+  opacity: 0;
+}

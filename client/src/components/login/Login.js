@@ -40,44 +40,42 @@ class Login extends Component {
     this.props.loginUser(myDude);
   }
 
-  componentDidMount() {
-    this.handleAlreadyAuth(this.props.auth.isAuth);
-  }
+  // componentDidMount() {
+  //   this.handleAlreadyAuth(this.props.auth.isAuth);
+  // }
 
-  componentDidUpdate() {
-    this.handleAlreadyAuth(this.props.auth.isAuth);
-  }
+  // componentDidUpdate() {
+  //   this.handleAlreadyAuth(this.props.auth.isAuth);
+  // }
 
-  handleAlreadyAuth(isAuth) {
-    if (isAuth) {
-      this.props.history.push("/recipes");
-    }
-  }
+  // handleAlreadyAuth(isAuth) {
+  //   if (isAuth) {
+  //     this.props.history.push("/list");
+  //   }
+  // }
 
   render() {
     const { errors } = this.props;
 
     const newUserMsg = (
-      <Alert bsStyle="alert-success" heading={`Welcome ${this.state.username}`}>
+      <Alert color="teal" heading={`Welcome ${this.state.username}`}>
         <hr className="my-1" />
         <p className="mb-0">
           You&rsquo;re all registered up! Go ahead and login with the password
-          you entered previously and get to brewing!
+          you entered previously!
         </p>
       </Alert>
     );
 
     return (
       <div className="row">
-        <div className="col-sm-12 col-md-8 col-lg-6 m-auto">
+        <div className="s12 m8 l6 m-auto">
           <h1>Login</h1>
-          <div className="login p-3 mb-3 z-depth-3">
+          <div className="login">
             {this.state.newUser ? newUserMsg : null}
             <form onSubmit={this.formSubmit}>
               <Input
-                placeholder="Enter your username"
                 label="Username"
-                type="text"
                 name="username"
                 autoFocus={!this.state.newUser}
                 value={this.state.username}
@@ -85,7 +83,6 @@ class Login extends Component {
                 onChange={this.inputChange}
               />
               <Input
-                placeholder="Enter your password"
                 label="Password"
                 type="password"
                 name="password"
@@ -94,26 +91,13 @@ class Login extends Component {
                 error={errors.password}
                 onChange={this.inputChange}
               />
-              <Button
-                type="submit"
-                classes={[
-                  "btn-primary",
-                  "mt-5",
-                  "d-flex",
-                  "w-100",
-                  "justify-content-center"
-                ]}
-                icon="baselineAccountCircle24px"
-              >
+              <Button type="submit" icon="person">
                 Login
               </Button>
             </form>
           </div>
           <p className="text-center">
-            Don&rsquo;t have an account?
-            <Link className="ml-2" to="/signup">
-              Sign up now!
-            </Link>
+            Don&rsquo;t have an account? <Link to="/signup">Sign up now!</Link>
           </p>
         </div>
       </div>

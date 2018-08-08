@@ -15,3 +15,8 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const GET_PLACES = "GET_PLACES";
 export const SET_CURRENT_PLACE = "SET_CURRENT_PLACE";
 export const SAVE_CURRENT_PLACE = "SAVE_CURRENT_PLACE";
+export const DELETE_PLACE = "DELETE_PLACE";
+
+// toast
+export const ADD_TOAST = "ADD_TOAST";
+export const DELETE_TOAST = "DELETE_TOAST";

@@ -70,7 +70,6 @@ router.post(
     // validate request
     const author = req.user.id;
     const { body } = req;
-    console.log("body", body);
     const { errors, isValid } = validatePlaceInput(body);
 
     // check validation
@@ -94,7 +93,6 @@ router.post(
       .save()
       .then(place => res.json(place))
       .catch(err => {
-        console.log("err", err);
         errors.placeError = "We ran into a problem saving this place.";
         res.status(400).json(errors);
       });
@@ -142,48 +140,30 @@ router.post(
 //   }
 // );
 
-// @route   DELETE api/recipe/:recipe_id
-// @desc    Delete a recipe
+// @route   DELETE api/place/:id
+// @desc    Delete a place
 // @access  Private
-// router.delete(
-//   "/:recipe_id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     const recipeId = req.params.recipe_id;
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { id } = req.params;
 
-//     Recipe.findByIdAndDelete(recipeId)
-//       .then(recipe => {
-//         if (notEmpty(recipe)) {
-//           // deleted the recipe - now delete the associated versions, brews and gravities
-//           Version.find({ recipe: recipe._id })
-//             .then(versions => {
-//               versions.forEach(version => {
-//                 Version.findByIdAndDelete(version._id)
-//                   .then(version => {
-//                     Brew.find({ version: version._id }).then(brews => {
-//                       brews.forEach(brew => {
-//                         Brew.findByIdAndDelete(brew._id)
-//                           .then(brew => {
-//                             Gravity.deleteMany({ brew: brew._id }).catch(err =>
-//                               console.log("g dm err >", err)
-//                             );
-//                           })
-//                           .catch(err => console.log("b fd err >", err));
-//                       });
-//                     });
-//                   })
-//                   .catch(err => console.log("v fd err >", err));
-//               });
-//             })
-//             .catch(err => res.status(400).json(err));
-//           return res.json({ deleted: true });
-//         }
-//         return res.json({
-//           deleted: "That recipe was not found or already deleted!"
-//         });
-//       })
-//       .catch(err => res.status(400).json(err));
-//   }
-// );
+    Place.findByIdAndDelete(id)
+      .then(place => {
+        if (notEmpty(place)) {
+          // deleted the place - now delete the associated versions, brews and gravities
+          return res.json({
+            place,
+            deleted: true
+          });
+        }
+        return res.json({
+          deleted: "That place was not found or already deleted!"
+        });
+      })
+      .catch(err => res.status(400).json(err));
+  }
+);
 
 module.exports = router;

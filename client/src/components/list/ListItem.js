@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
+import { deletePlace } from "../../actions/placeActions";
 
 class ListItem extends Component {
   constructor(props) {
@@ -13,8 +15,10 @@ class ListItem extends Component {
   handleDelete(e) {
     e.preventDefault();
 
-    console.log("e", e);
-    console.log(">>", this.props.item);
+    const { _id } = this.props.item;
+
+    // TODO: add some sort of confirmation (confirm button?)
+    this.props.deletePlace(_id);
   }
 
   render() {
@@ -37,29 +41,33 @@ class ListItem extends Component {
             fab={true}
             classes={[
               "btn-floating",
-              "btn-large",
+              // "btn-large",
               "halfway-fab",
               "teal",
               "lighten-2"
             ]}
           >
-            <Button icon="insert_chart" classes={["btn-floating", "blue"]} />
-            <Button icon="publish" classes={["btn-floating", "yellow"]} />
-            <Button icon="format_quote" classes={["btn-floating", "orange"]} />
+            <Button
+              icon="delete_forever"
+              classes={["btn-floating", "red"]}
+              clickOrTo={this.handleDelete}
+            />
           </Button>
         </div>
         <div className="card-content">
           <p>{address}</p>
         </div>
-        {/* ({lat}, {lng}) */}
-        {/* <Button clickOrTo={this.handleDelete}>Delete</Button> */}
       </div>
     );
   }
 }
 
 ListItem.propTypes = {
+  deletePlace: PropTypes.func.isRequired,
   item: PropTypes.object
 };
 
-export default ListItem;
+export default connect(
+  null,
+  { deletePlace }
+)(ListItem);

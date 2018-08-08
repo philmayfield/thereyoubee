@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 
 // routes / componenets
 import IsAuth from "../components/common/IsAuth";
+import ToastContainer from "./toast/ToastContainer";
 import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
@@ -35,6 +36,7 @@ class App extends Component {
             <div className="App">
               <IsAuth />
               <Loading />
+              <ToastContainer />
               <nav>
                 <Link className="" to="/login">
                   Login

@@ -6567,22 +6567,19 @@ input[type=range]::-ms-thumb {
   right: 0;
   bottom: 0;
   z-index: 997; }
-  .fab.active ul {
-    visibility: visible; }
   .fab ul {
     text-align: right;
     right: 5rem;
     margin: 0;
     transform: translateY(50%);
     position: relative;
-    width: 500px;
-    visibility: hidden; }
+    width: 500px; }
   .fab li {
     opacity: 0;
-    transform: scale(0.7) translateX(50px);
+    transform: scale(0.2) translateX(25px);
     display: inline-block;
     margin: 0 15px 0 0;
-    transition: all 250ms cubic-bezier(0.07, 0.405, 0.21, 1.5); }
+    transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
   .fab .halfway-fab {
     right: 1rem; }
 
@@ -6663,6 +6660,24 @@ input[type=range]::-ms-thumb {
 .growFade-enter-done {
   opacity: 1 !important;
   transform: scale(1) translateX(0) !important; }
+
+.turn {
+  transition: transform 333ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+
+.zero {
+  transform: rotate(0deg); }
+
+.ninety {
+  transform: rotate(90deg); }
+
+.one-eighty {
+  transform: rotate(180deg); }
+
+.two-seventy {
+  transform: rotate(270deg); }
+
+.three-sixety {
+  transform: rotate(1turn); }
 
 body {
   overflow-y: scroll; }

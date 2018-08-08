@@ -11,7 +11,7 @@ export default (state = [], action) => {
       return action.payload;
 
     case SAVE_CURRENT_PLACE:
-      return [...state, action.payload];
+      return [...state, action.payload.data];
 
     default:
       return state;

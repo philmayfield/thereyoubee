@@ -1,10 +1,10 @@
 // Fixed Action Button
 .fab {
-  &.active {
-    ul {
-      visibility: visible;
-    }
-  }
+  // &.active {
+  //   ul {
+  //     visibility: visible;
+  //   }
+  // }
   ul {
     text-align: right;
     right: 5rem;
@@ -12,14 +12,14 @@
     transform: translateY(50%);
     position: relative;
     width: 500px;
-    visibility: hidden;
+    // visibility: hidden;
   }
   li {
     opacity: 0;
-    transform: scale(0.7) translateX(50px);
+    transform: scale(0.2) translateX(25px);
     display: inline-block;
     margin: 0 15px 0 0;
-    transition: all 250ms cubic-bezier(0.07, 0.405, 0.21, 1.5);
+    transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
   }
 
   padding: 0;

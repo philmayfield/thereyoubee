@@ -43,3 +43,26 @@
   opacity: 1 !important;
   transform: scale(1) translateX(0) !important;
 }
+// .growFade-exit-done {
+//   opacity: 0;
+//   transform: scale(0.2) translateY(50px);
+// }
+
+.turn {
+  transition: transform 333ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+}
+.zero {
+  transform: rotate(0deg);
+}
+.ninety {
+  transform: rotate(90deg);
+}
+.one-eighty {
+  transform: rotate(180deg);
+}
+.two-seventy {
+  transform: rotate(270deg);
+}
+.three-sixety {
+  transform: rotate(1turn);
+}

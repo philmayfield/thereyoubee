@@ -22,10 +22,14 @@ class Button extends Component {
     const delayAmt = this.props.children.length;
 
     return (
-      <div className={`fab ${this.state.showFab ? "active" : ""}`}>
+      <div className={`fab`}>
         <button type="button" className={className} onClick={this.handleToggle}>
           {
-            <i className={`material-icons`}>
+            <i
+              className={`material-icons turn ${
+                this.state.showFab ? "one-eighty" : "zero"
+              }`}
+            >
               {this.state.showFab ? "close" : icon}
             </i>
           }
@@ -37,11 +41,9 @@ class Button extends Component {
               timeout={0}
               classNames="growFade"
             >
-              {state => (
-                <li style={{ transitionDelay: `${(delayAmt - i) * 50}ms` }}>
-                  {child}
-                </li>
-              )}
+              <li style={{ transitionDelay: `${(delayAmt - i) * 50}ms` }}>
+                {child}
+              </li>
             </CSSTransition>
           ))}
         </ul>

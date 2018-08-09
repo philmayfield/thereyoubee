@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { notEmpty } from "../../common/empty";
+import { isEmpty, notEmpty } from "../../common/empty";
 import Button from "../common/Button";
 import { saveCurrentPlace } from "../../actions/placeActions";
+import { CSSTransition } from "react-transition-group";
 
 class AddCurrentPlace extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class AddCurrentPlace extends Component {
     this.state = {};
 
     this.handleAddPlace = this.handleAddPlace.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ show: true });
   }
 
   handleAddPlace(e) {
@@ -28,7 +33,7 @@ class AddCurrentPlace extends Component {
   }
 
   render() {
-    const { currentPlace, places } = this.props;
+    const { currentPlace, places, errors } = this.props;
     const {
       address,
       suggestion,
@@ -36,24 +41,41 @@ class AddCurrentPlace extends Component {
       // latLng
     } = currentPlace;
     const showComponent = notEmpty(place_id);
+    const showAddBtn = isEmpty(errors);
     const alreadyHavePlace = notEmpty(
       places.find(place => place.place_id === place_id)
     );
 
     return (
-      <div className={showComponent ? "add-current-place" : "hide"}>
-        <h2 className="sr-only">Current Place</h2>
-        <div>{address}</div>
-        <div>{suggestion}</div>
-        <div>{place_id}</div>
-        {alreadyHavePlace ? (
-          <div className="red-text">Already have it</div>
-        ) : (
-          <Button clickOrTo={this.handleAddPlace} value={currentPlace}>
-            Add This Place
-          </Button>
-        )}
-      </div>
+      <CSSTransition in={showComponent} timeout={0} classNames="growFade">
+        <div className={showComponent ? "add-current-place z-depth-3" : "hide"}>
+          <h2 className="sr-only">Current Place</h2>
+          <div className="add-current-place__place-name">
+            <i className={`material-icons place-icon mr-2`}>place</i>
+            {suggestion}
+          </div>
+          <hr />
+          <p className="mt-0">{address}</p>
+          {alreadyHavePlace ? (
+            <div className="red-text">Already have it</div>
+          ) : showAddBtn ? (
+            <div className="right-align">
+              <Button
+                clickOrTo={this.handleAddPlace}
+                value={currentPlace}
+                icon="add_circle"
+              >
+                Add This Place
+              </Button>
+            </div>
+          ) : (
+            <div className="red-text">
+              We couldnt get your list of places, go ahead and try reloading the
+              page and finding it again please.
+            </div>
+          )}
+        </div>
+      </CSSTransition>
     );
   }
 }
@@ -61,11 +83,13 @@ class AddCurrentPlace extends Component {
 AddCurrentPlace.propTypes = {
   places: PropTypes.array.isRequired,
   currentPlace: PropTypes.object.isRequired,
-  saveCurrentPlace: PropTypes.func.isRequired
+  saveCurrentPlace: PropTypes.func.isRequired,
+  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };
 
 const mapStateToProps = state => ({
   currentPlace: state.currentPlace,
+  errors: state.errors,
   places: state.places
 });
 

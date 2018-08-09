@@ -1,8 +1,19 @@
 .add-current-place {
   background-color: #fff;
+  border-radius: $button-radius;
   padding: $spacer;
-  position: absolute;
+  position: fixed;
   bottom: $spacer;
-  left: $spacer;
   right: $spacer;
+
+  // for transition
+  opacity: 0;
+  transform: scale(0.2) translateX(25px);
+  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+}
+
+.add-current-place__place-name {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 }

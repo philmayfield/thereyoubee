@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { isEmpty, notEmpty } from "../../common/empty";
 import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
-import Point from "../point/Point";
+import ClickablePoint from "../point/ClickablePoint";
+// import Point from "../point/Point";
 import { fitBounds } from "google-map-react/utils";
 
 class Map extends Component {
@@ -26,16 +27,6 @@ class Map extends Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
-  getCurrentPlace(currentPlace) {
-    const { address, place_id } = this.props.currentPlace;
-    const hasCurrentPlace = notEmpty(address) || notEmpty(place_id);
-
-    return {
-      hasCurrentPlace,
-      currentPlace: currentPlace
-    };
-  }
-
   makeBounds(placesArr) {
     if (isEmpty(placesArr)) return null;
 
@@ -43,14 +34,14 @@ class Map extends Component {
     const lngs = [];
 
     placesArr.forEach(({ latLng }) => {
-      lats.push(latLng.lat);
-      lngs.push(latLng.lng);
+      lats.push(parseFloat(latLng.lat));
+      lngs.push(parseFloat(latLng.lng));
     });
 
-    lats.sort();
-    lngs.sort();
+    lats.sort((a, b) => a - b);
+    lngs.sort((a, b) => a - b);
 
-    const bounds = {
+    return {
       nw: {
         lat: lats[lats.length - 1],
         lng: lngs[0]
@@ -60,14 +51,12 @@ class Map extends Component {
         lng: lngs[lngs.length - 1]
       }
     };
-
-    console.log("bounds", bounds);
-    return bounds;
   }
 
   makePoints(placesArr) {
     return placesArr.map(place => (
-      <Point
+      <ClickablePoint
+        show={placesArr.length === 1}
         key={place.place_id || place.address}
         lat={place.latLng.lat}
         lng={place.latLng.lng}
@@ -77,12 +66,12 @@ class Map extends Component {
   }
 
   render() {
-    const { hasCurrentPlace, currentPlace } = this.getCurrentPlace(
-      this.props.currentPlace
-    );
-    const placesArr = hasCurrentPlace ? [currentPlace] : [];
+    const { currentPlace, places } = this.props;
+    const hasCurrentPlace = notEmpty(currentPlace.place_id);
+    const placesArr = hasCurrentPlace ? [currentPlace] : places;
     const points = this.makePoints(placesArr);
     let centerZoom = {
+      // default zoom and center over north america
       center: {
         lat: 39.09596,
         lng: -95.88867
@@ -91,6 +80,7 @@ class Map extends Component {
     };
 
     if (hasCurrentPlace) {
+      // has current place - show just that place zoomed in
       centerZoom = {
         center: {
           lat: currentPlace.latLng.lat,
@@ -98,7 +88,8 @@ class Map extends Component {
         },
         zoom: 17
       };
-    } else if (placesArr.length) {
+    } else if (notEmpty(placesArr)) {
+      // no current place, but has list of places - have library make centerZoom
       const widthHeight = {
         width: this.state.width,
         height: this.state.height
@@ -118,12 +109,14 @@ class Map extends Component {
 }
 
 Map.propTypes = {
+  places: PropTypes.array.isRequired,
   currentPlace: PropTypes.object.isRequired,
   text: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  currentPlace: state.currentPlace
+  currentPlace: state.currentPlace,
+  places: state.places
 });
 
 export default connect(

@@ -1,0 +1,15 @@
+.floating-input {
+  display: block;
+  width: 100%;
+  padding: $spacer;
+  line-height: 1;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0 transparent solid;
+  border-radius: $button-radius;
+
+  &::placeholder {
+    color: color("grey", "base");
+    opacity: 1;
+  }
+}

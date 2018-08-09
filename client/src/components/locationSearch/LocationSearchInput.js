@@ -11,7 +11,7 @@ class LocationSearchInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasFocus: false,
+      // hasFocus: false,
       address: "",
       findPlaceInput: "",
       place: {
@@ -25,8 +25,8 @@ class LocationSearchInput extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
+    // this.handleFocus = this.handleFocus.bind(this);
+    // this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleChange(address) {
@@ -39,7 +39,7 @@ class LocationSearchInput extends Component {
     geocodeByAddress(address)
       .then(results => {
         this.setState({
-          address,
+          address: "",
           place: {
             ...this.state.place,
             place_id,
@@ -70,16 +70,16 @@ class LocationSearchInput extends Component {
     }
   }
 
-  handleFocus() {
-    this.setState({ hasFocus: true });
-  }
+  // handleFocus() {
+  //   this.setState({ hasFocus: true });
+  // }
 
-  handleBlur() {
-    const { findPlaceInput } = this.state;
-    if (!findPlaceInput.length) {
-      this.setState({ hasFocus: false });
-    }
-  }
+  // handleBlur() {
+  //   const { findPlaceInput } = this.state;
+  //   if (!findPlaceInput.length) {
+  //     this.setState({ hasFocus: false });
+  //   }
+  // }
 
   resetCurrentPlace() {
     this.setState({
@@ -103,33 +103,35 @@ class LocationSearchInput extends Component {
       suggestions,
       loading
     }) => {
-      const inputClass = `suggestion__input ${
+      const inputClass = `suggestion__input floating-input browser-default ${
         suggestions.length ? "suggestion__input--open" : ""
       }`;
 
       return (
-        <div className="suggestion__root">
-          <div className="input-field">
-            <input
-              id="find-a-place"
-              onFocusCapture={this.handleFocus}
-              onBlurCapture={this.handleBlur}
-              name="findPlaceInput"
-              value={this.state.findPlaceInput}
-              onChangeCapture={this.handleInputChange}
-              {...getInputProps({
-                className: inputClass
-              })}
-            />
-            <label
-              className={this.state.hasFocus ? "active" : ""}
-              htmlFor="find-a-place"
-            >
-              Find a Place
-            </label>
-          </div>
+        <div className="suggestion__root z-depth-1">
+          <label className="sr-only" htmlFor="find-a-place">
+            Find a Place
+          </label>
+          <input
+            id="find-a-place"
+            onFocusCapture={this.handleFocus}
+            onBlurCapture={this.handleBlur}
+            name="findPlaceInput"
+            value={this.state.findPlaceInput}
+            onChangeCapture={this.handleInputChange}
+            placeholder="Find a Place"
+            {...getInputProps({
+              className: inputClass
+            })}
+          />
           <div className="suggestion__dropdown-container">
-            {loading && <div>Loading...</div>}
+            {loading && (
+              <div className="suggestion__loading">
+                <div className="progress">
+                  <div className="indeterminate" />
+                </div>
+              </div>
+            )}
             {suggestions.map(suggestion => {
               const className = `suggestion__item ${
                 suggestion.active ? "suggestion__item--active" : ""
@@ -139,6 +141,7 @@ class LocationSearchInput extends Component {
                   key={suggestion.id}
                   {...getSuggestionItemProps(suggestion, { className })}
                 >
+                  <i className={`material-icons place-icon mr-3`}>place</i>
                   {suggestion.description}
                 </div>
               );

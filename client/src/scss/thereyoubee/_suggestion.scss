@@ -4,8 +4,45 @@
   left: $spacer;
   right: $spacer;
   z-index: 10;
+}
 
-  // temp
-  background-color: #fff;
+.suggestion__input {
+  padding-left: $spacer * 3.5;
+}
+
+.suggestion__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.suggestion__loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.suggestion__dropdown-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom-left-radius: $button-radius;
+  border-bottom-right-radius: $button-radius;
+  position: relative;
+  z-index: 12;
+}
+
+.suggestion__item {
   padding: $spacer;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &:nth-of-type(even) {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  &.suggestion__item--active {
+    background-color: rgba(color("blue", "base"), 0.1);
+  }
 }

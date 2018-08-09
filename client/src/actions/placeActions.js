@@ -23,8 +23,17 @@ export const getAllPlaces = () => dispatch => {
     })
     .catch(err => {
       const { response } = err;
+      const error = response
+        ? {
+            status: response.status,
+            data: response.data
+          }
+        : {
+            status: "",
+            data: err
+          };
 
-      dispatch(getErrors(response ? response.data : err));
+      dispatch(getErrors(error));
 
       if (response && response.status === 500) {
         dispatch(

@@ -5,13 +5,34 @@
 
 .logo-nav {
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  z-index: 10;
+  top: 65px;
+  left: $spacer;
 
-  // temp
-  background-color: #fff;
-  padding: 10px;
+  .logo {
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    position: absolute;
+    top: -36.5px;
+    left: $spacer;
+    z-index: 50;
+    cursor: pointer;
+  }
+
+  nav {
+    position: relative;
+    z-index: 1;
+    // temp
+    background-color: #fff;
+    padding: 10px;
+  }
+}
+
+hr {
+  border: rgba(black, 0.15) solid 0;
+  border-bottom-width: 1px;
+  margin-top: $spacer/2;
+  margin-bottom: $spacer/2;
 }
 
 // body {

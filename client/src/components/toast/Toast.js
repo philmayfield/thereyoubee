@@ -46,7 +46,7 @@ class Toast extends Component {
     const { iconColor = "white" } = toast;
     return (
       <CSSTransition in={this.state.show} timeout={0} classNames="growFade">
-        <div className="toast">
+        <div className="toast with-height">
           {!!toast.icon && (
             <i className={`material-icons left ${iconColor}-text`}>
               {toast.icon}

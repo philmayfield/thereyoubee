@@ -45,9 +45,12 @@
 }
 .growFade-appear-done,
 .growFade-enter-done {
-  max-height: 5rem;
   opacity: 1 !important;
-  transform: scale(1) translateX(0) !important;
+  transform: scale(1) translateX(0) translateY(0) !important;
+
+  &.with-height {
+    max-height: 5rem;
+  }
 }
 // .growFade-exit-done {
 //   opacity: 0;

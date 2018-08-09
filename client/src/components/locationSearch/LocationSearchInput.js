@@ -91,11 +91,6 @@ class LocationSearchInput extends Component {
         latLng: {}
       }
     });
-    console.log(
-      ">>",
-      this.props.currentPlace.place_id,
-      !!this.props.currentPlace.place_id
-    );
     if (this.props.currentPlace.place_id) {
       this.props.resetCurrentPlace();
     }

@@ -3,6 +3,7 @@ import {
   GET_PLACES,
   SET_CURRENT_PLACE,
   SAVE_CURRENT_PLACE,
+  RESET_CURRENT_PLACE,
   DELETE_PLACE
 } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
@@ -67,6 +68,13 @@ export const saveCurrentPlace = place => dispatch => {
         payload,
         type: SAVE_CURRENT_PLACE
       });
+      dispatch(
+        addToast({
+          value: `Added ${place.suggestion}`,
+          icon: "thumb_up",
+          time: 3000
+        })
+      );
     })
     .catch(err => {
       const error = err.response ? err.response.data : err;
@@ -80,5 +88,12 @@ export const setCurrentPlace = payload => {
   return {
     payload,
     type: SET_CURRENT_PLACE
+  };
+};
+
+// reset the current place on the app to default
+export const resetCurrentPlace = () => {
+  return {
+    type: RESET_CURRENT_PLACE
   };
 };

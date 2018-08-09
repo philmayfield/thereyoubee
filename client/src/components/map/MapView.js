@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getAllPlaces } from "../../actions/placeActions";
 import LocationSearchInput from "../locationSearch/LocationSearchInput";
 import AddCurrentPlace from "../currentPlace/AddCurrentPlace";
 import Map from "./Map";
 
 class MapView extends Component {
+  componentDidMount() {
+    this.props.getAllPlaces();
+  }
+
   render() {
     return (
       <div className="map-view" key="map-view">
@@ -18,8 +23,16 @@ class MapView extends Component {
   }
 }
 
-// MapView.propTypes = {
-//   something: PropTypes.string.isRequired
-// }
+MapView.propTypes = {
+  places: PropTypes.array.isRequired,
+  getAllPlaces: PropTypes.func.isRequired
+};
 
-export default MapView;
+const mapStateToProps = state => ({
+  places: state.places
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllPlaces }
+)(MapView);

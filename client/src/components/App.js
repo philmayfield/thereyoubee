@@ -36,7 +36,7 @@ class App extends Component {
             <div className="App">
               <IsAuth />
               <Loading />
-              <ToastContainer />
+              <ToastContainer test={false} />
               <nav>
                 <Link className="" to="/login">
                   Login

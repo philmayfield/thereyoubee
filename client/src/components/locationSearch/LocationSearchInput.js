@@ -5,7 +5,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import PropTypes from "prop-types";
-import { setCurrentPlace } from "../../actions/placeActions";
+import { setCurrentPlace, resetCurrentPlace } from "../../actions/placeActions";
 
 class LocationSearchInput extends Component {
   constructor(props) {
@@ -65,6 +65,9 @@ class LocationSearchInput extends Component {
 
   handleInputChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    if (!e.target.value.length) {
+      this.resetCurrentPlace();
+    }
   }
 
   handleFocus() {
@@ -75,6 +78,26 @@ class LocationSearchInput extends Component {
     const { findPlaceInput } = this.state;
     if (!findPlaceInput.length) {
       this.setState({ hasFocus: false });
+    }
+  }
+
+  resetCurrentPlace() {
+    this.setState({
+      address: "",
+      place: {
+        address: "",
+        suggestion: "",
+        place_id: "",
+        latLng: {}
+      }
+    });
+    console.log(
+      ">>",
+      this.props.currentPlace.place_id,
+      !!this.props.currentPlace.place_id
+    );
+    if (this.props.currentPlace.place_id) {
+      this.props.resetCurrentPlace();
     }
   }
 
@@ -143,7 +166,9 @@ class LocationSearchInput extends Component {
 }
 
 LocationSearchInput.propTypes = {
-  setCurrentPlace: PropTypes.func.isRequired
+  currentPlace: PropTypes.object.isRequired,
+  setCurrentPlace: PropTypes.func.isRequired,
+  resetCurrentPlace: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -152,5 +177,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setCurrentPlace }
+  { setCurrentPlace, resetCurrentPlace }
 )(LocationSearchInput);

@@ -27,9 +27,8 @@ class PlacesMap extends Component {
   }
 
   getCurrentPlace(currentPlace) {
-    const { address, place_id, latLng } = this.props.currentPlace;
-    const hasCurrentPlace =
-      notEmpty(address) || notEmpty(place_id) || notEmpty(latLng);
+    const { address, place_id } = this.props.currentPlace;
+    const hasCurrentPlace = notEmpty(address) || notEmpty(place_id);
 
     return {
       hasCurrentPlace,

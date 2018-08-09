@@ -2,7 +2,7 @@ import { ADD_TOAST, DELETE_TOAST } from "./actionTypes";
 
 // add a toast
 export const addToast = payload => dispatch => {
-  const time = payload.time || 3000;
+  const { showClose = false, time = 3000 } = payload;
   const id = Date.now();
   payload.id = id;
 
@@ -11,9 +11,12 @@ export const addToast = payload => dispatch => {
     type: ADD_TOAST
   });
 
-  setTimeout(() => {
-    dispatch(deleteToast(id));
-  }, time);
+  if (!showClose) {
+    // auto close
+    setTimeout(() => {
+      dispatch(deleteToast(id));
+    }, time);
+  }
 };
 
 // delete a toast

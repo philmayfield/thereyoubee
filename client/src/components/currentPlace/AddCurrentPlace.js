@@ -42,7 +42,7 @@ class AddCurrentPlace extends Component {
 
     return (
       <div className={showComponent ? "add-current-place" : "hide"}>
-        <h2>Current Place</h2>
+        <h2 className="sr-only">Current Place</h2>
         <div>{address}</div>
         <div>{suggestion}</div>
         <div>{place_id}</div>

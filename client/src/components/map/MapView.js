@@ -14,10 +14,10 @@ class MapView extends Component {
   render() {
     return (
       <div className="map-view" key="map-view">
-        <h2>Map View</h2>
+        <h2 className="sr-only">Map View</h2>
+        <Map />
         <LocationSearchInput />
         <AddCurrentPlace />
-        <Map />
       </div>
     );
   }

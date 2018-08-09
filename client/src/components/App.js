@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -13,6 +12,7 @@ import PropTypes from "prop-types";
 // routes / componenets
 import IsAuth from "../components/common/IsAuth";
 import ToastContainer from "./toast/ToastContainer";
+import LogoNav from "../components/logoNav/LogoNav";
 import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
@@ -37,21 +37,8 @@ class App extends Component {
               <IsAuth />
               <Loading />
               <ToastContainer test={false} />
-              <nav>
-                <Link className="" to="/login">
-                  Login
-                </Link>
-                <Link className="" to="/map">
-                  Map
-                </Link>
-                <Link className="" to="/list">
-                  List
-                </Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {isAuth ? "Logged in" : "Not logged in"}
-              </nav>
-              <h1>There You Bee</h1>
-              <main className="container">
+              <LogoNav isAuth={isAuth} />
+              <main>
                 <TransitionGroup>
                   <CSSTransition
                     key={location.key}

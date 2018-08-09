@@ -1,0 +1,11 @@
+.suggestion__root {
+  position: absolute;
+  top: $spacer;
+  left: $spacer;
+  right: $spacer;
+  z-index: 10;
+
+  // temp
+  background-color: #fff;
+  padding: $spacer;
+}

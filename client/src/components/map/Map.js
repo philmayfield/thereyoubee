@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { notEmpty } from "../../common/empty";
+import { isEmpty, notEmpty } from "../../common/empty";
 import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
 import Point from "../point/Point";
 import { fitBounds } from "google-map-react/utils";
 
-class PlacesMap extends Component {
+class Map extends Component {
   constructor(props) {
     super(props);
     this.state = { width: 0, height: 0 };
@@ -37,7 +37,7 @@ class PlacesMap extends Component {
   }
 
   makeBounds(placesArr) {
-    if (!placesArr.length) return null;
+    if (isEmpty(placesArr)) return null;
 
     const lats = [];
     const lngs = [];
@@ -50,7 +50,7 @@ class PlacesMap extends Component {
     lats.sort();
     lngs.sort();
 
-    return {
+    const bounds = {
       nw: {
         lat: lats[lats.length - 1],
         lng: lngs[0]
@@ -60,6 +60,9 @@ class PlacesMap extends Component {
         lng: lngs[lngs.length - 1]
       }
     };
+
+    console.log("bounds", bounds);
+    return bounds;
   }
 
   makePoints(placesArr) {
@@ -105,7 +108,7 @@ class PlacesMap extends Component {
     }
 
     return (
-      <div style={{ height: "70vh", width: "100%" }}>
+      <div className="the-map">
         <GoogleMapReact center={centerZoom.center} zoom={centerZoom.zoom}>
           {points}
         </GoogleMapReact>
@@ -114,7 +117,7 @@ class PlacesMap extends Component {
   }
 }
 
-PlacesMap.propTypes = {
+Map.propTypes = {
   currentPlace: PropTypes.object.isRequired,
   text: PropTypes.string
 };
@@ -126,4 +129,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {}
-)(PlacesMap);
+)(Map);

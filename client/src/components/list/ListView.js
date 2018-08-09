@@ -37,7 +37,17 @@ class ListView extends Component {
 
     return (
       <div className="list-view">
-        <h2>List View</h2>
+        <div className="sr-only">
+          <h2>List View</h2>
+        </div>
+        {!!hasPlaces && (
+          <div className="right-align">
+            <p className="flow-text">
+              {places.length} Place
+              {places.length > 1 ? "s" : ""}
+            </p>
+          </div>
+        )}
         {content}
       </div>
     );

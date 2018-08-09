@@ -22,8 +22,19 @@ export const getAllPlaces = () => dispatch => {
       });
     })
     .catch(err => {
-      const error = err.response ? err.response.data : err;
-      dispatch(getErrors(error));
+      const { response } = err;
+
+      dispatch(getErrors(response ? response.data : err));
+
+      if (response && response.status === 500) {
+        dispatch(
+          addToast({
+            value: `Uh oh, thats a 500 response, try refreshing.`,
+            icon: "error",
+            showClose: true
+          })
+        );
+      }
     })
     .finally(() => dispatch(notLoading("getAllPlaces")));
 };

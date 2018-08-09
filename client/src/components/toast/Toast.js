@@ -43,10 +43,15 @@ class Toast extends Component {
 
   render() {
     const { toast } = this.props;
+    const { iconColor = "white" } = toast;
     return (
       <CSSTransition in={this.state.show} timeout={0} classNames="growFade">
         <div className="toast">
-          {!!toast.icon && <i className="material-icons left">{toast.icon}</i>}
+          {!!toast.icon && (
+            <i className={`material-icons left ${iconColor}-text`}>
+              {toast.icon}
+            </i>
+          )}
           {toast.value}
           {!!toast.showClose && (
             <button

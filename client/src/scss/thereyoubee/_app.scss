@@ -10,50 +10,6 @@ body,
   overflow: hidden;
 }
 
-.logo-nav {
-  position: absolute;
-  left: $spacer;
-
-  .logo {
-    width: 24px;
-    height: 24px;
-    background-color: #000;
-    position: absolute;
-    z-index: 50;
-    cursor: pointer;
-  }
-
-  nav {
-    position: relative;
-    z-index: 1;
-    // temp
-    background-color: #fff;
-    padding: 10px;
-  }
-
-  transition: $bouncy;
-}
-
-.map .logo-nav {
-  top: 65px;
-
-  .logo {
-    top: -36.5px;
-    left: $spacer;
-  }
-}
-
-.list .logo-nav {
-  top: $spacer;
-
-  .logo {
-    top: 0;
-  }
-  nav {
-    top: $spacer * 2.5;
-  }
-}
-
 hr {
   border: rgba(black, 0.15) solid 0;
   border-bottom-width: 1px;

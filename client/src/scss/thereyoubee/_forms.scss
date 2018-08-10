@@ -1,8 +1,9 @@
 .floating-input {
   display: block;
   width: 100%;
-  padding: $spacer;
-  line-height: 1;
+  padding: 14px;
+  line-height: 20px;
+  height: $spacer * 3;
   background-color: #fff;
   background-clip: padding-box;
   border: 0 transparent solid;

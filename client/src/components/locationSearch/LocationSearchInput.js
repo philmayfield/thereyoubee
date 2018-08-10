@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import PropTypes from "prop-types";
 import { setCurrentPlace, resetCurrentPlace } from "../../actions/placeActions";
+import totalPlaces from "../../common/totalPlaces";
 
 class LocationSearchInput extends Component {
   constructor(props) {
@@ -97,6 +98,8 @@ class LocationSearchInput extends Component {
   }
 
   render() {
+    const { places } = this.props;
+    const placeholderText = `Find a Place - ${totalPlaces(places.length)}`;
     const renderFunc = ({
       getInputProps,
       getSuggestionItemProps,
@@ -119,7 +122,7 @@ class LocationSearchInput extends Component {
             name="findPlaceInput"
             value={this.state.findPlaceInput}
             onChangeCapture={this.handleInputChange}
-            placeholder="Find a Place"
+            placeholder={placeholderText}
             {...getInputProps({
               className: inputClass
             })}
@@ -164,13 +167,15 @@ class LocationSearchInput extends Component {
 }
 
 LocationSearchInput.propTypes = {
+  places: PropTypes.array.isRequired,
   currentPlace: PropTypes.object.isRequired,
   setCurrentPlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  currentPlace: state.currentPlace
+  currentPlace: state.currentPlace,
+  places: state.places
 });
 
 export default connect(

@@ -5,7 +5,7 @@ import { getAllPlaces } from "../../actions/placeActions";
 import Alert from "../common/Alert";
 import { notEmpty } from "../../common/empty";
 import List from "./List";
-import TotalPlaces from "../places/TotalPlaces";
+import totalPlaces from "../../common/totalPlaces";
 
 class ListView extends Component {
   componentDidMount() {
@@ -44,7 +44,7 @@ class ListView extends Component {
           <h2>List View</h2>
         </div>
         <header className="list-view__header right-align p-3 z-depth-3">
-          <TotalPlaces number={places.length} />
+          {totalPlaces(places.length)}
         </header>
         {content}
       </div>

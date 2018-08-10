@@ -48,11 +48,26 @@ class App extends Component {
                     <Switch location={location}>
                       <Route
                         exact
+                        path="/"
+                        render={() =>
+                          isAuth ? (
+                            <RedirectWrap action={history.action}>
+                              <Redirect to="/map" />
+                            </RedirectWrap>
+                          ) : (
+                            <RedirectWrap action={history.action}>
+                              <Redirect to="/login" />
+                            </RedirectWrap>
+                          )
+                        }
+                      />
+                      <Route
+                        exact
                         path="/login"
                         render={() =>
                           isAuth ? (
                             <RedirectWrap action={history.action}>
-                              <Redirect to="/list" />
+                              <Redirect to="/map" />
                             </RedirectWrap>
                           ) : (
                             <Login />

@@ -69,7 +69,7 @@ class Login extends Component {
 
     return (
       <div className="row vh100">
-        <div className="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto my-auto">
+        <div className="col-11 col-sm-8 col-md-6 col-lg-5 mx-auto my-auto">
           <div className="card">
             {this.state.newUser ? newUserMsg : null}
             <form onSubmit={this.formSubmit}>

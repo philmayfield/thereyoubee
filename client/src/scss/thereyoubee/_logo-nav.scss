@@ -1,5 +1,6 @@
 .logo-nav {
   position: absolute;
+  transition: $bouncy;
 
   .logo {
     width: 24px;
@@ -26,16 +27,9 @@
     a {
       display: flex;
       align-items: center;
-    }
-  }
-
-  ul {
-    li {
       padding: $spacer/2 $spacer $spacer/2 $spacer/2;
     }
   }
-
-  transition: $bouncy;
 }
 
 .login .logo-nav {

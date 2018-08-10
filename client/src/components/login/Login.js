@@ -68,32 +68,36 @@ class Login extends Component {
     );
 
     return (
-      <div className="row">
-        <div className="s12 m8 l6 m-auto">
-          <h1>Login</h1>
-          <div className="login">
+      <div className="row vh100">
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto my-auto">
+          <div className="card">
             {this.state.newUser ? newUserMsg : null}
             <form onSubmit={this.formSubmit}>
-              <Input
-                label="Username"
-                name="username"
-                autoFocus={!this.state.newUser}
-                value={this.state.username}
-                error={errors.username}
-                onChange={this.inputChange}
-              />
-              <Input
-                label="Password"
-                type="password"
-                name="password"
-                autoFocus={this.state.newUser}
-                value={this.state.password}
-                error={errors.password}
-                onChange={this.inputChange}
-              />
-              <Button type="submit" icon="person">
-                Login
-              </Button>
+              <div className="card-content">
+                <span className="card-title">Login</span>
+                <Input
+                  label="Username"
+                  name="username"
+                  autoFocus={!this.state.newUser}
+                  value={this.state.username}
+                  error={errors.username}
+                  onChange={this.inputChange}
+                />
+                <Input
+                  label="Password"
+                  type="password"
+                  name="password"
+                  autoFocus={this.state.newUser}
+                  value={this.state.password}
+                  error={errors.password}
+                  onChange={this.inputChange}
+                />
+                <div className="right-align">
+                  <Button type="submit" icon="person">
+                    Login
+                  </Button>
+                </div>
+              </div>
             </form>
           </div>
           <p className="text-center">

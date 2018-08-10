@@ -37,21 +37,25 @@ class LogoNav extends Component {
               <li>
                 {isAuth ? (
                   <Link onClick={this.hideMenu} to="/login">
+                    <i className={`material-icons mr-2`}>account_circle</i>
                     Logout
                   </Link>
                 ) : (
                   <Link onClick={this.hideMenu} to="/login">
+                    <i className={`material-icons mr-2`}>account_circle</i>
                     Login
                   </Link>
                 )}
               </li>
               <li>
                 <Link onClick={this.hideMenu} to="/map">
+                  <i className={`material-icons mr-2`}>place</i>
                   Map of Places
                 </Link>
               </li>
               <li>
                 <Link onClick={this.hideMenu} to="/list">
+                  <i className={`material-icons mr-2`}>list</i>
                   List of Places
                 </Link>
               </li>

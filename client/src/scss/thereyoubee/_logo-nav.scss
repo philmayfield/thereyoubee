@@ -22,15 +22,29 @@
     opacity: 0;
     transform: scale(0.2) translateY(-100px) translateX(-100px);
     transition: $bouncy;
+
+    a {
+      display: flex;
+      align-items: center;
+    }
   }
 
   ul {
     li {
-      padding: $spacer/2 $spacer;
+      padding: $spacer/2 $spacer $spacer/2 $spacer/2;
     }
   }
 
   transition: $bouncy;
+}
+
+.login .logo-nav {
+  top: $spacer;
+  left: $spacer;
+
+  nav {
+    top: $spacer * 2;
+  }
 }
 
 .map .logo-nav {

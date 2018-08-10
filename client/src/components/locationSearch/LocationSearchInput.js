@@ -111,7 +111,7 @@ class LocationSearchInput extends Component {
       }`;
 
       return (
-        <div className="suggestion__root z-depth-1">
+        <div className="suggestion__root z-depth-2">
           <label className="sr-only" htmlFor="find-a-place">
             Find a Place
           </label>

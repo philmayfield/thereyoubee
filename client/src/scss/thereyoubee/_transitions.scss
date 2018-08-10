@@ -1,3 +1,5 @@
+$bouncy: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+
 .slide-appear,
 .slide-appear-done,
 .slide-enter,
@@ -41,7 +43,7 @@
 .growFade {
   opacity: 0;
   transform: scale(0.2) translateX(25px);
-  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+  transition: $bouncy;
 }
 .growFade-appear-done,
 .growFade-enter-done {

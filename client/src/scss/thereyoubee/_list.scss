@@ -1,0 +1,15 @@
+.list-view {
+}
+
+$header-height: $spacer * 3.5;
+
+.list-view__header {
+  height: $header-height;
+  position: relative;
+  z-index: 1;
+}
+
+.place-list {
+  height: calc(100vh - #{$header-height});
+  overflow-y: scroll;
+}

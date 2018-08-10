@@ -1,0 +1,11 @@
+.list .total-places {
+}
+
+.map .total-places {
+  background-color: #fff;
+  border-radius: $button-radius;
+  padding: $spacer/2 $spacer;
+  position: absolute;
+  bottom: $spacer;
+  left: $spacer;
+}

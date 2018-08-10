@@ -20,7 +20,7 @@ class List extends Component {
         return <ListItem key={place._id} item={place} />;
       });
 
-    return <div className="place-list">{placeItems}</div>;
+    return <div className="place-list p-3">{placeItems}</div>;
   }
 }
 

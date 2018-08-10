@@ -33,13 +33,13 @@ class App extends Component {
       <Router>
         <Route
           render={({ location, history }) => (
-            <div className="App">
+            <div className={`App ${location.pathname.replace("/", "")}`}>
               <IsAuth />
               <Loading />
               <ToastContainer test={false} />
               <LogoNav isAuth={isAuth} />
               <main>
-                <TransitionGroup>
+                <TransitionGroup component={null}>
                   <CSSTransition
                     key={location.key}
                     timeout={500}

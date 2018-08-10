@@ -3,6 +3,8 @@
 @import "utilities/spacing";
 @import "utilities/screenreaders";
 
+@import "transitions";
+
 @import "app";
 @import "card";
 @import "display";
@@ -10,9 +12,10 @@
 @import "forms";
 @import "loading";
 @import "toast";
-@import "transitions";
 
 @import "current-place";
+@import "list";
 @import "map";
+@import "place";
 @import "point";
 @import "suggestion";

@@ -5,6 +5,7 @@ import { getAllPlaces } from "../../actions/placeActions";
 import Alert from "../common/Alert";
 import { notEmpty } from "../../common/empty";
 import List from "./List";
+import TotalPlaces from "../places/TotalPlaces";
 
 class ListView extends Component {
   componentDidMount() {
@@ -27,12 +28,14 @@ class ListView extends Component {
       content = <List places={places} />;
     } else if (!isLoading)
       content = (
-        <Alert heading="There aren&rsquo;t any places here yet!">
-          <p>
-            Looks like you havent added any places here yet, why don&rsquo;t you
-            flip over to the map view and start adding some!
-          </p>
-        </Alert>
+        <div className="px-3 pt-5">
+          <Alert heading="There aren&rsquo;t any places here yet!">
+            <p>
+              Looks like you havent added any places here yet, why don&rsquo;t
+              you flip over to the map view and start adding some!
+            </p>
+          </Alert>
+        </div>
       );
 
     return (
@@ -40,14 +43,9 @@ class ListView extends Component {
         <div className="sr-only">
           <h2>List View</h2>
         </div>
-        {!!hasPlaces && (
-          <div className="right-align">
-            <p className="flow-text">
-              {places.length} Place
-              {places.length > 1 ? "s" : ""}
-            </p>
-          </div>
-        )}
+        <header className="list-view__header right-align p-3 z-depth-3">
+          <TotalPlaces number={places.length} />
+        </header>
         {content}
       </div>
     );

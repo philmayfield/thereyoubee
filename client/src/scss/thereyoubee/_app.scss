@@ -1,11 +1,15 @@
-.App {
+body,
+.App,
+.list-view,
+.map-view,
+.the-map {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .logo-nav {
   position: absolute;
-  top: 65px;
   left: $spacer;
 
   .logo {
@@ -13,8 +17,6 @@
     height: 24px;
     background-color: #000;
     position: absolute;
-    top: -36.5px;
-    left: $spacer;
     z-index: 50;
     cursor: pointer;
   }
@@ -25,6 +27,28 @@
     // temp
     background-color: #fff;
     padding: 10px;
+  }
+
+  transition: $bouncy;
+}
+
+.map .logo-nav {
+  top: 65px;
+
+  .logo {
+    top: -36.5px;
+    left: $spacer;
+  }
+}
+
+.list .logo-nav {
+  top: $spacer;
+
+  .logo {
+    top: 0;
+  }
+  nav {
+    top: $spacer * 2.5;
   }
 }
 

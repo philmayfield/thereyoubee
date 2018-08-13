@@ -2573,7 +2573,7 @@ html {
   color: rgba(0, 0, 0, 0.87); }
   @media only screen and (min-width: 0) {
     html {
-      font-size: 16px; } }
+      font-size: 18px; } }
 
 h1,
 h2,
@@ -6105,13 +6105,16 @@ hr {
 
 .logo-nav {
   position: absolute;
-  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+  transition-delay: 200ms; }
   .logo-nav .logo {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     background-color: #000;
     position: absolute;
     z-index: 50;
+    top: 0;
+    left: 0;
     cursor: pointer; }
   .logo-nav nav {
     position: relative;
@@ -6204,7 +6207,7 @@ hr {
   z-index: 10; }
 
 .suggestion__input {
-  padding-left: 3.5rem; }
+  padding-left: 3rem; }
 
 .suggestion__input--open {
   border-bottom-left-radius: 0;

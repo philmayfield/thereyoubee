@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
+import { logoutUser } from "../../actions/authActions";
 
 class LogoNav extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class LogoNav extends Component {
 
     this.toggleMenu = this.toggleMenu.bind(this);
     this.hideMenu = this.hideMenu.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   toggleMenu(e) {
@@ -21,6 +24,11 @@ class LogoNav extends Component {
 
   hideMenu() {
     this.setState({ show: false });
+  }
+
+  handleLogout() {
+    this.hideMenu();
+    this.props.logoutUser();
   }
 
   render() {
@@ -36,7 +44,7 @@ class LogoNav extends Component {
             <ul className="m-0">
               <li>
                 {isAuth ? (
-                  <Link onClick={this.hideMenu} to="/login">
+                  <Link onClick={this.handleLogout} to="/login">
                     <i className={`material-icons mr-2`}>account_circle</i>
                     Logout
                   </Link>
@@ -68,7 +76,11 @@ class LogoNav extends Component {
 }
 
 LogoNav.propTypes = {
-  isAuth: PropTypes.bool.isRequired
+  isAuth: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.func.isRequired
 };
 
-export default LogoNav;
+export default connect(
+  null,
+  { logoutUser }
+)(LogoNav);

@@ -1,13 +1,16 @@
 .logo-nav {
   position: absolute;
   transition: $bouncy;
+  transition-delay: 200ms;
 
   .logo {
-    width: 24px;
-    height: 24px;
+    width: 1.5 * $spacer;
+    height: 1.5 * $spacer;
     background-color: #000;
     position: absolute;
     z-index: 50;
+    top: 0;
+    left: 0;
     cursor: pointer;
   }
 
@@ -45,8 +48,6 @@
   top: $spacer * 1.75;
   left: $spacer * 1.75;
 
-  .logo {
-  }
   nav {
     top: $spacer * 2;
     left: -$spacer * 0.75;
@@ -57,9 +58,6 @@
   top: $spacer;
   left: $spacer;
 
-  .logo {
-    // top: 0;
-  }
   nav {
     top: $spacer * 2.5;
   }

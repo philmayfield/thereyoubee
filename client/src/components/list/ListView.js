@@ -18,14 +18,16 @@ class ListView extends Component {
       // auth,
       places
     } = this.props;
+    // filter out places that have the delete flag true
+    const placesToRender = places.filter(place => !place.deleteFlag);
     // const { isAuth } = auth;
     const { loadingArr } = app;
     const isLoading = notEmpty(loadingArr);
-    const hasPlaces = notEmpty(places);
+    const hasPlaces = notEmpty(placesToRender);
     let content;
 
     if (hasPlaces && !isLoading) {
-      content = <List places={places} />;
+      content = <List places={placesToRender} />;
     } else if (!isLoading)
       content = (
         <div className="px-3 pt-5">

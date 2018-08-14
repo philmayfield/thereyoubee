@@ -1,12 +1,7 @@
-import {
-  IS_LOADING,
-  NOT_LOADING,
-  ACTION_CONFIRM
-} from "../actions/actionTypes";
+import { IS_LOADING, NOT_LOADING } from "../actions/actionTypes";
 
 const defaultState = {
-  loadingArr: [],
-  confirmObject: {}
+  loadingArr: []
 };
 
 export default (state = defaultState, action) => {
@@ -22,12 +17,6 @@ export default (state = defaultState, action) => {
         ...state,
         loadingArr: state.loadingArr.filter(item => item !== action.payload),
         confirmObject: {}
-      };
-
-    case ACTION_CONFIRM:
-      return {
-        ...state,
-        confirmObject: action.payload
       };
 
     default:

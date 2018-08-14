@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
-import { deletePlace } from "../../actions/placeActions";
+import { flagPlace } from "../../actions/placeActions";
 
 class ListItem extends Component {
   constructor(props) {
@@ -12,13 +12,9 @@ class ListItem extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  handleDelete(e) {
-    e.preventDefault();
-
-    const { _id } = this.props.item;
-
-    // TODO: add some sort of confirmation (confirm button?)
-    this.props.deletePlace(_id);
+  handleDelete() {
+    const { item, flagPlace } = this.props;
+    flagPlace(item);
   }
 
   render() {
@@ -63,11 +59,11 @@ class ListItem extends Component {
 }
 
 ListItem.propTypes = {
-  deletePlace: PropTypes.func.isRequired,
+  flagPlace: PropTypes.func.isRequired,
   item: PropTypes.object
 };
 
 export default connect(
   null,
-  { deletePlace }
+  { flagPlace }
 )(ListItem);

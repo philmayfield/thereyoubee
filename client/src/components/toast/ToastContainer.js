@@ -18,7 +18,7 @@ class ToastContainer extends Component {
     this.props.addToast({
       value: `Test Toast!`,
       icon: "thumb_up",
-      showClose: true,
+      // showClose: true,
       // time: 5 * 60000
       time: 3000
     });

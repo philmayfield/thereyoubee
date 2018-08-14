@@ -3,16 +3,21 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { deleteToast } from "../../actions/toastActions";
+import { notEmpty } from "../../common/empty";
 
 class Toast extends Component {
   constructor(props) {
     super(props);
     this.animationTime = 250; // css animation time in ms
+    this.hasUndo = notEmpty(props.toast.undoInaction);
+    this.timeout = null;
     this.state = {
       show: false
     };
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleUndo = this.handleUndo.bind(this);
+    this.handleUndoInaction = this.handleUndoInaction.bind(this);
   }
 
   componentDidMount() {
@@ -25,10 +30,18 @@ class Toast extends Component {
       const time = toast.time || 3000;
       const timeout = time - this.animationTime; // css animation length
 
-      setTimeout(() => {
-        this.setState({ show: false });
+      this.timeout = setTimeout(() => {
+        this.timeout = null;
+        if (this.hasUndo) {
+          this.handleUndoInaction();
+        }
+        this.handleDelete();
       }, timeout);
     }
+  }
+
+  componentWillUnmount() {
+    this.timeout = null;
   }
 
   handleDelete() {
@@ -39,6 +52,24 @@ class Toast extends Component {
     setTimeout(() => {
       this.props.deleteToast(id);
     }, this.animationTime);
+  }
+
+  handleUndo() {
+    // undo some action from the toast
+    // immediately clear the timeout
+    clearTimeout(this.timeout);
+    this.timeout = null;
+
+    // dispatch the action to undo whatever it was
+    this.props.undoActionDispatch();
+
+    // delete the toast
+    this.handleDelete();
+  }
+
+  handleUndoInaction() {
+    // if undo is not clicked dispatch some action
+    this.props.undoInactionDispatch();
   }
 
   render() {
@@ -61,18 +92,41 @@ class Toast extends Component {
               Close
             </button>
           )}
+          {!!this.hasUndo && (
+            <button onClick={this.handleUndo} className="btn-flat toast-action">
+              Undo
+            </button>
+          )}
         </div>
       </CSSTransition>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    deleteToast() {
+      dispatch(deleteToast(props.toast.id));
+    },
+    undoActionDispatch() {
+      const { undoObj, undoAction } = props.toast;
+      dispatch(undoAction(undoObj));
+    },
+    undoInactionDispatch() {
+      const { undoObj, undoInaction } = props.toast;
+      dispatch(undoInaction(undoObj));
+    }
+  };
+};
+
 Toast.propTypes = {
   toast: PropTypes.object.isRequired,
-  deleteToast: PropTypes.func.isRequired
+  deleteToast: PropTypes.func.isRequired,
+  undoActionDispatch: PropTypes.func,
+  undoInactionDispatch: PropTypes.func
 };
 
 export default connect(
   null,
-  { deleteToast }
+  mapDispatchToProps
 )(Toast);

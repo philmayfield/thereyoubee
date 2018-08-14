@@ -1,6 +1,8 @@
 import axios from "axios";
 import {
   GET_PLACES,
+  FLAG_PLACE,
+  UNFLAG_PLACE,
   SET_CURRENT_PLACE,
   SAVE_CURRENT_PLACE,
   RESET_CURRENT_PLACE,
@@ -48,32 +50,47 @@ export const getAllPlaces = () => dispatch => {
     .finally(() => dispatch(notLoading("getAllPlaces")));
 };
 
-// delete a place from the database
-export const deletePlace = id => dispatch => {
-  dispatch(clearErrors());
-  dispatch(isLoading("deletePlace"));
+// flag place to be removed
+export const flagPlace = place => dispatch => {
+  dispatch({
+    type: FLAG_PLACE,
+    payload: place._id
+  });
 
+  dispatch(
+    addToast({
+      value: `Deleted ${place.suggestion}`,
+      icon: "info",
+      undoAction: unflagPlace,
+      undoInaction: deletePlace,
+      undoObj: place,
+      time: 5000
+    })
+  );
+};
+
+// unflag place to be removed
+export const unflagPlace = place => dispatch => {
+  dispatch({
+    type: UNFLAG_PLACE,
+    payload: place._id
+  });
+};
+
+// delete a place from the store and database
+export const deletePlace = place => dispatch => {
   axios
-    .delete(`/api/place/${id}`)
-    .then(res => {
-      const { place } = res.data;
+    .delete(`/api/place/${place._id}`)
+    .then(() => {
       dispatch({
         type: DELETE_PLACE,
-        payload: id
+        payload: place._id
       });
-      dispatch(
-        addToast({
-          value: `Deleted ${place.suggestion}`,
-          icon: "info",
-          time: 3000
-        })
-      );
     })
     .catch(err => {
       const error = err.response ? err.response.data : err;
       dispatch(getErrors(error));
-    })
-    .finally(() => dispatch(notLoading("deletePlace")));
+    });
 };
 
 // save the current place to the database

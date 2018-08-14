@@ -1,5 +1,12 @@
 // Fixed Action Button
 .fab {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
   ul {
     text-align: right;
     right: 3.5rem;
@@ -18,13 +25,6 @@
   .btn-large + ul {
     right: 5rem;
   }
-
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 997;
 
   .halfway-fab {
     right: 1rem;

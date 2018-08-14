@@ -1,8 +1,12 @@
-body,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .App,
 .list-view,
-.map-view,
-.the-map {
+.map-view {
   width: 100%;
   height: 100%;
   overflow: hidden;

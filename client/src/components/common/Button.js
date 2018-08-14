@@ -94,7 +94,6 @@ class Button extends Component {
 Button.propTypes = {
   value: PropTypes.any,
   classes: PropTypes.array,
-  svgClasses: PropTypes.array,
   fab: PropTypes.bool,
   pulse: PropTypes.bool,
   type: PropTypes.string,

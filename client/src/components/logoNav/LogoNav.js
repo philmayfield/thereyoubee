@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { logoutUser } from "../../actions/authActions";
+import getImg from "../../common/getImg";
+import ReactSVG from "react-svg";
 
 class LogoNav extends Component {
   constructor(props) {
@@ -33,13 +35,17 @@ class LogoNav extends Component {
 
   render() {
     const { isAuth } = this.props;
+    const { show } = this.state;
     return (
       <div className="logo-nav">
         {/* TODO: make this a button */}
-        <div onClick={this.toggleMenu} className="logo">
-          B
+        <div
+          onClick={this.toggleMenu}
+          className={`logo turn zero ${show ? "ninety" : ""}`}
+        >
+          <ReactSVG path={getImg("logo")} />
         </div>
-        <CSSTransition in={this.state.show} timeout={0} classNames="growFade">
+        <CSSTransition in={show} timeout={0} classNames="growFade">
           <nav className="z-depth-3">
             <ul className="m-0">
               <li>

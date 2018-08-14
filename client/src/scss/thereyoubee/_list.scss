@@ -8,5 +8,6 @@ $header-height: $spacer * 3.5;
 
 .place-list {
   height: calc(100vh - #{$header-height});
+  padding-bottom: $spacer * 5;
   overflow-y: scroll;
 }

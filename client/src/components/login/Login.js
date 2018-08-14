@@ -68,7 +68,7 @@ class Login extends Component {
     );
 
     return (
-      <div className="row vh100">
+      <div className="login-view d-flex">
         <div className="col-11 col-sm-8 col-md-6 col-lg-5 mx-auto my-auto">
           <div className="card">
             {this.state.newUser ? newUserMsg : null}
@@ -78,7 +78,6 @@ class Login extends Component {
                 <Input
                   label="Username"
                   name="username"
-                  autoFocus={!this.state.newUser}
                   value={this.state.username}
                   error={errors.username}
                   onChange={this.inputChange}
@@ -87,7 +86,6 @@ class Login extends Component {
                   label="Password"
                   type="password"
                   name="password"
-                  autoFocus={this.state.newUser}
                   value={this.state.password}
                   error={errors.password}
                   onChange={this.inputChange}
@@ -100,7 +98,7 @@ class Login extends Component {
               </div>
             </form>
           </div>
-          <p className="text-center">
+          <p className="center-align">
             Don&rsquo;t have an account? <Link to="/signup">Sign up now!</Link>
           </p>
         </div>

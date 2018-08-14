@@ -1,11 +1,9 @@
-// import logo from "../img/logo.svg";
+import logo from "../img/logo.svg";
 // import phil from "../img/phil.svg";
-import location from "../img/baseline-location-24px.svg";
 
 let imgs = {
-  // logo,
+  logo
   // phil,
-  location
 };
 
 let getImage = key => imgs[key];

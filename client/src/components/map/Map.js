@@ -65,6 +65,21 @@ class Map extends Component {
     ));
   }
 
+  createMapOptions(maps) {
+    return {
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: maps.MapTypeControlStyle.DEFAULT,
+        position: maps.ControlPosition.BOTTOM_CENTER
+      },
+      streetViewControl: true,
+      streetViewControlOptions: {
+        position: maps.ControlPosition.LEFT_BOTTOM
+      },
+      fullscreenControl: false
+    };
+  }
+
   render() {
     const { currentPlace, places } = this.props;
     const hasCurrentPlace = notEmpty(currentPlace.place_id);
@@ -100,7 +115,11 @@ class Map extends Component {
 
     return (
       <div className="the-map">
-        <GoogleMapReact center={centerZoom.center} zoom={centerZoom.zoom}>
+        <GoogleMapReact
+          center={centerZoom.center}
+          zoom={centerZoom.zoom}
+          options={this.createMapOptions}
+        >
           {points}
         </GoogleMapReact>
       </div>

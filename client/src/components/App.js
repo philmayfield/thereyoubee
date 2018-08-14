@@ -29,8 +29,6 @@ class App extends Component {
     const RedirectWrap = ({ action, children }) =>
       action === "REPLACE" ? null : children;
 
-    console.log("isAuth", isAuth);
-
     return (
       <Router>
         <Route

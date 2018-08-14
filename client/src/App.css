@@ -6084,6 +6084,7 @@ hr {
 .add-current-place {
   background-color: #fff;
   border-radius: 2px;
+  max-width: calc(100% - 2rem);
   padding: 1rem;
   position: fixed;
   bottom: 1rem;

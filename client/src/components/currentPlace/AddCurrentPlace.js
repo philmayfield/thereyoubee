@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { isEmpty, notEmpty } from "../../common/empty";
 import Button from "../common/Button";
-import { saveCurrentPlace } from "../../actions/placeActions";
+import {
+  saveCurrentPlace,
+  resetCurrentPlace
+} from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
 
 class AddCurrentPlace extends Component {
@@ -12,6 +15,7 @@ class AddCurrentPlace extends Component {
     this.state = {};
 
     this.handleAddPlace = this.handleAddPlace.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +34,12 @@ class AddCurrentPlace extends Component {
     delete newPlace.latLng;
 
     this.props.saveCurrentPlace(newPlace);
+  }
+
+  handleClose(e) {
+    e.preventDefault();
+
+    this.props.resetCurrentPlace();
   }
 
   render() {
@@ -61,6 +71,12 @@ class AddCurrentPlace extends Component {
           ) : showAddBtn ? (
             <div className="right-align">
               <Button
+                clickOrTo={this.handleClose}
+                classes={["btn-flat", "red-text", "mr-3"]}
+              >
+                Close
+              </Button>
+              <Button
                 clickOrTo={this.handleAddPlace}
                 value={currentPlace}
                 icon="add_circle"
@@ -84,6 +100,7 @@ AddCurrentPlace.propTypes = {
   places: PropTypes.array.isRequired,
   currentPlace: PropTypes.object.isRequired,
   saveCurrentPlace: PropTypes.func.isRequired,
+  resetCurrentPlace: PropTypes.func.isRequired,
   errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };
 
@@ -95,5 +112,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { saveCurrentPlace }
+  { saveCurrentPlace, resetCurrentPlace }
 )(AddCurrentPlace);

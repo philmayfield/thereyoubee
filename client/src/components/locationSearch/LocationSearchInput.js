@@ -11,6 +11,7 @@ import totalPlaces from "../../common/totalPlaces";
 class LocationSearchInput extends Component {
   constructor(props) {
     super(props);
+    this.textInput = React.createRef();
     this.state = {
       // hasFocus: false,
       address: "",
@@ -36,6 +37,8 @@ class LocationSearchInput extends Component {
 
   handleSelect(address, place_id) {
     const suggestion = address.split(",")[0] || "";
+    // blur the text input to ditch the on screen keyboard for mobile
+    this.textInput.current.blur();
 
     geocodeByAddress(address)
       .then(results => {
@@ -117,6 +120,7 @@ class LocationSearchInput extends Component {
           </label>
           <input
             id="find-a-place"
+            ref={this.textInput}
             onFocusCapture={this.handleFocus}
             onBlurCapture={this.handleBlur}
             name="findPlaceInput"

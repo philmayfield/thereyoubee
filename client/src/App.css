@@ -5880,73 +5880,6 @@ input[type=range]::-ms-thumb {
   white-space: nowrap;
   border: 0; }
 
-.slide-appear,
-.slide-appear-done,
-.slide-enter,
-.slide-enter-done,
-.slide-exit,
-.slide-exit-done {
-  position: absolute;
-  top: 0;
-  width: 100%; }
-
-.slide-appear {
-  transform: translateY(100px);
-  opacity: 0; }
-
-.slide-appear.slide-appear-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
-
-.slide-enter {
-  transform: translateY(100px); }
-
-.slide-enter.slide-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
-
-.slide-exit {
-  opacity: 1;
-  transform: translateY(0); }
-
-.slide-exit.slide-exit-active {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
-
-.growFade {
-  opacity: 0;
-  transform: scale(0.2) translateX(25px);
-  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
-
-.growFade-appear-done,
-.growFade-enter-done {
-  opacity: 1 !important;
-  transform: scale(1) translateX(0) translateY(0) !important; }
-  .growFade-appear-done.with-height,
-  .growFade-enter-done.with-height {
-    max-height: 5rem; }
-
-.turn {
-  transition: transform 333ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
-
-.zero {
-  transform: rotate(0deg); }
-
-.ninety {
-  transform: rotate(90deg); }
-
-.one-eighty {
-  transform: rotate(180deg); }
-
-.two-seventy {
-  transform: rotate(270deg); }
-
-.three-sixety {
-  transform: rotate(1turn); }
-
 body {
   width: 100%;
   height: 100%;
@@ -5982,11 +5915,20 @@ hr {
 
 .card .card-title-area {
   border-radius: 2px 2px 0 0;
+  display: flex;
+  align-items: center;
   position: relative;
   padding: 12px; }
 
 .card .card-title-area.with-fab {
   padding-right: 5rem; }
+
+.place-card {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 250ms cubic-bezier(0.5, -0.2, 0.5, 1.2); }
 
 .d-none {
   display: none !important; }
@@ -6076,8 +6018,8 @@ hr {
 .toast {
   max-height: 0rem;
   min-height: 0;
-  opacity: 0;
   top: 0;
+  opacity: 0;
   transform: scale(0.2) translateX(25px);
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
 
@@ -6248,3 +6190,82 @@ hr {
     background-color: rgba(0, 0, 0, 0.03); }
   .suggestion__item.suggestion__item--active {
     background-color: rgba(33, 150, 243, 0.1); }
+
+.slide-appear,
+.slide-appear-done,
+.slide-enter,
+.slide-enter-done,
+.slide-exit,
+.slide-exit-done {
+  position: absolute;
+  top: 0;
+  width: 100%; }
+
+.slide-appear {
+  transform: translateY(100px);
+  opacity: 0; }
+
+.slide-appear.slide-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
+
+.slide-enter {
+  transform: translateY(100px); }
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
+
+.slide-exit {
+  opacity: 1;
+  transform: translateY(0); }
+
+.slide-exit.slide-exit-active {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
+
+.growFade {
+  opacity: 0;
+  transform: scale(0.2) translateX(25px);
+  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+
+.growFade-appear-done,
+.growFade-enter-done {
+  opacity: 1 !important;
+  transform: scale(1) translateX(0) translateY(0) !important; }
+  .growFade-appear-done.with-height,
+  .growFade-enter-done.with-height {
+    max-height: 5rem; }
+
+.place-card-enter-done {
+  margin: 1rem 0 0 0;
+  max-height: 15rem;
+  opacity: 1;
+  transform: scale(1); }
+
+.place-card-exit-done {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: scale(0); }
+
+.turn {
+  transition: transform 333ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+
+.zero {
+  transform: rotate(0deg); }
+
+.ninety {
+  transform: rotate(90deg); }
+
+.one-eighty {
+  transform: rotate(180deg); }
+
+.two-seventy {
+  transform: rotate(270deg); }
+
+.three-sixety {
+  transform: rotate(1turn); }

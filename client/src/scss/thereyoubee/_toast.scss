@@ -1,8 +1,6 @@
 .toast {
   max-height: 0rem;
   min-height: 0;
-  opacity: 0;
   top: 0; // not sure why this is set to 35px by default
-  transform: scale(0.2) translateX(25px);
-  transition: $bouncy;
+  @include txGrowFadeStart();
 }

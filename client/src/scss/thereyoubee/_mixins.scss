@@ -1,0 +1,18 @@
+@mixin txSlideAppearActive() {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255);
+}
+
+@mixin txGrowFadeStart() {
+  opacity: 0;
+  transform: scale(0.2) translateX(25px);
+  transition: $bouncy;
+}
+
+@mixin txPlaceCardStart() {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: scale(0);
+}

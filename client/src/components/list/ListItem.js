@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
-import { flagPlace } from "../../actions/placeActions";
+import { flagPlace, setCurrentPlace } from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
+import { withRouter } from "react-router-dom";
 
 class ListItem extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class ListItem extends Component {
     };
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleViewPlace = this.handleViewPlace.bind(this);
   }
 
   handleDelete() {
@@ -24,6 +26,12 @@ class ListItem extends Component {
     setTimeout(() => {
       flagPlace(item);
     }, this.animationTime);
+  }
+
+  handleViewPlace() {
+    const { setCurrentPlace, item, history } = this.props;
+    setCurrentPlace(item);
+    history.push("/map");
   }
 
   render() {
@@ -49,7 +57,7 @@ class ListItem extends Component {
             <i className="material-icons mr-2 place-icon white-text">place</i>
             <span className="card-title white-text">{suggestion}</span>
             <Button
-              icon="menu"
+              icon="more_vert"
               fab={true}
               classes={[
                 "btn-floating",
@@ -59,6 +67,11 @@ class ListItem extends Component {
                 "lighten-2"
               ]}
             >
+              <Button
+                icon="visibility"
+                classes={["btn-floating", "blue"]}
+                clickOrTo={this.handleViewPlace}
+              />
               <Button
                 icon="delete_forever"
                 classes={["btn-floating", "red"]}
@@ -78,10 +91,12 @@ class ListItem extends Component {
 ListItem.propTypes = {
   index: PropTypes.number,
   flagPlace: PropTypes.func.isRequired,
-  item: PropTypes.object
+  setCurrentPlace: PropTypes.func.isRequired,
+  item: PropTypes.object,
+  history: PropTypes.object
 };
 
 export default connect(
   null,
-  { flagPlace }
-)(ListItem);
+  { flagPlace, setCurrentPlace }
+)(withRouter(ListItem));

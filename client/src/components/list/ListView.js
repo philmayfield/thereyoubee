@@ -46,7 +46,7 @@ class ListView extends Component {
           <h2>List View</h2>
         </div>
         <header className="list-view__header right-align p-3 z-depth-3">
-          {totalPlaces(places.length)}
+          {totalPlaces(placesToRender.length)}
         </header>
         {content}
       </div>

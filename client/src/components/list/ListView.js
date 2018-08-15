@@ -1,73 +1,53 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import PropTypes from "prop-types";
-import { getAllPlaces } from "../../actions/placeActions";
 import Alert from "../common/Alert";
 import { notEmpty } from "../../common/empty";
 import List from "./List";
 import totalPlaces from "../../common/totalPlaces";
 
-class ListView extends Component {
-  componentDidMount() {
-    this.props.getAllPlaces();
-  }
+const ListView = props => {
+  const {
+    // isAuth,
+    isLoading,
+    places
+  } = props;
+  const hasPlaces = notEmpty(places);
+  let content;
 
-  render() {
-    const {
-      app,
-      // auth,
-      places
-    } = this.props;
-    // filter out places that have the delete flag true
-    const placesToRender = places.filter(place => !place.deleteFlag);
-    // const { isAuth } = auth;
-    const { loadingArr } = app;
-    const isLoading = notEmpty(loadingArr);
-    const hasPlaces = notEmpty(placesToRender);
-    let content;
-
-    if (hasPlaces && !isLoading) {
-      content = <List places={placesToRender} />;
-    } else if (!isLoading)
-      content = (
-        <div className="px-3 pt-5">
-          <Alert heading="There aren&rsquo;t any places here yet!">
-            <p>
-              Looks like you havent added any places here yet, why don&rsquo;t
-              you flip over to the map view and start adding some!
-            </p>
-          </Alert>
-        </div>
-      );
-
-    return (
-      <div className="list-view">
-        <div className="sr-only">
-          <h2>List View</h2>
-        </div>
-        <header className="list-view__header right-align p-3 z-depth-3">
-          {totalPlaces(placesToRender.length)}
-        </header>
-        {content}
+  if (hasPlaces && !isLoading) {
+    content = (
+      <List
+        // isAuth={isAuth}
+        places={places}
+      />
+    );
+  } else if (!isLoading)
+    content = (
+      <div className="px-3 pt-5">
+        <Alert heading="There aren&rsquo;t any places here yet!">
+          <p>
+            Looks like you havent added any places here yet, why don&rsquo;t you
+            flip over to the map view and start adding some!
+          </p>
+        </Alert>
       </div>
     );
-  }
-}
 
-ListView.propTypes = {
-  app: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  places: PropTypes.array.isRequired,
-  getAllPlaces: PropTypes.func.isRequired
+  return (
+    <div className="list-view">
+      <h2 className="sr-only">List View</h2>
+      <header className="list-view__header right-align p-3 z-depth-3">
+        {totalPlaces(places.length, isLoading)}
+      </header>
+      {content}
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-  app: state.app,
-  auth: state.auth,
-  places: state.places
-});
+ListView.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  // isAuth: PropTypes.bool.isRequired,
+  places: PropTypes.array.isRequired
+};
 
-export default connect(
-  mapStateToProps,
-  { getAllPlaces }
-)(ListView);
+export default ListView;

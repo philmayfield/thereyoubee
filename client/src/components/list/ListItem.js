@@ -19,6 +19,7 @@ class ListItem extends Component {
   }
 
   handleDelete() {
+    // flag the place for deletion
     this.setState({ show: false });
     const { item, flagPlace } = this.props;
 
@@ -29,6 +30,7 @@ class ListItem extends Component {
   }
 
   handleViewPlace() {
+    // view the place on the map
     const { setCurrentPlace, item, history } = this.props;
     setCurrentPlace(item);
     history.push("/map");
@@ -43,7 +45,6 @@ class ListItem extends Component {
       suggestion
       // latLng = {}
     } = this.props.item;
-    // const { lat, lng } = latLng;
 
     return (
       <CSSTransition
@@ -59,13 +60,7 @@ class ListItem extends Component {
             <Button
               icon="more_vert"
               fab={true}
-              classes={[
-                "btn-floating",
-                // "btn-large",
-                "halfway-fab",
-                "teal",
-                "lighten-2"
-              ]}
+              classes={["btn-floating", "halfway-fab", "teal", "lighten-2"]}
             >
               <Button
                 icon="visibility"
@@ -89,7 +84,6 @@ class ListItem extends Component {
 }
 
 ListItem.propTypes = {
-  index: PropTypes.number,
   flagPlace: PropTypes.func.isRequired,
   setCurrentPlace: PropTypes.func.isRequired,
   item: PropTypes.object,

@@ -27,8 +27,6 @@ class LocationSearchInput extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    // this.handleFocus = this.handleFocus.bind(this);
-    // this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleChange(address) {
@@ -74,17 +72,6 @@ class LocationSearchInput extends Component {
     }
   }
 
-  // handleFocus() {
-  //   this.setState({ hasFocus: true });
-  // }
-
-  // handleBlur() {
-  //   const { findPlaceInput } = this.state;
-  //   if (!findPlaceInput.length) {
-  //     this.setState({ hasFocus: false });
-  //   }
-  // }
-
   resetCurrentPlace() {
     this.setState({
       address: "",
@@ -95,14 +82,15 @@ class LocationSearchInput extends Component {
         latLng: {}
       }
     });
-    if (this.props.currentPlace.place_id) {
-      this.props.resetCurrentPlace();
-    }
+    this.props.resetCurrentPlace();
   }
 
   render() {
-    const { places } = this.props;
-    const placeholderText = `Find a Place - ${totalPlaces(places.length)}`;
+    const { numPlaces, isLoading } = this.props;
+    const placeholderText = `Find a Place - ${totalPlaces(
+      numPlaces,
+      isLoading
+    )}`;
     const renderFunc = ({
       getInputProps,
       getSuggestionItemProps,
@@ -121,8 +109,6 @@ class LocationSearchInput extends Component {
           <input
             id="find-a-place"
             ref={this.textInput}
-            onFocusCapture={this.handleFocus}
-            onBlurCapture={this.handleBlur}
             name="findPlaceInput"
             value={this.state.findPlaceInput}
             onChangeCapture={this.handleInputChange}
@@ -171,15 +157,15 @@ class LocationSearchInput extends Component {
 }
 
 LocationSearchInput.propTypes = {
-  places: PropTypes.array.isRequired,
-  currentPlace: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   setCurrentPlace: PropTypes.func.isRequired,
-  resetCurrentPlace: PropTypes.func.isRequired
+  resetCurrentPlace: PropTypes.func.isRequired,
+  numPlaces: PropTypes.number.isRequired,
+  currentPlace: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  currentPlace: state.currentPlace,
-  places: state.places
+  currentPlace: state.currentPlace
 });
 
 export default connect(

@@ -9,6 +9,9 @@ import {
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
+// actions
+import { getAllPlaces } from "../actions/placeActions";
+
 // routes / componenets
 import IsAuth from "../components/common/IsAuth";
 import ToastContainer from "./toast/ToastContainer";
@@ -18,14 +21,22 @@ import MapView from "./map/MapView";
 import ListView from "./list/ListView";
 import Login from "./login/Login";
 
+// helpers
+import { notEmpty } from "../common/empty";
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    props.getAllPlaces();
   }
 
   render() {
-    const { isAuth } = this.props.auth;
+    const { app, auth, places } = this.props;
+    const { isAuth } = auth;
+    const placesToRender = places.filter(place => !place.deleteFlag);
+    const isLoading = notEmpty(app.loadingArr);
     const RedirectWrap = ({ action, children }) =>
       action === "REPLACE" ? null : children;
 
@@ -74,8 +85,28 @@ class App extends Component {
                           )
                         }
                       />
-                      <Route exact path="/map" component={MapView} />
-                      <Route exact path="/list" component={ListView} />
+                      <Route
+                        exact
+                        path="/map"
+                        render={() => (
+                          <MapView
+                            isAuth={isAuth}
+                            isLoading={isLoading}
+                            places={placesToRender}
+                          />
+                        )}
+                      />
+                      <Route
+                        exact
+                        path="/list"
+                        render={() => (
+                          <ListView
+                            isAuth={isAuth}
+                            isLoading={isLoading}
+                            places={placesToRender}
+                          />
+                        )}
+                      />
                     </Switch>
                   </CSSTransition>
                 </TransitionGroup>
@@ -89,14 +120,19 @@ class App extends Component {
 }
 
 App.propTypes = {
-  auth: PropTypes.object.isRequired
+  places: PropTypes.array.isRequired,
+  app: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  getAllPlaces: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  app: state.app,
+  auth: state.auth,
+  places: state.places
 });
 
 export default connect(
   mapStateToProps,
-  {}
+  { getAllPlaces }
 )(App);

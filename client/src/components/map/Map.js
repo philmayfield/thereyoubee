@@ -4,7 +4,6 @@ import { isEmpty, notEmpty } from "../../common/empty";
 import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
 import ClickablePoint from "../point/ClickablePoint";
-// import Point from "../point/Point";
 import { fitBounds } from "google-map-react/utils";
 
 class Map extends Component {
@@ -82,7 +81,7 @@ class Map extends Component {
   }
 
   render() {
-    const { currentPlace, places } = this.props;
+    const { currentPlace, places = [] } = this.props;
     const hasCurrentPlace = notEmpty(currentPlace.place_id);
     const placesArr = hasCurrentPlace ? [currentPlace] : places;
     const points = this.makePoints(placesArr);
@@ -106,13 +105,14 @@ class Map extends Component {
         },
         zoom: hasCurrentPlace ? 17 : 10
       };
-    } else if (notEmpty(placesArr)) {
-      // no current place, but has list of places - have library make centerZoom
+    } else if (placesArr.length > 1) {
+      // no current place, but has more than one item on the list of places - have library make centerZoom
       const widthHeight = {
         width: this.state.width,
         height: this.state.height
       };
       const bounds = this.makeBounds(placesArr);
+
       centerZoom = bounds && fitBounds(bounds, widthHeight);
     }
 
@@ -137,11 +137,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentPlace: state.currentPlace,
-  places: state.places
+  currentPlace: state.currentPlace
 });
 
-export default connect(
-  mapStateToProps,
-  {}
-)(Map);
+export default connect(mapStateToProps)(Map);

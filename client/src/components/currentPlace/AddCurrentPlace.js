@@ -39,7 +39,6 @@ class AddCurrentPlace extends Component {
     delete newPlace.latLng;
 
     this.props.saveCurrentPlace(newPlace);
-
     this.handleClose();
   }
 
@@ -50,12 +49,7 @@ class AddCurrentPlace extends Component {
 
   render() {
     const { currentPlace, places, errors } = this.props;
-    const {
-      address,
-      suggestion,
-      place_id
-      // latLng
-    } = currentPlace;
+    const { address, suggestion, place_id } = currentPlace;
     const { show } = this.state;
     const gotAnIssue = notEmpty(errors);
     const alreadyHavePlace = notEmpty(
@@ -106,16 +100,15 @@ class AddCurrentPlace extends Component {
 
 AddCurrentPlace.propTypes = {
   places: PropTypes.array.isRequired,
-  currentPlace: PropTypes.object.isRequired,
   saveCurrentPlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired,
+  currentPlace: PropTypes.object.isRequired,
   errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };
 
 const mapStateToProps = state => ({
   currentPlace: state.currentPlace,
-  errors: state.errors,
-  places: state.places
+  errors: state.errors
 });
 
 export default connect(

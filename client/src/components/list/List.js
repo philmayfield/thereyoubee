@@ -2,23 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ListItem from "./ListItem";
+import { resetCurrentPlace } from "../../actions/placeActions";
 
 class List extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  componentDidMount() {
+    this.props.resetCurrentPlace();
   }
 
   render() {
     const {
-      places
-      // auth
+      // isAuth
+      places = []
     } = this.props;
-    const placeItems =
-      Array.isArray(places) &&
-      places.map(place => {
-        return <ListItem key={place._id} item={place} />;
-      });
+    const placeItems = places.map(place => (
+      <ListItem key={place._id} item={place} />
+    ));
 
     return <div className="place-list px-3">{placeItems}</div>;
   }
@@ -26,14 +24,11 @@ class List extends Component {
 
 List.propTypes = {
   places: PropTypes.array.isRequired,
-  auth: PropTypes.object.isRequired
+  resetCurrentPlace: PropTypes.func.isRequired
+  // isAuth: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
 export default connect(
-  mapStateToProps,
-  {}
+  null,
+  { resetCurrentPlace }
 )(List);

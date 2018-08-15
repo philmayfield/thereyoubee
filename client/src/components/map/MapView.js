@@ -1,34 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import PropTypes from "prop-types";
-import { getAllPlaces } from "../../actions/placeActions";
 import LocationSearchInput from "../locationSearch/LocationSearchInput";
 import AddCurrentPlace from "../currentPlace/AddCurrentPlace";
 import Map from "./Map";
 
-class MapView extends Component {
-  componentDidMount() {
-    // get a fresh set of places up front
-    this.props.getAllPlaces();
-  }
-
-  render() {
-    return (
-      <div className="map-view" key="map-view">
-        <h2 className="sr-only">Map View</h2>
-        <Map />
-        <LocationSearchInput />
-        <AddCurrentPlace />
-      </div>
-    );
-  }
-}
-
-MapView.propTypes = {
-  getAllPlaces: PropTypes.func.isRequired
+const MapView = props => {
+  const { isLoading, places } = props;
+  return (
+    <div className="map-view" key="map-view">
+      <h2 className="sr-only">Map View</h2>
+      <Map places={places} />
+      <LocationSearchInput isLoading={isLoading} numPlaces={places.length} />
+      <AddCurrentPlace places={places} />
+    </div>
+  );
 };
 
-export default connect(
-  null,
-  { getAllPlaces }
-)(MapView);
+MapView.propTypes = {
+  isLoading: PropTypes.bool,
+  places: PropTypes.array.isRequired
+};
+
+export default MapView;

@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { logoutUser } from "../../actions/authActions";
-import getImg from "../../common/getImg";
-import ReactSVG from "react-svg";
+import Button from "../common/Button";
+// import getImg from "../../common/getImg";
+// import ReactSVG from "react-svg";
 
 class LogoNav extends Component {
   constructor(props) {
@@ -38,13 +39,14 @@ class LogoNav extends Component {
     const { show } = this.state;
     return (
       <div className="logo-nav">
-        {/* TODO: make this a button */}
-        <div
-          onClick={this.toggleMenu}
-          className={`logo turn zero ${show ? "ninety" : ""}`}
+        <Button
+          classes={["menu-btn", "btn-flat", "btn-empty"]}
+          clickOrTo={this.toggleMenu}
         >
-          <ReactSVG path={getImg("logo")} />
-        </div>
+          <i className={`material-icons turn ${show ? "one-eighty" : "zero"}`}>
+            {show ? "close" : "menu"}
+          </i>
+        </Button>
         <CSSTransition in={show} timeout={0} classNames="growFade">
           <nav className="z-depth-3">
             <ul className="m-0">

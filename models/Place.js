@@ -25,11 +25,11 @@ const PlaceSchema = new Schema({
   },
   latLng: {
     lat: {
-      type: Schema.Types.String,
+      type: Schema.Types.Number,
       required: true
     },
     lng: {
-      type: Schema.Types.String,
+      type: Schema.Types.Number,
       required: true
     }
   }

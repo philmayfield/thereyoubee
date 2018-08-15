@@ -34,8 +34,8 @@ class Map extends Component {
     const lngs = [];
 
     placesArr.forEach(({ latLng }) => {
-      lats.push(parseFloat(latLng.lat));
-      lngs.push(parseFloat(latLng.lng));
+      lats.push(latLng.lat);
+      lngs.push(latLng.lng);
     });
 
     lats.sort((a, b) => a - b);
@@ -67,16 +67,17 @@ class Map extends Component {
 
   createMapOptions(maps) {
     return {
-      mapTypeControl: true,
-      mapTypeControlOptions: {
-        style: maps.MapTypeControlStyle.DEFAULT,
-        position: maps.ControlPosition.BOTTOM_CENTER
-      },
+      fullscreenControl: false,
+      zoomControl: true,
+      // mapTypeControl: true,
+      // mapTypeControlOptions: {
+      //   style: maps.MapTypeControlStyle.DEFAULT,
+      //   position: maps.ControlPosition.BOTTOM_CENTER
+      // },
       streetViewControl: true,
       streetViewControlOptions: {
         position: maps.ControlPosition.LEFT_BOTTOM
-      },
-      fullscreenControl: false
+      }
     };
   }
 
@@ -94,14 +95,16 @@ class Map extends Component {
       zoom: 4
     };
 
-    if (hasCurrentPlace) {
-      // has current place - show just that place zoomed in
+    if (hasCurrentPlace || placesArr.length === 1) {
+      // has current place or only one place on list - show just that place zoomed in
+      const place = hasCurrentPlace ? currentPlace : placesArr[0];
+
       centerZoom = {
         center: {
-          lat: currentPlace.latLng.lat,
-          lng: currentPlace.latLng.lng
+          lat: place.latLng.lat,
+          lng: place.latLng.lng
         },
-        zoom: 17
+        zoom: hasCurrentPlace ? 17 : 10
       };
     } else if (notEmpty(placesArr)) {
       // no current place, but has list of places - have library make centerZoom

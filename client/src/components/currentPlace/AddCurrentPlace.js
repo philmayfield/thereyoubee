@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { isEmpty, notEmpty } from "../../common/empty";
+import { notEmpty } from "../../common/empty";
 import Button from "../common/Button";
 import {
   saveCurrentPlace,
@@ -12,14 +12,19 @@ import { CSSTransition } from "react-transition-group";
 class AddCurrentPlace extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      show: false
+    };
 
     this.handleAddPlace = this.handleAddPlace.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ show: true });
+  componentDidUpdate(prevProps, prevState) {
+    const { currentPlace } = this.props;
+    if (notEmpty(currentPlace.place_id) && !prevState.show) {
+      this.setState({ show: true });
+    }
   }
 
   handleAddPlace(e) {
@@ -34,11 +39,12 @@ class AddCurrentPlace extends Component {
     delete newPlace.latLng;
 
     this.props.saveCurrentPlace(newPlace);
+
+    this.handleClose();
   }
 
-  handleClose(e) {
-    e.preventDefault();
-
+  handleClose() {
+    this.setState({ show: false });
     this.props.resetCurrentPlace();
   }
 
@@ -50,15 +56,15 @@ class AddCurrentPlace extends Component {
       place_id
       // latLng
     } = currentPlace;
-    const showComponent = notEmpty(place_id);
-    const showAddBtn = isEmpty(errors);
+    const { show } = this.state;
+    const gotAnIssue = notEmpty(errors);
     const alreadyHavePlace = notEmpty(
       places.find(place => place.place_id === place_id)
     );
 
     return (
-      <CSSTransition in={showComponent} timeout={0} classNames="growFade">
-        <div className={showComponent ? "add-current-place z-depth-3" : "hide"}>
+      <CSSTransition in={show} timeout={0} classNames="growFade" unmountOnExit>
+        <div className="add-current-place z-depth-3">
           <h2 className="sr-only">Current Place</h2>
           <div className="add-current-place__place-name">
             <i className={`material-icons place-icon mr-2`}>place</i>
@@ -66,9 +72,12 @@ class AddCurrentPlace extends Component {
           </div>
           <hr />
           <p className="mt-0">{address}</p>
-          {alreadyHavePlace ? (
-            <div className="red-text">Already have it</div>
-          ) : showAddBtn ? (
+          {gotAnIssue ? (
+            <div className="red-text">
+              We couldnt get your list of places, go ahead and try reloading the
+              page and finding it again please.
+            </div>
+          ) : (
             <div className="right-align">
               <Button
                 clickOrTo={this.handleClose}
@@ -76,18 +85,17 @@ class AddCurrentPlace extends Component {
               >
                 Close
               </Button>
-              <Button
-                clickOrTo={this.handleAddPlace}
-                value={currentPlace}
-                icon="add_circle"
-              >
-                Add This Place
-              </Button>
-            </div>
-          ) : (
-            <div className="red-text">
-              We couldnt get your list of places, go ahead and try reloading the
-              page and finding it again please.
+              {alreadyHavePlace ? (
+                <span className="teal-text">Already have it</span>
+              ) : (
+                <Button
+                  clickOrTo={this.handleAddPlace}
+                  value={currentPlace}
+                  icon="add_circle"
+                >
+                  Add This Place
+                </Button>
+              )}
             </div>
           )}
         </div>

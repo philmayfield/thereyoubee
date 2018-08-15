@@ -3,7 +3,8 @@
   transition: $bouncy;
   transition-delay: 200ms;
 
-  .logo {
+  .logo,
+  .menu-btn {
     width: 1.5 * $spacer;
     height: 1.5 * $spacer;
     position: absolute;
@@ -11,6 +12,11 @@
     top: 0;
     left: 0;
     cursor: pointer;
+
+    i {
+      font-size: 1.5 * $spacer;
+      line-height: 1;
+    }
   }
 
   nav {

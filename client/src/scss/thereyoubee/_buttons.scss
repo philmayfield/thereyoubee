@@ -1,0 +1,15 @@
+.btn-empty {
+  padding: 0;
+  height: auto;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.btn-flat {
+  &:hover {
+    background-color: rgba(black, 0.035);
+    text-decoration: underline;
+  }
+}

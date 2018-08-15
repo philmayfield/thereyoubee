@@ -1,11 +1,11 @@
 .add-current-place {
   background-color: #fff;
   border-radius: $button-radius;
-  max-width: calc(100% - #{$spacer * 2});
+  max-width: calc(100% - #{$spacer});
   padding: $spacer;
   position: fixed;
   bottom: $spacer;
-  right: $spacer;
+  right: $spacer/2;
   @include txGrowFadeStart();
 }
 

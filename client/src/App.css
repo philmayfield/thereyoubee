@@ -5916,6 +5916,16 @@ hr {
   background-size: cover;
   /* background by SVGBackgrounds.com */ }
 
+.btn-empty {
+  padding: 0;
+  height: auto; }
+  .btn-empty:hover {
+    background-color: transparent; }
+
+.btn-flat:hover {
+  background-color: rgba(0, 0, 0, 0.035);
+  text-decoration: underline; }
+
 .card .card-title-area {
   border-radius: 2px 2px 0 0;
   display: flex;
@@ -6029,11 +6039,11 @@ hr {
 .add-current-place {
   background-color: #fff;
   border-radius: 2px;
-  max-width: calc(100% - 2rem);
+  max-width: calc(100% - 1rem);
   padding: 1rem;
   position: fixed;
   bottom: 1rem;
-  right: 1rem;
+  right: 0.5rem;
   opacity: 0;
   transform: scale(0.2) translateX(25px);
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
@@ -6057,7 +6067,8 @@ hr {
   position: absolute;
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
   transition-delay: 200ms; }
-  .logo-nav .logo {
+  .logo-nav .logo,
+  .logo-nav .menu-btn {
     width: 1.5rem;
     height: 1.5rem;
     position: absolute;
@@ -6065,6 +6076,10 @@ hr {
     top: 0;
     left: 0;
     cursor: pointer; }
+    .logo-nav .logo i,
+    .logo-nav .menu-btn i {
+      font-size: 1.5rem;
+      line-height: 1; }
   .logo-nav nav {
     position: relative;
     z-index: 2;

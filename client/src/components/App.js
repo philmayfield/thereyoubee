@@ -20,6 +20,7 @@ import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
 import Login from "./login/Login";
+import Register from "./register/Register";
 
 // helpers
 import { notEmpty } from "../common/empty";
@@ -93,6 +94,19 @@ class App extends Component {
                             </RedirectWrap>
                           ) : (
                             <Login />
+                          )
+                        }
+                      />
+                      <Route
+                        exact
+                        path="/register"
+                        render={() =>
+                          isAuth ? (
+                            <RedirectWrap action={history.action}>
+                              <Redirect to="/map" />
+                            </RedirectWrap>
+                          ) : (
+                            <Register />
                           )
                         }
                       />

@@ -1,23 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { loginUser } from "../../actions/authActions";
-import { notEmpty } from "../../common/empty";
+import PropTypes from "prop-types";
 import Input from "../common/Input";
-import Alert from "../common/Alert";
 import Button from "../common/Button";
+import { registerUser } from "../../actions/authActions";
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
-
-    const user = this.props.match && this.props.match.params.user;
-
     this.state = {
-      username: user ? user : "",
+      username: "",
       password: "",
-      newUser: notEmpty(user),
+      password2: "",
       errors: {}
     };
 
@@ -32,52 +27,27 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { username, password } = this.state;
+    const { username, password, password2 } = this.state;
 
-    const myDude = {
+    const myNewDude = {
       username,
-      password
+      password,
+      password2
     };
 
-    this.props.loginUser(myDude);
+    this.props.registerUser(myNewDude);
   }
-
-  // componentDidMount() {
-  //   this.handleAlreadyAuth(this.props.auth.isAuth);
-  // }
-
-  // componentDidUpdate() {
-  //   this.handleAlreadyAuth(this.props.auth.isAuth);
-  // }
-
-  // handleAlreadyAuth(isAuth) {
-  //   if (isAuth) {
-  //     console.log("tph", this.props.history);
-  //     this.props.history.push("/map");
-  //   }
-  // }
 
   render() {
     const { errors } = this.props;
 
-    const newUserMsg = (
-      <Alert color="teal" heading={`Welcome ${this.state.username}`}>
-        <hr className="my-1" />
-        <p className="mb-0">
-          You&rsquo;re all registered up! Go ahead and login with the password
-          you entered previously!
-        </p>
-      </Alert>
-    );
-
     return (
-      <div className="login-view d-flex">
+      <div className="register-view d-flex">
         <div className="col-11 col-sm-8 col-md-6 col-lg-5 mx-auto my-auto">
           <div className="card">
-            {this.state.newUser ? newUserMsg : null}
             <form onSubmit={this.handleSubmit}>
               <div className="card-content">
-                <span className="card-title">Login</span>
+                <span className="card-title">Register</span>
                 <Input
                   label="Username"
                   name="username"
@@ -95,18 +65,26 @@ class Login extends Component {
                   error={errors.password}
                   onChange={this.inputChange}
                 />
+                <Input
+                  label="Confirm Password"
+                  type="password"
+                  name="password2"
+                  required={true}
+                  value={this.state.password2}
+                  error={errors.password2}
+                  onChange={this.inputChange}
+                />
                 <div className="d-flex justify-content-between">
                   <span>* Required</span>
                   <Button type="submit" icon="person">
-                    Log in
+                    Register
                   </Button>
                 </div>
               </div>
             </form>
           </div>
           <p className="center-align">
-            Don&rsquo;t have an account?{" "}
-            <Link to="/register">Sign up now!</Link>
+            Already have an account? <Link to="/login">Log in now!</Link>
           </p>
         </div>
       </div>
@@ -114,23 +92,16 @@ class Login extends Component {
   }
 }
 
+Register.propTypes = {
+  errors: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
-  auth: state.auth,
   errors: state.errors
 });
 
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  auth: PropTypes.object.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      user: PropTypes.string
-    })
-  })
-};
-
 export default connect(
   mapStateToProps,
-  { loginUser }
-)(Login);
+  { registerUser }
+)(Register);

@@ -19,6 +19,7 @@ class Map extends Component {
   }
 
   componentWillUnmount() {
+    this.props.setShowTopNav(true);
     window.removeEventListener("resize", this.updateWindowDimensions);
   }
 
@@ -81,7 +82,7 @@ class Map extends Component {
   }
 
   render() {
-    const { currentPlace, places = [] } = this.props;
+    const { currentPlace, places = [], setShowTopNav } = this.props;
     const hasCurrentPlace = notEmpty(currentPlace.place_id);
     const placesArr = hasCurrentPlace ? [currentPlace] : places;
     const points = this.makePoints(placesArr);
@@ -122,6 +123,13 @@ class Map extends Component {
           center={centerZoom.center}
           zoom={centerZoom.zoom}
           options={this.createMapOptions}
+          onGoogleApiLoaded={({ map, maps }) => {
+            const streetView = map.getStreetView();
+            maps.event.addListener(streetView, "visible_changed", () =>
+              setShowTopNav(!streetView.visible)
+            );
+          }}
+          yesIWantToUseGoogleMapApiInternals
         >
           {points}
         </GoogleMapReact>
@@ -132,6 +140,7 @@ class Map extends Component {
 
 Map.propTypes = {
   places: PropTypes.array.isRequired,
+  setShowTopNav: PropTypes.func.isRequired,
   currentPlace: PropTypes.object.isRequired,
   text: PropTypes.string
 };

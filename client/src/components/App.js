@@ -27,13 +27,24 @@ import { notEmpty } from "../common/empty";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showTopNav: true
+    };
 
-    props.getAllPlaces();
+    this.setShowTopNav = this.setShowTopNav.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getAllPlaces();
+  }
+
+  setShowTopNav(val = true) {
+    this.setState({ showTopNav: val });
   }
 
   render() {
-    const { app, auth, places } = this.props;
+    const { app, auth, places, currentPlace } = this.props;
+    const { showTopNav } = this.state;
     const { isAuth } = auth;
     const placesToRender = places.filter(place => !place.deleteFlag);
     const isLoading = notEmpty(app.loadingArr);
@@ -48,7 +59,7 @@ class App extends Component {
               <IsAuth />
               <Loading />
               <ToastContainer test={false} />
-              <LogoNav isAuth={isAuth} />
+              <LogoNav isAuth={isAuth} showTopNav={showTopNav} />
               <main>
                 <TransitionGroup component={null}>
                   <CSSTransition
@@ -93,6 +104,9 @@ class App extends Component {
                             isAuth={isAuth}
                             isLoading={isLoading}
                             places={placesToRender}
+                            currentPlace={currentPlace}
+                            showTopNav={showTopNav}
+                            setShowTopNav={this.setShowTopNav}
                           />
                         )}
                       />
@@ -123,13 +137,15 @@ App.propTypes = {
   places: PropTypes.array.isRequired,
   app: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  currentPlace: PropTypes.object.isRequired,
   getAllPlaces: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   app: state.app,
   auth: state.auth,
-  places: state.places
+  places: state.places,
+  currentPlace: state.currentPlace
 });
 
 export default connect(

@@ -20,6 +20,13 @@ class AddCurrentPlace extends Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
+  componentDidMount() {
+    const { currentPlace } = this.props;
+    if (notEmpty(currentPlace.place_id)) {
+      this.setState({ show: true });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { currentPlace } = this.props;
     if (notEmpty(currentPlace.place_id) && !prevState.show) {
@@ -27,11 +34,8 @@ class AddCurrentPlace extends Component {
     }
   }
 
-  handleAddPlace(e) {
-    e.preventDefault();
-
+  handleAddPlace() {
     const { currentPlace } = this.props;
-
     const newPlace = {
       ...currentPlace,
       ...currentPlace.latLng
@@ -107,7 +111,6 @@ AddCurrentPlace.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentPlace: state.currentPlace,
   errors: state.errors
 });
 

@@ -86,7 +86,7 @@ class LocationSearchInput extends Component {
   }
 
   render() {
-    const { numPlaces, isLoading } = this.props;
+    const { numPlaces, isLoading, showTopNav } = this.props;
     const placeholderText = `Find a Place - ${totalPlaces(
       numPlaces,
       isLoading
@@ -145,19 +145,22 @@ class LocationSearchInput extends Component {
     };
 
     return (
-      <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-      >
-        {renderFunc}
-      </PlacesAutocomplete>
+      showTopNav && (
+        <PlacesAutocomplete
+          value={this.state.address}
+          onChange={this.handleChange}
+          onSelect={this.handleSelect}
+        >
+          {renderFunc}
+        </PlacesAutocomplete>
+      )
     );
   }
 }
 
 LocationSearchInput.propTypes = {
   isLoading: PropTypes.bool.isRequired,
+  showTopNav: PropTypes.bool.isRequired,
   setCurrentPlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired,
   numPlaces: PropTypes.number.isRequired,

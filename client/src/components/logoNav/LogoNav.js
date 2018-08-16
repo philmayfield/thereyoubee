@@ -35,10 +35,10 @@ class LogoNav extends Component {
   }
 
   render() {
-    const { isAuth } = this.props;
+    const { isAuth, showTopNav } = this.props;
     const { show } = this.state;
     return (
-      <div className="logo-nav">
+      <div className={`${showTopNav ? "logo-nav" : "hide"}`}>
         <Button
           classes={["menu-btn", "btn-flat", "btn-empty"]}
           clickOrTo={this.toggleMenu}
@@ -85,6 +85,7 @@ class LogoNav extends Component {
 
 LogoNav.propTypes = {
   isAuth: PropTypes.bool.isRequired,
+  showTopNav: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired
 };
 

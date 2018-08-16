@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { logoutUser } from "../../actions/authActions";
 import Button from "../common/Button";
+import Icon from "../common/Icon";
 // import getImg from "../../common/getImg";
 // import ReactSVG from "react-svg";
 
@@ -43,9 +44,10 @@ class LogoNav extends Component {
           classes={["menu-btn", "btn-flat", "btn-empty"]}
           clickOrTo={this.toggleMenu}
         >
-          <i className={`material-icons turn ${show ? "one-eighty" : "zero"}`}>
-            {show ? "close" : "menu"}
-          </i>
+          <Icon
+            name={show ? "close" : "menu"}
+            classes={["turn", show ? "one-eighty" : "zero"]}
+          />
         </Button>
         <CSSTransition in={show} timeout={0} classNames="growFade">
           <nav className="z-depth-3">
@@ -53,25 +55,25 @@ class LogoNav extends Component {
               <li>
                 {isAuth ? (
                   <Link onClick={this.handleLogout} to="/login">
-                    <i className={`material-icons mr-2`}>account_circle</i>
+                    <Icon name="account_circle" classes={["mr-2"]} />
                     Logout
                   </Link>
                 ) : (
                   <Link onClick={this.hideMenu} to="/login">
-                    <i className={`material-icons mr-2`}>account_circle</i>
+                    <Icon name="account_circle" classes={["mr-2"]} />
                     Login
                   </Link>
                 )}
               </li>
               <li>
                 <Link onClick={this.hideMenu} to="/map">
-                  <i className={`material-icons mr-2`}>place</i>
+                  <Icon name="place" classes={["mr-2"]} />
                   Map of Places
                 </Link>
               </li>
               <li>
                 <Link onClick={this.hideMenu} to="/list">
-                  <i className={`material-icons mr-2`}>list</i>
+                  <Icon name="list" classes={["mr-2"]} />
                   List of Places
                 </Link>
               </li>

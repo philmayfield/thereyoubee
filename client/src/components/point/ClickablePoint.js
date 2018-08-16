@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
+import Icon from "../common/Icon";
 
 class ClickablePoint extends Component {
   constructor(props) {
@@ -42,13 +43,11 @@ class ClickablePoint extends Component {
     const { show, transitionIn } = this.state;
     return (
       <div onClick={this.handleClick} className="map-point">
-        <i
-          className={`map-point__icon material-icons place-icon ${
-            show ? "deep-orange-text" : ""
-          }`}
-        >
-          place
-        </i>
+        <Icon
+          name="place"
+          classes={["map-point__icon", "place-icon"]}
+          color={show ? "deep-orange" : ""}
+        />
         <CSSTransition in={transitionIn} timeout={0} classNames="growFade">
           <span className={`map-point__text z-depth-1 ${show ? "" : "hide"}`}>
             {this.props.text}

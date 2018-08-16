@@ -7,6 +7,7 @@ import PlacesAutocomplete, {
 import PropTypes from "prop-types";
 import { setCurrentPlace, resetCurrentPlace } from "../../actions/placeActions";
 import totalPlaces from "../../common/totalPlaces";
+import Icon from "../common/Icon";
 
 class LocationSearchInput extends Component {
   constructor(props) {
@@ -134,7 +135,7 @@ class LocationSearchInput extends Component {
                   key={suggestion.id}
                   {...getSuggestionItemProps(suggestion, { className })}
                 >
-                  <i className={`material-icons place-icon mr-3`}>place</i>
+                  <Icon name="place" classes={["place-icon", "mr-2"]} />
                   {suggestion.description}
                 </div>
               );

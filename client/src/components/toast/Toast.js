@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { deleteToast } from "../../actions/toastActions";
 import { notEmpty } from "../../common/empty";
+import Icon from "../common/Icon";
 
 class Toast extends Component {
   constructor(props) {
@@ -79,9 +80,7 @@ class Toast extends Component {
       <CSSTransition in={this.state.show} timeout={0} classNames="growFade">
         <div className="toast with-height">
           {!!toast.icon && (
-            <i className={`material-icons left ${iconColor}-text`}>
-              {toast.icon}
-            </i>
+            <Icon name={toast.icon} classes={["left"]} color={iconColor} />
           )}
           {toast.value}
           {!!toast.showClose && (

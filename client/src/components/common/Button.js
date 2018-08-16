@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import Icon from "./Icon";
 
 class Button extends Component {
   constructor(props) {
@@ -20,27 +21,21 @@ class Button extends Component {
 
   renderFab(className, icon) {
     const delayAmt = this.props.children.length;
+    const { showFab } = this.state;
 
     return (
       <div className={`fab`}>
         <button type="button" className={className} onClick={this.handleToggle}>
           {
-            <i
-              className={`material-icons turn ${
-                this.state.showFab ? "one-eighty" : "zero"
-              }`}
-            >
-              {this.state.showFab ? "close" : icon}
-            </i>
+            <Icon
+              name={showFab ? "close" : icon}
+              classes={["turn", showFab ? "one-eighty" : "zero"]}
+            />
           }
         </button>
         <ul>
           {React.Children.map(this.props.children, (child, i) => (
-            <CSSTransition
-              in={this.state.showFab}
-              timeout={0}
-              classNames="growFade"
-            >
+            <CSSTransition in={showFab} timeout={0} classNames="growFade">
               <li style={{ transitionDelay: `${(delayAmt - i) * 50}ms` }}>
                 {child}
               </li>
@@ -72,7 +67,7 @@ class Button extends Component {
     } else {
       return type === "link" ? (
         <Link className={className} to={clickOrTo}>
-          {icon ? <i className={`material-icons ${iconSide}`}>{icon}</i> : ""}
+          {icon ? <Icon name={icon} classes={[iconSide]} /> : ""}
           {children}
         </Link>
       ) : (
@@ -83,7 +78,7 @@ class Button extends Component {
           value={value}
           data-confirm-item={confirmItem}
         >
-          {icon ? <i className={`material-icons ${iconSide}`}>{icon}</i> : ""}
+          {icon ? <Icon name={icon} classes={[iconSide]} /> : ""}
           {fab ? "" : children}
         </button>
       );

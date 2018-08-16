@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { notEmpty } from "../../common/empty";
 import Button from "../common/Button";
+import Icon from "../common/Icon";
 import {
   saveCurrentPlace,
   resetCurrentPlace
@@ -28,9 +29,12 @@ class AddCurrentPlace extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { currentPlace } = this.props;
-    if (notEmpty(currentPlace.place_id) && !prevState.show) {
+    const hasCurrentPlace = notEmpty(this.props.currentPlace.place_id);
+    if (hasCurrentPlace && !prevState.show) {
       this.setState({ show: true });
+    }
+    if (!hasCurrentPlace && prevState.show) {
+      this.setState({ show: false });
     }
   }
 
@@ -55,7 +59,7 @@ class AddCurrentPlace extends Component {
     const { currentPlace, places, errors } = this.props;
     const { address, suggestion, place_id } = currentPlace;
     const { show } = this.state;
-    const gotAnIssue = notEmpty(errors);
+    const gotAnIssue = notEmpty(errors) && errors.status !== 404;
     const alreadyHavePlace = notEmpty(
       places.find(place => place.place_id === place_id)
     );
@@ -65,7 +69,7 @@ class AddCurrentPlace extends Component {
         <div className="add-current-place z-depth-3">
           <h2 className="sr-only">Current Place</h2>
           <div className="add-current-place__place-name">
-            <i className={`material-icons place-icon mr-2`}>place</i>
+            <Icon name={"place"} classes={["place-icon", "mr-2"]} />
             {suggestion}
           </div>
           <hr />
@@ -73,7 +77,7 @@ class AddCurrentPlace extends Component {
           {gotAnIssue ? (
             <div className="red-text">
               We couldnt get your list of places, go ahead and try reloading the
-              page and finding it again please.
+              page and finding the place again please.
             </div>
           ) : (
             <div className="right-align">
@@ -84,7 +88,7 @@ class AddCurrentPlace extends Component {
                 Close
               </Button>
               {alreadyHavePlace ? (
-                <span className="teal-text">Already have it</span>
+                <span className="teal-text">On the list!</span>
               ) : (
                 <Button
                   clickOrTo={this.handleAddPlace}

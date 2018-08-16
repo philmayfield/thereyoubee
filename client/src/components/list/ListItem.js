@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
+import Icon from "../common/Icon";
 import { flagPlace, setCurrentPlace } from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
@@ -55,7 +56,7 @@ class ListItem extends Component {
       >
         <div className="card place-card">
           <div className="card-title-area with-fab teal">
-            <i className="material-icons mr-2 place-icon white-text">place</i>
+            <Icon name="place" classes={["mr-2"]} color="white" />
             <span className="card-title white-text">{suggestion}</span>
             <Button
               icon="more_vert"

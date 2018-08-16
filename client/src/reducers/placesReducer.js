@@ -3,7 +3,8 @@ import {
   FLAG_PLACE,
   UNFLAG_PLACE,
   SAVE_CURRENT_PLACE,
-  DELETE_PLACE
+  DELETE_PLACE,
+  RESET_PLACES
   // SET_CURRENT_PLACE
 } from "../actions/actionTypes";
 // import { notEmpty } from "../common/empty";
@@ -34,6 +35,9 @@ export default (state = [], action) => {
 
     case DELETE_PLACE:
       return state.filter(place => place._id !== action.payload);
+
+    case RESET_PLACES:
+      return [];
 
     default:
       return state;

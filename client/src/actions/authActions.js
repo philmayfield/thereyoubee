@@ -13,7 +13,8 @@ export const registerUser = userData => dispatch => {
   dispatch(isLoading("registerUser"));
 
   async function logMeIn() {
-    await loginUser(userData)(dispatch);
+    // await loginUser(userData)(dispatch);
+    await dispatch(loginUser(userData));
     dispatch(
       saveList({
         name: "default"
@@ -35,47 +36,43 @@ export const registerUser = userData => dispatch => {
 };
 
 // login a user
-function loginUser(userData) {
-  return async dispatch => {
-    dispatch(clearErrors());
-    dispatch(isLoading("loginUser"));
+export const loginUser = userData => async dispatch => {
+  dispatch(clearErrors());
+  dispatch(isLoading("loginUser"));
 
-    await axios
-      .post("/api/user/login", userData)
-      .then(res => {
-        // save token to local storage
-        const { token } = res.data;
-        localStorage.setItem("jwtToken", token);
+  await axios
+    .post("/api/user/login", userData)
+    .then(res => {
+      // save token to local storage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
 
-        // set token to auth header for axios call
-        setAuthToken(token);
+      // set token to auth header for axios call
+      setAuthToken(token);
 
-        // decode token to get user data
-        const decoded = jwt_decode(token);
+      // decode token to get user data
+      const decoded = jwt_decode(token);
 
-        // set current user with decoded data
-        dispatch(setCurrentUser(decoded));
+      // set current user with decoded data
+      dispatch(setCurrentUser(decoded));
 
-        // go fetch the places for the user
-        dispatch(getAllPlaces());
+      // go fetch the places for the user
+      dispatch(getAllPlaces());
 
-        // show a toast!
-        dispatch(
-          addToast({
-            value: `Logged in as ${decoded.username}!`,
-            icon: "mood"
-          })
-        );
-      })
-      .then(() => console.log("logged in"))
-      .catch(err => {
-        const error = err.response ? err.response.data : err;
-        dispatch(getErrors(error));
-      })
-      .finally(() => dispatch(notLoading("loginUser")));
-  };
-}
-export { loginUser };
+      // show a toast!
+      dispatch(
+        addToast({
+          value: `Logged in as ${decoded.username}!`,
+          icon: "mood"
+        })
+      );
+    })
+    .catch(err => {
+      const error = err.response ? err.response.data : err;
+      dispatch(getErrors(error));
+    })
+    .finally(() => dispatch(notLoading("loginUser")));
+};
 
 // set currently logged in user
 export const setCurrentUser = payload => {
@@ -87,8 +84,6 @@ export const setCurrentUser = payload => {
 
 // log out current user
 export const logoutUser = () => dispatch => {
-  dispatch(clearErrors());
-
   // remove jwt token from local storage
   localStorage.removeItem("jwtToken");
 

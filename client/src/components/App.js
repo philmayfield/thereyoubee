@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllPlaces();
+    // this.props.getAllPlaces();
   }
 
   setShowTopNav(val = true) {

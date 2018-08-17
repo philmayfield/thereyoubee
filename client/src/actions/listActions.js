@@ -58,8 +58,8 @@ export const deleteList = list => dispatch => {
     });
 };
 
-// save the current list to the database
-export const saveCurrentList = list => dispatch => {
+// save a list to the database
+export const saveList = list => dispatch => {
   dispatch(clearErrors());
   dispatch(isLoading("saveCurrentList"));
 

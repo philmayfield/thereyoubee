@@ -23,8 +23,10 @@ export const RESET_CURRENT_PLACE = "RESET_CURRENT_PLACE";
 // lists
 export const GET_LISTS = "GET_LISTS";
 export const SET_LIST = "SET_LIST";
+export const RESET_LIST = "RESET_LIST";
 export const SAVE_LIST = "SAVE_LIST";
 export const DELETE_LIST = "DELETE_LIST";
+export const RESET_LISTS = "RESET_LISTS";
 
 // toast
 export const ADD_TOAST = "ADD_TOAST";

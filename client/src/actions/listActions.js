@@ -1,5 +1,12 @@
 import axios from "axios";
-import { GET_LISTS, SET_LIST, SAVE_LIST, DELETE_LIST } from "./actionTypes";
+import {
+  GET_LISTS,
+  SET_LIST,
+  SAVE_LIST,
+  DELETE_LIST,
+  RESET_LIST,
+  RESET_LISTS
+} from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { addToast } from "./toastActions";
 
@@ -72,7 +79,7 @@ export const saveList = list => dispatch => {
       });
       dispatch(
         addToast({
-          value: `Added ${list.name}`,
+          value: `Added ${list.name} list`,
           icon: "thumb_up"
         })
       );
@@ -89,5 +96,19 @@ export const setList = payload => {
   return {
     payload,
     type: SET_LIST
+  };
+};
+
+// set the current list on the app
+export const resetCurrentList = () => {
+  return {
+    type: RESET_LIST
+  };
+};
+
+// set the current list on the app
+export const resetLists = () => {
+  return {
+    type: RESET_LISTS
   };
 };

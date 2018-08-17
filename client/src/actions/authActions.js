@@ -4,7 +4,12 @@ import setAuthToken from "../common/setAuthToken";
 import { SET_CURRENT_USER } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { getAllPlaces, resetCurrentPlace, resetPlaces } from "./placeActions";
-import { saveList } from "./listActions";
+import {
+  saveList,
+  getAllLists,
+  resetCurrentList,
+  resetLists
+} from "./listActions";
 import { addToast } from "./toastActions";
 
 // register a new user
@@ -56,7 +61,8 @@ export const loginUser = userData => async dispatch => {
       // set current user with decoded data
       dispatch(setCurrentUser(decoded));
 
-      // go fetch the places for the user
+      // go fetch the lists and places for the user
+      dispatch(getAllLists());
       dispatch(getAllPlaces());
 
       // show a toast!
@@ -93,7 +99,9 @@ export const logoutUser = () => dispatch => {
   // set current user to empty object
   dispatch(setCurrentUser({}));
 
-  // reset current place and places
+  // reset current places and lists
   dispatch(resetCurrentPlace());
   dispatch(resetPlaces());
+  dispatch(resetCurrentList());
+  dispatch(resetLists());
 };

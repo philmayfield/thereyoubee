@@ -18,7 +18,7 @@ class List extends Component {
       <ListItem key={place._id} item={place} />
     ));
 
-    return <div className="place-list px-3">{placeItems}</div>;
+    return <div className="list-view__holder px-3">{placeItems}</div>;
   }
 }
 

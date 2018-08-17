@@ -39,7 +39,7 @@ const ListView = props => {
         <h2 className="sr-only">List View</h2>
         {totalPlaces(places.length, isLoading)}
       </header>
-      <section className="place-list">{content}</section>
+      <section className="list-view__list">{content}</section>
     </div>
   );
 };

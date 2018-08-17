@@ -6,13 +6,13 @@ $header-height: $spacer * 3.5;
   z-index: 1;
 }
 
-.place-list {
+.list-view__list {
   height: calc(100vh - #{$header-height});
   padding-bottom: $spacer * 5;
   overflow-y: scroll;
 }
 
-.list-holder {
+.list-view__holder {
   display: grid;
   grid-column-gap: $spacer;
   grid-template-columns: 1fr;

@@ -13,5 +13,13 @@
 
 .place-card {
   @include txPlaceCardStart();
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
   transition: $lessBouncy;
+
+  @media screen and (max-width: 540px) {
+    margin-left: -$spacer * 0.75;
+    margin-right: -$spacer * 0.75;
+  }
 }

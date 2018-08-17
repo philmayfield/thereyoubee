@@ -1,7 +1,7 @@
 .add-current-place {
   background-color: #fff;
   border-radius: $button-radius;
-  max-width: calc(100% - #{$spacer});
+  max-width: calc(100% - #{$spacer * 3.75}); // leave room for pegman button
   padding: $spacer;
   position: fixed;
   bottom: $spacer;

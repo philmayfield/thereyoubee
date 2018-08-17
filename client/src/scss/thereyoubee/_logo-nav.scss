@@ -50,8 +50,13 @@
 }
 
 .map .logo-nav {
-  top: $spacer * 1.75;
-  left: $spacer * 1.75;
+  top: $spacer * 1.25;
+  left: $spacer * 1.25;
+
+  @media #{$medium-and-up} {
+    left: $spacer * 1.75;
+    top: $spacer * 1.75;
+  }
 
   nav {
     top: $spacer * 2.5;
@@ -60,8 +65,13 @@
 }
 
 .list .logo-nav {
-  top: $spacer;
-  left: $spacer;
+  top: $spacer/2;
+  left: $spacer/2;
+
+  @media #{$medium-and-up} {
+    left: $spacer;
+    top: $spacer;
+  }
 
   nav {
     top: $spacer * 2.5;

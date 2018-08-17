@@ -1,9 +1,15 @@
 .suggestion__root {
   position: absolute;
-  top: $spacer;
-  left: $spacer;
-  right: $spacer;
+  left: $spacer/2;
+  right: $spacer/2;
+  top: $spacer/2;
   z-index: 10;
+
+  @media #{$medium-and-up} {
+    top: $spacer;
+    left: $spacer;
+    right: $spacer;
+  }
 }
 
 .suggestion__input {

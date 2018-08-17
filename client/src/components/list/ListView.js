@@ -35,9 +35,9 @@ const ListView = props => {
 
   return (
     <div className="list-view">
-      <header className="list-view__header right-align p-3 z-depth-3">
+      <header className="list-view__header z-depth-3 d-flex justify-content-end align-items-center pr-3">
         <h2 className="sr-only">List View</h2>
-        {totalPlaces(places.length, isLoading)}
+        <span>{totalPlaces(places.length, isLoading)}</span>
       </header>
       <section className="list-view__list">{content}</section>
     </div>

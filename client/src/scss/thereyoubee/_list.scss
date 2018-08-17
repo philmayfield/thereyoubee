@@ -1,15 +1,24 @@
-$header-height: $spacer * 3.5;
+$header-height-mobile: $spacer * 2.5;
+$header-height-desktop: $spacer * 3.5;
 
 .list-view__header {
-  height: $header-height;
+  height: $header-height-mobile;
   position: relative;
   z-index: 1;
+
+  @media #{$medium-and-up} {
+    height: $header-height-desktop;
+  }
 }
 
 .list-view__list {
-  height: calc(100vh - #{$header-height});
+  height: calc(100vh - #{$header-height-mobile});
   padding-bottom: $spacer * 5;
   overflow-y: scroll;
+
+  @media #{$medium-and-up} {
+    height: calc(100vh - #{$header-height-desktop});
+  }
 }
 
 .list-view__holder {

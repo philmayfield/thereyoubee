@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { notEmpty } from "../../common/empty";
 import Button from "../common/Button";
@@ -56,13 +57,23 @@ class AddCurrentPlace extends Component {
   }
 
   render() {
-    const { currentPlace, places, errors } = this.props;
+    const { isAuth, currentPlace, places, errors } = this.props;
     const { address, suggestion, place_id } = currentPlace;
     const { show } = this.state;
-    const gotAnIssue = notEmpty(errors) && errors.status !== 404;
+    const hasAnIssue = notEmpty(errors) && errors.status !== 404;
     const alreadyHavePlace = notEmpty(
       places.find(place => place.place_id === place_id)
     );
+    const showMessage = !isAuth || hasAnIssue;
+    const whatsTheProb =
+      showMessage && !isAuth ? (
+        <Fragment>
+          Please <Link to="/login">log in</Link> or{" "}
+          <Link to="/register">make an account</Link> to save places.
+        </Fragment>
+      ) : (
+        "We couldnt get your list of places, go ahead and try reloading the page and finding the place again please."
+      );
 
     return (
       <CSSTransition in={show} timeout={0} classNames="growFade" unmountOnExit>
@@ -73,12 +84,9 @@ class AddCurrentPlace extends Component {
             {suggestion}
           </div>
           <hr />
-          <p className="mt-0">{address}</p>
-          {gotAnIssue ? (
-            <div className="red-text">
-              We couldnt get your list of places, go ahead and try reloading the
-              page and finding the place again please.
-            </div>
+          <p className="mt-0 truncate">{address}</p>
+          {showMessage ? (
+            <p className="m-0">{whatsTheProb}</p>
           ) : (
             <div className="right-align">
               <Button
@@ -108,6 +116,7 @@ class AddCurrentPlace extends Component {
 
 AddCurrentPlace.propTypes = {
   places: PropTypes.array.isRequired,
+  isAuth: PropTypes.bool.isRequired,
   saveCurrentPlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired,
   currentPlace: PropTypes.object.isRequired,

@@ -48,7 +48,7 @@
 }
 
 .place-card-enter-done {
-  margin: $spacer 0 0 0;
+  margin-top: $spacer;
   max-height: $spacer * 15;
   opacity: 1;
   transform: scale(1);

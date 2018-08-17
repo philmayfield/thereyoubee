@@ -79,7 +79,12 @@ class ListItem extends Component {
           <div className="card-content">
             <p>{address}</p>
             <small className="grey-text d-flex justify-content-between mt-1">
-              <span>Added on {moment(date).format("MMM D, YYYY")}</span>
+              <span className="mr-1">
+                Added on{" "}
+                <span className="text-nowrap">
+                  {moment(date).format("MMM D, YYYY")}
+                </span>
+              </span>
               <span className="right-align">
                 {latLng.lat}, {latLng.lng}
               </span>

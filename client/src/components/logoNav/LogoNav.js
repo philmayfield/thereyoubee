@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group";
 import { logoutUser } from "../../actions/authActions";
 import Button from "../common/Button";
 import Icon from "../common/Icon";
+import AddEditLists from "../lists/AddEditLists";
 // import getImg from "../../common/getImg";
 // import ReactSVG from "react-svg";
 
@@ -36,8 +37,11 @@ class LogoNav extends Component {
   }
 
   render() {
-    const { isAuth, showTopNav } = this.props;
+    const { isAuth, showTopNav, currentList, hasCurrentList } = this.props;
     const { show } = this.state;
+    const buttonString = hasCurrentList ? currentList.name : "All Places";
+    const showingListString = hasCurrentList ? currentList.name : "All lists";
+
     return (
       <header className={`${showTopNav ? "logo-nav" : "hide"}`}>
         <h1 className="sr-only">ThereYouBee</h1>
@@ -69,16 +73,22 @@ class LogoNav extends Component {
               <li>
                 <Link onClick={this.hideMenu} to="/map">
                   <Icon name="place" classes={["mr-2"]} />
-                  Map of Places
+                  Map of {buttonString}
                 </Link>
               </li>
               <li>
                 <Link onClick={this.hideMenu} to="/list">
                   <Icon name="list" classes={["mr-2"]} />
-                  List of Places
+                  List of {buttonString}
                 </Link>
               </li>
+              <li>
+                <AddEditLists />
+              </li>
             </ul>
+            <small className="d-block center-align">
+              Viewing {showingListString}
+            </small>
           </nav>
         </CSSTransition>
       </header>
@@ -87,9 +97,11 @@ class LogoNav extends Component {
 }
 
 LogoNav.propTypes = {
+  hasCurrentList: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
   showTopNav: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  currentList: PropTypes.object.isRequired
 };
 
 export default connect(

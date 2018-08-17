@@ -44,11 +44,12 @@ class App extends Component {
   }
 
   render() {
-    const { app, auth, places, currentPlace } = this.props;
+    const { app, auth, places, currentPlace, currentList } = this.props;
     const { showTopNav } = this.state;
     const { isAuth } = auth;
     const placesToRender = places.filter(place => !place.deleteFlag);
     const isLoading = notEmpty(app.loadingArr);
+    const hasCurrentList = notEmpty(currentList);
     const RedirectWrap = ({ action, children }) =>
       action === "REPLACE" ? null : children;
 
@@ -60,7 +61,12 @@ class App extends Component {
               <IsAuth />
               <Loading />
               <ToastContainer test={false} />
-              <LogoNav isAuth={isAuth} showTopNav={showTopNav} />
+              <LogoNav
+                isAuth={isAuth}
+                showTopNav={showTopNav}
+                currentList={currentList}
+                hasCurrentList={hasCurrentList}
+              />
               <main>
                 <TransitionGroup component={null}>
                   <CSSTransition
@@ -152,6 +158,7 @@ App.propTypes = {
   app: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   currentPlace: PropTypes.object.isRequired,
+  currentList: PropTypes.object.isRequired,
   getAllPlaces: PropTypes.func.isRequired
 };
 
@@ -159,7 +166,8 @@ const mapStateToProps = state => ({
   app: state.app,
   auth: state.auth,
   places: state.places,
-  currentPlace: state.currentPlace
+  currentPlace: state.currentPlace,
+  currentList: state.currentList
 });
 
 export default connect(

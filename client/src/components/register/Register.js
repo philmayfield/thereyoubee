@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Input from "../common/Input";
 import Button from "../common/Button";
+import { clearErrors } from "../../actions/appActions";
 import { registerUser } from "../../actions/authActions";
 
 class Register extends Component {
@@ -18,6 +19,10 @@ class Register extends Component {
 
     this.inputChange = this.inputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.clearErrors();
   }
 
   inputChange(e) {
@@ -93,8 +98,9 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  errors: PropTypes.object.isRequired,
-  registerUser: PropTypes.func.isRequired
+  clearErrors: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -103,5 +109,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, clearErrors }
 )(Register);

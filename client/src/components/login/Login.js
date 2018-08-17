@@ -2,23 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
-import { loginUser } from "../../actions/authActions";
-import { notEmpty } from "../../common/empty";
 import Input from "../common/Input";
-import Alert from "../common/Alert";
 import Button from "../common/Button";
+import { clearErrors } from "../../actions/appActions";
+import { loginUser } from "../../actions/authActions";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
-    const user = this.props.match && this.props.match.params.user;
-
     this.state = {
-      username: user ? user : "",
-      password: "",
-      newUser: notEmpty(user),
-      errors: {}
+      username: "",
+      password: ""
     };
 
     this.inputChange = this.inputChange.bind(this);
@@ -43,6 +38,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    this.props.clearErrors();
     this.handleAlreadyAuth();
   }
 
@@ -59,21 +55,10 @@ class Login extends Component {
   render() {
     const { errors } = this.props;
 
-    const newUserMsg = (
-      <Alert color="teal" heading={`Welcome ${this.state.username}`}>
-        <hr className="my-1" />
-        <p className="mb-0">
-          You&rsquo;re all registered up! Go ahead and login with the password
-          you entered previously!
-        </p>
-      </Alert>
-    );
-
     return (
       <div className="login-view d-flex">
         <div className="col-11 col-sm-8 col-md-6 col-lg-5 mx-auto my-auto">
           <div className="card">
-            {this.state.newUser ? newUserMsg : null}
             <form onSubmit={this.handleSubmit}>
               <div className="card-content">
                 <span className="card-title">Login</span>
@@ -120,17 +105,13 @@ const mapStateToProps = state => ({
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   history: PropTypes.object,
-  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      user: PropTypes.string
-    })
-  })
+  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser, clearErrors }
 )(withRouter(Login));

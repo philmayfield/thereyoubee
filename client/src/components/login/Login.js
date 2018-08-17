@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { loginUser } from "../../actions/authActions";
 import { notEmpty } from "../../common/empty";
 import Input from "../common/Input";
@@ -42,20 +42,19 @@ class Login extends Component {
     this.props.loginUser(myDude);
   }
 
-  // componentDidMount() {
-  //   this.handleAlreadyAuth(this.props.auth.isAuth);
-  // }
+  componentDidMount() {
+    this.handleAlreadyAuth();
+  }
 
-  // componentDidUpdate() {
-  //   this.handleAlreadyAuth(this.props.auth.isAuth);
-  // }
+  componentDidUpdate() {
+    this.handleAlreadyAuth();
+  }
 
-  // handleAlreadyAuth(isAuth) {
-  //   if (isAuth) {
-  //     console.log("tph", this.props.history);
-  //     this.props.history.push("/map");
-  //   }
-  // }
+  handleAlreadyAuth() {
+    if (this.props.auth.isAuth) {
+      this.props.history.push("/map");
+    }
+  }
 
   render() {
     const { errors } = this.props;
@@ -121,8 +120,9 @@ const mapStateToProps = state => ({
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   auth: PropTypes.object.isRequired,
+  history: PropTypes.object,
+  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   match: PropTypes.shape({
     params: PropTypes.shape({
       user: PropTypes.string
@@ -133,4 +133,4 @@ Login.propTypes = {
 export default connect(
   mapStateToProps,
   { loginUser }
-)(Login);
+)(withRouter(Login));

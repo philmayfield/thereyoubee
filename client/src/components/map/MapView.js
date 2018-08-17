@@ -5,7 +5,15 @@ import AddCurrentPlace from "../currentPlace/AddCurrentPlace";
 import Map from "./Map";
 
 const MapView = props => {
-  const { isLoading, places, currentPlace, showTopNav, setShowTopNav } = props;
+  const {
+    isLoading,
+    isAuth,
+    places,
+    currentPlace,
+    showTopNav,
+    setShowTopNav
+  } = props;
+
   return (
     <div className="map-view" key="map-view">
       <h2 className="sr-only">Map View</h2>
@@ -15,13 +23,18 @@ const MapView = props => {
         numPlaces={places.length}
         showTopNav={showTopNav}
       />
-      <AddCurrentPlace places={places} currentPlace={currentPlace} />
+      <AddCurrentPlace
+        isAuth={isAuth}
+        places={places}
+        currentPlace={currentPlace}
+      />
     </div>
   );
 };
 
 MapView.propTypes = {
   places: PropTypes.array.isRequired,
+  isAuth: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   showTopNav: PropTypes.bool.isRequired,
   setShowTopNav: PropTypes.func.isRequired,

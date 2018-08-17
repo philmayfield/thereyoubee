@@ -6,6 +6,7 @@ import Icon from "../common/Icon";
 import { flagPlace, setCurrentPlace } from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
+import moment from "moment";
 
 class ListItem extends Component {
   constructor(props) {
@@ -42,9 +43,9 @@ class ListItem extends Component {
       // place_id,
       // author,
       address,
-      // date,
-      suggestion
-      // latLng = {}
+      date,
+      suggestion,
+      latLng = {}
     } = this.props.item;
 
     return (
@@ -77,6 +78,12 @@ class ListItem extends Component {
           </div>
           <div className="card-content">
             <p>{address}</p>
+            <small className="grey-text d-flex justify-content-between mt-1">
+              <span>Added on {moment(date).format("MMM D, YYYY")}</span>
+              <span className="right-align">
+                {latLng.lat}, {latLng.lng}
+              </span>
+            </small>
           </div>
         </div>
       </CSSTransition>

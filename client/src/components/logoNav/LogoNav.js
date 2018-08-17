@@ -39,7 +39,8 @@ class LogoNav extends Component {
     const { isAuth, showTopNav } = this.props;
     const { show } = this.state;
     return (
-      <div className={`${showTopNav ? "logo-nav" : "hide"}`}>
+      <header className={`${showTopNav ? "logo-nav" : "hide"}`}>
+        <h1 className="sr-only">ThereYouBee</h1>
         <Button
           classes={["menu-btn", "btn-flat", "btn-empty"]}
           clickOrTo={this.toggleMenu}
@@ -80,7 +81,7 @@ class LogoNav extends Component {
             </ul>
           </nav>
         </CSSTransition>
-      </div>
+      </header>
     );
   }
 }

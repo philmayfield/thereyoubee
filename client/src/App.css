@@ -6144,10 +6144,21 @@ hr {
   padding-bottom: 5rem;
   overflow-y: scroll; }
 
+.list-holder {
+  display: grid;
+  grid-column-gap: 1rem;
+  grid-template-columns: 1fr; }
+  @media only screen and (min-width: 768px) {
+    .list-holder {
+      grid-template-columns: 1fr 1fr; } }
+  @media only screen and (min-width: 1201px) {
+    .list-holder {
+      grid-template-columns: 1fr 1fr 1fr; } }
+
 .logo-nav {
   position: absolute;
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
-  transition-delay: 200ms; }
+  transition-delay: 250ms; }
   .logo-nav .logo,
   .logo-nav .menu-btn {
     width: 1.5rem;

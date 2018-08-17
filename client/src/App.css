@@ -2735,7 +2735,7 @@ small {
 
 .card-panel {
   transition: box-shadow .25s;
-  padding: 24px;
+  padding: 1rem;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
   background-color: #fff; }
@@ -2815,9 +2815,9 @@ small {
       bottom: 0;
       left: 0;
       max-width: 100%;
-      padding: 24px; }
+      padding: 1rem; }
   .card .card-content {
-    padding: 24px;
+    padding: 1rem;
     border-radius: 0 0 2px 2px; }
     .card .card-content p {
       margin: 0; }
@@ -2831,18 +2831,18 @@ small {
     background-color: inherit;
     border-top: 1px solid rgba(160, 160, 160, 0.2);
     position: relative;
-    padding: 16px 24px; }
+    padding: 16px 1rem; }
     .card .card-action:last-child {
       border-radius: 0 0 2px 2px; }
     .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
       color: #ffab40;
-      margin-right: 24px;
+      margin-right: 1rem;
       transition: color .3s ease;
       text-transform: uppercase; }
       .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
         color: #ffd8a6; }
   .card .card-reveal {
-    padding: 24px;
+    padding: 1rem;
     position: absolute;
     background-color: #fff;
     width: 100%;
@@ -3036,9 +3036,9 @@ small {
 .btn-small[disabled],
 .btn-flat[disabled] {
   pointer-events: none;
-  background-color: #DFDFDF !important;
+  background-color: #dfdfdf !important;
   box-shadow: none;
-  color: #9F9F9F !important;
+  color: #9f9f9f !important;
   cursor: default; }
   .btn.disabled:hover, .disabled.btn-large:hover, .disabled.btn-small:hover,
   .btn-floating.disabled:hover,
@@ -3059,8 +3059,8 @@ small {
   .btn-large[disabled]:hover,
   .btn-small[disabled]:hover,
   .btn-flat[disabled]:hover {
-    background-color: #DFDFDF !important;
-    color: #9F9F9F !important; }
+    background-color: #dfdfdf !important;
+    color: #9f9f9f !important; }
 
 .btn, .btn-large, .btn-small,
 .btn-floating,
@@ -4470,7 +4470,7 @@ textarea {
   .switch label .lever:before {
     background-color: rgba(38, 166, 154, 0.15); }
   .switch label .lever:after {
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12); }
 
 input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before,
@@ -6012,7 +6012,7 @@ hr {
   display: flex;
   align-items: center;
   position: relative;
-  padding: 12px; }
+  padding: 0.5rem; }
 
 .card .card-title-area.with-fab {
   padding-right: 2.5rem; }

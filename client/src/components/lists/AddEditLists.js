@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { saveList, deleteList, setList } from "../../actions/listActions";
 import Icon from "../common/Icon";
+import ListItem from "./ListItem";
 
 class AddEditLists extends Component {
   constructor(props) {
@@ -21,31 +22,35 @@ class AddEditLists extends Component {
 
   render() {
     const { show } = this.state;
-    const { deleteList, saveList, setList } = this.props;
+    const { deleteList, saveList, setList, lists } = this.props;
+    const listOfLists = lists.map(list => (
+      <ListItem key={list._id} list={list} />
+    ));
 
     return (
       <Fragment>
-        <a href="#" onClick={this.toggleShow}>
+        <button onClick={this.toggleShow} className="btn-empty btn-link">
           <Icon name="low_priority" classes={["mr-2"]} />
           Change List
-        </a>
-        {show ? (
-          <section className="changer">
-            <div>Im the changer!</div>
-          </section>
-        ) : null}
+        </button>
+        {show ? <section className="changer">{listOfLists}</section> : null}
       </Fragment>
     );
   }
 }
 
 AddEditLists.propTypes = {
+  lists: PropTypes.array.isRequired,
   deleteList: PropTypes.func.isRequired,
   saveList: PropTypes.func.isRequired,
   setList: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  lists: state.lists
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { saveList, deleteList, setList }
 )(AddEditLists);

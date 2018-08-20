@@ -1,4 +1,6 @@
-.btn-empty {
+.btn-empty,
+.btn-link {
+  border: 0 transparent solid;
   padding: 0;
   height: auto;
 
@@ -11,5 +13,18 @@
   &:hover {
     background-color: rgba(black, 0.035);
     text-decoration: underline;
+  }
+}
+
+.btn-link {
+  align-items: center;
+  background: none;
+  color: $link-color;
+  cursor: pointer;
+  display: flex;
+  line-height: 1.5;
+
+  &:focus {
+    background: none;
   }
 }

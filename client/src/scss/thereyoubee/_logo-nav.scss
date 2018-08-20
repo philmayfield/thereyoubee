@@ -32,7 +32,8 @@
     transform: scale(0.2) translateY(-100px) translateX(-100px);
     transition: $bouncy;
 
-    a {
+    a,
+    button {
       display: flex;
       align-items: center;
       padding: $spacer/2 $spacer $spacer/2 $spacer/2;

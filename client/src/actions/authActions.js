@@ -3,10 +3,14 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../common/setAuthToken";
 import { SET_CURRENT_USER } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
-import { getAllPlaces, resetCurrentPlace, resetPlaces } from "./placeActions";
+import {
+  // getAllPlaces,
+  resetCurrentPlace,
+  resetPlaces
+} from "./placeActions";
 import {
   saveList,
-  getAllLists,
+  // getAllLists,
   resetCurrentList,
   resetLists
 } from "./listActions";
@@ -62,8 +66,8 @@ export const loginUser = userData => async dispatch => {
       dispatch(setCurrentUser(decoded));
 
       // go fetch the lists and places for the user
-      dispatch(getAllLists());
-      dispatch(getAllPlaces());
+      // dispatch(getAllLists());
+      // dispatch(getAllPlaces());
 
       // show a toast!
       dispatch(

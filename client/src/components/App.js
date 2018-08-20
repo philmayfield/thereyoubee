@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 
 // actions
 import { getAllPlaces } from "../actions/placeActions";
+import { getAllLists } from "../actions/listActions";
 
 // routes / componenets
 import IsAuth from "../components/common/IsAuth";
@@ -35,8 +36,15 @@ class App extends Component {
     this.setShowTopNav = this.setShowTopNav.bind(this);
   }
 
-  componentDidMount() {
-    // this.props.getAllPlaces();
+  componentDidUpdate(prevProps) {
+    const cIsAuth = this.props.auth.isAuth;
+    const pIsAuth = prevProps.auth.isAuth;
+
+    // if we go from not isAuth to isAuth (refresh or login) fetch places and lists
+    if (cIsAuth && !pIsAuth) {
+      this.props.getAllPlaces();
+      this.props.getAllLists();
+    }
   }
 
   setShowTopNav(val = true) {
@@ -159,6 +167,7 @@ App.propTypes = {
   auth: PropTypes.object.isRequired,
   currentPlace: PropTypes.object.isRequired,
   currentList: PropTypes.object.isRequired,
+  getAllLists: PropTypes.func.isRequired,
   getAllPlaces: PropTypes.func.isRequired
 };
 
@@ -172,5 +181,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllPlaces }
+  { getAllPlaces, getAllLists }
 )(App);

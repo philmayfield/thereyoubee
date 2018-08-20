@@ -34,6 +34,15 @@
   transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255);
 }
 
+.fadeHalf,
+.fadeHalf-exit-done {
+  opacity: 0;
+}
+.fadeHalf-appear-done,
+.fadeHalf-enter-done {
+  opacity: 0.5 !important;
+}
+
 .growFade {
   @include txGrowFadeStart();
 }

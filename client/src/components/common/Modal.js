@@ -6,6 +6,18 @@ import { CSSTransition } from "react-transition-group";
 
 const modalRoot = document.getElementById("modal-root");
 
+// Modal Props
+// -----------------
+// toggle: (bool) - show / hide the modal
+// actions: (array) [ - array of actions that get turned into buttons in the footer of the modal
+//   {
+//     label: (string), - label for button
+//     btnClasses: (array), - classes for the button
+//     action: (function), - action for the button
+//     toggle: (bool) - optionally close the array with the action
+//   }
+// ]
+
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +28,7 @@ class Modal extends Component {
     this.el = document.createElement("div");
 
     this.handleRemove = this.handleRemove.bind(this);
+    this.withRemove = this.withRemove.bind(this);
   }
 
   componentDidMount() {
@@ -34,8 +47,26 @@ class Modal extends Component {
     }, this.animationTime);
   }
 
+  withRemove(fn) {
+    return () => {
+      fn();
+      this.handleRemove();
+    };
+  }
+
   render() {
     const { show } = this.state;
+    const actionButtons = this.props.actions.map(action => (
+      <Button
+        key={action.label}
+        clickOrTo={
+          action.toggle ? this.withRemove(action.action) : action.action
+        }
+        classes={[...action.btnClasses, "ml-2"]}
+      >
+        {action.label}
+      </Button>
+    ));
 
     return ReactDOM.createPortal(
       <Fragment>
@@ -43,12 +74,18 @@ class Modal extends Component {
           <div className={`modal ${show ? "open" : ""}`}>
             <div className="modal-content">{this.props.children}</div>
             <div className="modal-footer">
-              <Button clickOrTo={this.handleRemove}>Close</Button>
+              <Button
+                clickOrTo={this.handleRemove}
+                classes={["btn-flat", "red-text", "ml-2"]}
+              >
+                Close
+              </Button>
+              {actionButtons}
             </div>
           </div>
         </CSSTransition>
         <CSSTransition in={show} timeout={0} classNames="fadeHalf">
-          <div className="modal-overlay" />
+          <div onClick={this.handleRemove} className="modal-overlay" />
         </CSSTransition>
       </Fragment>,
       this.el
@@ -57,6 +94,7 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
+  actions: PropTypes.array,
   show: PropTypes.bool,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([

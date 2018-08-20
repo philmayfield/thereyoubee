@@ -5,6 +5,7 @@
   @include txGrowFadeStart();
 }
 .modal-overlay {
+  cursor: not-allowed;
   display: block;
   opacity: 0;
   transition: opacity 250ms ease-in-out;

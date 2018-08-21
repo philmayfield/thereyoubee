@@ -15,12 +15,20 @@ const Place = require("../../models/Place");
 // @desc    Read all places for a user
 // @access  Private
 router.get(
-  "/all",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { id } = req.params;
     const errors = {};
+    const conditions = {
+      author: req.user._id
+    };
 
-    Place.find({ author: req.user._id })
+    if (id !== "all") {
+      conditions.list_id = id;
+    }
+
+    Place.find(conditions)
       .then(places => {
         if (notEmpty(places)) {
           // found some places, return with 200 status
@@ -61,6 +69,7 @@ router.post(
     // get fields
     const placeFields = {};
     placeFields.author = author ? author : "";
+    placeFields.list_id = body.list_id ? body.list_id : "";
     placeFields.address = body.address ? body.address : "";
     placeFields.suggestion = body.suggestion ? body.suggestion : "";
     placeFields.place_id = body.place_id ? body.place_id : "";
@@ -73,7 +82,7 @@ router.post(
     new Place(placeFields)
       .save()
       .then(place => res.json(place))
-      .catch(err => {
+      .catch(() => {
         errors.placeError = "We ran into a problem saving this place.";
         res.status(400).json(errors);
       });

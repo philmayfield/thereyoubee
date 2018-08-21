@@ -4,12 +4,12 @@
   z-index: 1000;
   @include txGrowFadeStart();
 
-  @media #{$medium-and-down} {
+  @media #{$small-and-down} {
     width: calc(100% - #{$spacer});
   }
 
   & .modal-content {
-    padding: $spacer;
+    padding: $spacer $spacer 0;
   }
 }
 .modal-overlay {

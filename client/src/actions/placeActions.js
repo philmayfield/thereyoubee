@@ -13,11 +13,12 @@ import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { addToast } from "./toastActions";
 
 // get all of the saved places
-export const getAllPlaces = () => dispatch => {
+export const getAllPlaces = (list_id = "all") => dispatch => {
   dispatch(isLoading("getAllPlaces"));
+  dispatch(resetPlaces());
 
   axios
-    .get("/api/place/all")
+    .get(`/api/place/${list_id}`)
     .then(res => {
       dispatch({
         type: GET_PLACES,

@@ -4,7 +4,8 @@ import {
   UNFLAG_PLACE,
   SAVE_CURRENT_PLACE,
   DELETE_PLACE,
-  RESET_PLACES
+  RESET_PLACES,
+  SAVE_LIST
   // SET_CURRENT_PLACE
 } from "../actions/actionTypes";
 // import { notEmpty } from "../common/empty";
@@ -37,6 +38,7 @@ export default (state = [], action) => {
       return state.filter(place => place._id !== action.payload);
 
     case RESET_PLACES:
+    case SAVE_LIST: // saving a new list, places has to be empty
       return [];
 
     default:

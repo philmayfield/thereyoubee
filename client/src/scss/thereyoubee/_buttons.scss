@@ -1,6 +1,7 @@
 .btn-empty,
 .btn-link {
   border: 0 transparent solid;
+  box-shadow: none;
   padding: 0;
   height: auto;
 
@@ -21,8 +22,9 @@
   background: none;
   color: $link-color;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   line-height: 1.5;
+  text-transform: inherit;
 
   &:focus {
     background: none;

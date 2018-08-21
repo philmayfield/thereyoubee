@@ -6006,6 +6006,7 @@ i.right {
 .btn-empty,
 .btn-link {
   border: 0 transparent solid;
+  box-shadow: none;
   padding: 0;
   height: auto; }
   .btn-empty:hover,
@@ -6021,8 +6022,9 @@ i.right {
   background: none;
   color: #039be5;
   cursor: pointer;
-  display: flex;
-  line-height: 1.5; }
+  display: inline-flex;
+  line-height: 1.5;
+  text-transform: inherit; }
   .btn-link:focus {
     background: none; }
 

@@ -5,7 +5,9 @@ import {
   SAVE_LIST,
   DELETE_LIST,
   RESET_LIST,
-  RESET_LISTS
+  RESET_LISTS,
+  FLAG_LIST,
+  UNFLAG_LIST
 } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { addToast } from "./toastActions";
@@ -47,6 +49,33 @@ export const getAllLists = () => dispatch => {
       }
     })
     .finally(() => dispatch(notLoading("getAllLists")));
+};
+
+// flag list to be removed
+export const flagList = list => dispatch => {
+  dispatch({
+    type: FLAG_LIST,
+    payload: list._id
+  });
+
+  dispatch(
+    addToast({
+      value: `Deleted ${list.name} list`,
+      icon: "info",
+      undoAction: unflagList,
+      undoInaction: deleteList,
+      undoObj: list,
+      time: 5000
+    })
+  );
+};
+
+// unflag list to be removed
+export const unflagList = list => dispatch => {
+  dispatch({
+    type: UNFLAG_LIST,
+    payload: list._id
+  });
 };
 
 // delete a list from the store and database

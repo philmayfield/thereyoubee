@@ -5,7 +5,8 @@ import {
   saveList,
   deleteList,
   setList,
-  resetCurrentList
+  resetCurrentList,
+  flagList
 } from "../../actions/listActions";
 import { isEmpty } from "../../common/empty";
 import Icon from "../common/Icon";
@@ -24,7 +25,7 @@ class AddEditLists extends Component {
     };
 
     this.toggleShowModal = this.toggleShowModal.bind(this);
-    this.toggleShowAdd = this.toggleShowAdd.bind(this);
+    this.toggleAddForm = this.toggleAddForm.bind(this);
     this.handleSetList = this.handleSetList.bind(this);
     this.handleEditList = this.handleEditList.bind(this);
     this.handleDeleteList = this.handleDeleteList.bind(this);
@@ -36,8 +37,9 @@ class AddEditLists extends Component {
     const pNum = this.props.lists.length;
     const ppNum = prevProps.lists.length;
 
+    // added a new list, hide the form
     if (pNum && ppNum && pNum > ppNum) {
-      this.toggleShowAdd();
+      this.toggleAddForm(false);
     }
   }
 
@@ -46,9 +48,11 @@ class AddEditLists extends Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
-  toggleShowAdd() {
+  toggleAddForm(val) {
     this.resetForm();
-    this.setState({ showAdd: !this.state.showAdd });
+    this.setState({
+      showAdd: typeof val === "boolean" ? val : !this.state.showAdd
+    });
   }
 
   handleSetList(list) {
@@ -61,15 +65,19 @@ class AddEditLists extends Component {
   handleEditList(list) {
     return e => {
       e.stopPropagation();
-      this.toggleShowAdd();
+      this.toggleAddForm(true);
       this.setState({ listname: list.name });
     };
   }
 
   handleDeleteList(list) {
+    const { currentList, resetCurrentList, flagList } = this.props;
     return e => {
       e.stopPropagation();
-      console.log("delete", list);
+      flagList(list);
+      if (list._id === currentList._id) {
+        resetCurrentList();
+      }
     };
   }
 
@@ -93,6 +101,7 @@ class AddEditLists extends Component {
     const listOfLists = lists.map(list => (
       <ListItem
         key={list._id}
+        allList={false}
         list={list}
         setList={this.handleSetList(list)}
         editList={this.handleEditList(list)}
@@ -104,6 +113,7 @@ class AddEditLists extends Component {
     listOfLists.unshift(
       <ListItem
         key="all_lists"
+        allList={true}
         list={{ name: "All Lists" }}
         setList={resetCurrentList}
         editList={null}
@@ -134,7 +144,7 @@ class AddEditLists extends Component {
             <div className="d-flex justify-content-between align-items-end">
               <h5>Select a specific list to use</h5>
               <Button
-                clickOrTo={this.toggleShowAdd}
+                clickOrTo={this.toggleAddForm}
                 classes={["btn-flat"]}
                 icon={showAdd ? "arrow_back" : "add_circle"}
               >
@@ -174,17 +184,17 @@ AddEditLists.propTypes = {
   saveList: PropTypes.func.isRequired,
   setList: PropTypes.func.isRequired,
   resetCurrentList: PropTypes.func.isRequired,
+  flagList: PropTypes.func.isRequired,
   currentList: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  lists: state.lists,
   errors: state.errors,
   currentList: state.currentList
 });
 
 export default connect(
   mapStateToProps,
-  { saveList, deleteList, setList, resetCurrentList }
+  { saveList, deleteList, setList, resetCurrentList, flagList }
 )(AddEditLists);

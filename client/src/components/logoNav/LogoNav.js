@@ -37,7 +37,13 @@ class LogoNav extends Component {
   }
 
   render() {
-    const { isAuth, showTopNav, currentList, hasCurrentList } = this.props;
+    const {
+      isAuth,
+      showTopNav,
+      lists,
+      currentList,
+      hasCurrentList
+    } = this.props;
     const { show } = this.state;
     const buttonString = hasCurrentList ? currentList.name : "All Places";
     const showingListString = hasCurrentList ? currentList.name : "All lists";
@@ -83,7 +89,7 @@ class LogoNav extends Component {
                 </Link>
               </li>
               <li>
-                <AddEditLists />
+                <AddEditLists lists={lists} />
               </li>
             </ul>
             <small className="d-block center-align">
@@ -97,6 +103,7 @@ class LogoNav extends Component {
 }
 
 LogoNav.propTypes = {
+  lists: PropTypes.array.isRequired,
   hasCurrentList: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
   showTopNav: PropTypes.bool.isRequired,

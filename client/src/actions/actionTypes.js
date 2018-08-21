@@ -27,6 +27,8 @@ export const RESET_LIST = "RESET_LIST";
 export const SAVE_LIST = "SAVE_LIST";
 export const DELETE_LIST = "DELETE_LIST";
 export const RESET_LISTS = "RESET_LISTS";
+export const FLAG_LIST = "FLAG_LIST";
+export const UNFLAG_LIST = "UNFLAG_LIST";
 
 // toast
 export const ADD_TOAST = "ADD_TOAST";

@@ -52,10 +52,11 @@ class App extends Component {
   }
 
   render() {
-    const { app, auth, places, currentPlace, currentList } = this.props;
+    const { app, auth, places, currentPlace, lists, currentList } = this.props;
     const { showTopNav } = this.state;
     const { isAuth } = auth;
     const placesToRender = places.filter(place => !place.deleteFlag);
+    const listsToRender = lists.filter(list => !list.deleteFlag);
     const isLoading = notEmpty(app.loadingArr);
     const hasCurrentList = notEmpty(currentList);
     const RedirectWrap = ({ action, children }) =>
@@ -72,6 +73,7 @@ class App extends Component {
               <LogoNav
                 isAuth={isAuth}
                 showTopNav={showTopNav}
+                lists={listsToRender}
                 currentList={currentList}
                 hasCurrentList={hasCurrentList}
               />
@@ -163,6 +165,7 @@ class App extends Component {
 
 App.propTypes = {
   places: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   app: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   currentPlace: PropTypes.object.isRequired,
@@ -176,6 +179,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   places: state.places,
   currentPlace: state.currentPlace,
+  lists: state.lists,
   currentList: state.currentList
 });
 

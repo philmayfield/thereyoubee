@@ -26,7 +26,7 @@ export const registerUser = userData => dispatch => {
     await dispatch(loginUser(userData));
     dispatch(
       saveList({
-        name: "default"
+        name: "Default"
       })
     );
   }

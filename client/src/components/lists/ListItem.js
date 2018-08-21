@@ -6,7 +6,7 @@ const ListItem = props => {
   const { list, setList, editList, deleteList, isCurrent, allList } = props;
   return (
     <li
-      className={`collection-item d-flex justify-content-between align-items-center ${
+      className={`collection-item cursor-pointer d-flex justify-content-between align-items-center ${
         isCurrent ? "active" : ""
       }`}
       onClick={setList}

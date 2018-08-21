@@ -47,6 +47,8 @@ class AddEditLists extends Component {
   }
 
   toggleShowModal() {
+    const { hideMenu } = this.props;
+    if (typeof hideMenu === "function") hideMenu();
     this.resetForm();
     this.setState({ showModal: !this.state.showModal });
   }
@@ -198,6 +200,7 @@ class AddEditLists extends Component {
 AddEditLists.propTypes = {
   lists: PropTypes.array.isRequired,
   showBtnIcon: PropTypes.bool,
+  hideMenu: PropTypes.func,
   getAllPlaces: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   saveList: PropTypes.func.isRequired,

@@ -33,7 +33,7 @@ router.post("/register", (req, res) => {
 
       const { username } = req.body;
 
-      errors.username = `Sorry, the username ${username} already exists :(`;
+      errors.username = `Sorry, the username ${username} already exist 😢`;
 
       return res.status(400).json(errors);
     } else {
@@ -73,8 +73,7 @@ router.post("/login", (req, res) => {
 
   // Find user by username
   User.findOne({ username }).then(user => {
-    const notFoundMsg =
-      "Sorry we couldn't find anyone with that username and password combination";
+    const notFoundMsg = "Sorry, invalid username and password combination";
 
     // check for user
     if (!user) {

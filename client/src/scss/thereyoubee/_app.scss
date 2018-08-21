@@ -28,6 +28,15 @@ hr {
   margin-bottom: $spacer/2;
 }
 
+i {
+  &.left {
+    margin-right: $spacer/2;
+  }
+  &.right {
+    margin-left: $spacer/2;
+  }
+}
+
 // body {
 //   overflow-y: scroll;
 // }

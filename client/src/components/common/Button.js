@@ -16,6 +16,7 @@ class Button extends Component {
 
   handleToggle(e) {
     e.preventDefault();
+    e.stopPropagation();
     this.setState({ showFab: !this.state.showFab });
   }
 

@@ -69,8 +69,11 @@ class AddEditLists extends Component {
   handleSetList(list) {
     return e => {
       e.stopPropagation();
-      this.setState({ hasChange: true });
-      this.props.setList(list);
+      const { setList, currentList } = this.props;
+      if (list._id !== currentList._id) {
+        this.setState({ hasChange: true });
+        setList(list);
+      }
     };
   }
 
@@ -128,7 +131,7 @@ class AddEditLists extends Component {
         key="all_lists"
         allList={true}
         list={{ name: "All Lists" }}
-        setList={resetCurrentList}
+        setList={this.handleSetList({})}
         editList={null}
         isCurrent={isEmpty(currentList)}
       />

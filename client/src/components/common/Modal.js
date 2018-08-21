@@ -56,7 +56,8 @@ class Modal extends Component {
 
   render() {
     const { show } = this.state;
-    const actionButtons = this.props.actions.map(action => (
+    const { actions = [] } = this.props;
+    const actionButtons = actions.map(action => (
       <Button
         key={action.label}
         clickOrTo={

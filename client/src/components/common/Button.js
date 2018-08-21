@@ -35,8 +35,9 @@ class Button extends Component {
           }
         </button>
         <ul>
-          {React.Children.map(this.props.children, (child, i) => {
-            return (
+          {React.Children.map(
+            this.props.children,
+            (child, i) =>
               child && (
                 <CSSTransition in={showFab} timeout={0} classNames="growFade">
                   <li style={{ transitionDelay: `${(delayAmt - i) * 50}ms` }}>
@@ -44,8 +45,7 @@ class Button extends Component {
                   </li>
                 </CSSTransition>
               )
-            );
-          })}
+          )}
         </ul>
       </div>
     );

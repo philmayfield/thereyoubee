@@ -135,6 +135,8 @@ class App extends Component {
                             isLoading={isLoading}
                             places={placesToRender}
                             currentPlace={currentPlace}
+                            lists={listsToRender}
+                            currentList={currentList}
                             showTopNav={showTopNav}
                             setShowTopNav={this.setShowTopNav}
                           />

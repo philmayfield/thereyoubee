@@ -40,10 +40,11 @@ class AddCurrentPlace extends Component {
   }
 
   handleAddPlace() {
-    const { currentPlace } = this.props;
+    const { currentPlace, currentList } = this.props;
     const newPlace = {
       ...currentPlace,
-      ...currentPlace.latLng
+      ...currentPlace.latLng,
+      list_id: currentList._id
     };
     delete newPlace.latLng;
 
@@ -57,9 +58,17 @@ class AddCurrentPlace extends Component {
   }
 
   render() {
-    const { isAuth, currentPlace, places, errors } = this.props;
+    const {
+      isAuth,
+      currentPlace,
+      places,
+      currentList,
+      lists,
+      errors
+    } = this.props;
     const { address, suggestion, place_id } = currentPlace;
     const { show } = this.state;
+    const listName = notEmpty(currentList) ? currentList.name : "All lists";
     const hasAnIssue = notEmpty(errors) && errors.status !== 404;
     const alreadyHavePlace = notEmpty(
       places.find(place => place.place_id === place_id)
@@ -85,6 +94,7 @@ class AddCurrentPlace extends Component {
           </div>
           <hr />
           <p className="mt-0 truncate">{address}</p>
+          <p>List: {listName}</p>
           {showMessage ? (
             <p className="m-0">{whatsTheProb}</p>
           ) : (
@@ -116,10 +126,12 @@ class AddCurrentPlace extends Component {
 
 AddCurrentPlace.propTypes = {
   places: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   isAuth: PropTypes.bool.isRequired,
   saveCurrentPlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired,
   currentPlace: PropTypes.object.isRequired,
+  currentList: PropTypes.object.isRequired,
   errors: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };
 

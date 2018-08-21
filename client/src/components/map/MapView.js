@@ -10,6 +10,8 @@ const MapView = props => {
     isAuth,
     places,
     currentPlace,
+    lists,
+    currentList,
     showTopNav,
     setShowTopNav
   } = props;
@@ -27,6 +29,8 @@ const MapView = props => {
         isAuth={isAuth}
         places={places}
         currentPlace={currentPlace}
+        lists={lists}
+        currentList={currentList}
       />
     </div>
   );
@@ -34,11 +38,13 @@ const MapView = props => {
 
 MapView.propTypes = {
   places: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   isAuth: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   showTopNav: PropTypes.bool.isRequired,
   setShowTopNav: PropTypes.func.isRequired,
-  currentPlace: PropTypes.object.isRequired
+  currentPlace: PropTypes.object.isRequired,
+  currentList: PropTypes.object.isRequired
 };
 
 export default MapView;

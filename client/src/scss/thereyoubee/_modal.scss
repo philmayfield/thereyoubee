@@ -1,7 +1,7 @@
 .modal {
   display: block;
   top: 10%;
-  z-index: 1000;
+  z-index: 99;
   @include txGrowFadeStart();
 
   @media #{$small-and-down} {
@@ -17,4 +17,5 @@
   display: block;
   opacity: 0;
   transition: opacity 250ms ease-in-out;
+  z-index: 98;
 }

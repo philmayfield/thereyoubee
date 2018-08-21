@@ -5990,6 +5990,9 @@ i.left {
 i.right {
   margin-left: 0.5rem; }
 
+.cursor-pointer {
+  cursor: pointer; }
+
 .login main,
 .register main {
   height: 100vh; }
@@ -6141,7 +6144,7 @@ i.right {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 100;
   transition: opacity 500ms ease; }
 
 .app-loading-in {
@@ -6153,7 +6156,7 @@ i.right {
 .modal {
   display: block;
   top: 10%;
-  z-index: 1000;
+  z-index: 99;
   opacity: 0;
   transform: scale(0.2) translateX(25px);
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
@@ -6167,7 +6170,8 @@ i.right {
   cursor: not-allowed;
   display: block;
   opacity: 0;
-  transition: opacity 250ms ease-in-out; }
+  transition: opacity 250ms ease-in-out;
+  z-index: 98; }
 
 .text-nowrap {
   white-space: nowrap; }

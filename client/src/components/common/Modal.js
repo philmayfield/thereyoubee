@@ -41,7 +41,9 @@ class Modal extends Component {
   }
 
   handleRemove() {
+    const { onClose } = this.props;
     this.setState({ show: false });
+    if (typeof onClose === "function") onClose();
     setTimeout(() => {
       this.props.toggle();
     }, this.animationTime);
@@ -97,6 +99,7 @@ class Modal extends Component {
 Modal.propTypes = {
   actions: PropTypes.array,
   show: PropTypes.bool,
+  onClose: PropTypes.func,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.array,

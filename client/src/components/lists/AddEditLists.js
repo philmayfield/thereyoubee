@@ -8,6 +8,7 @@ import {
   resetCurrentList,
   flagList
 } from "../../actions/listActions";
+import { getAllPlaces } from "../../actions/placeActions";
 import { isEmpty } from "../../common/empty";
 import Icon from "../common/Icon";
 import Modal from "../common/Modal";
@@ -21,10 +22,12 @@ class AddEditLists extends Component {
     this.state = {
       listname: "",
       showModal: false,
-      showAdd: false
+      showAdd: false,
+      hasChange: false
     };
 
     this.toggleShowModal = this.toggleShowModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.toggleAddForm = this.toggleAddForm.bind(this);
     this.handleSetList = this.handleSetList.bind(this);
     this.handleEditList = this.handleEditList.bind(this);
@@ -48,6 +51,13 @@ class AddEditLists extends Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
+  handleCloseModal() {
+    const { getAllPlaces, currentList = {} } = this.props;
+    if (this.state.hasChange) {
+      getAllPlaces(currentList._id);
+    }
+  }
+
   toggleAddForm(val) {
     this.resetForm();
     this.setState({
@@ -58,6 +68,7 @@ class AddEditLists extends Component {
   handleSetList(list) {
     return e => {
       e.stopPropagation();
+      this.setState({ hasChange: true });
       this.props.setList(list);
     };
   }
@@ -75,6 +86,7 @@ class AddEditLists extends Component {
     return e => {
       e.stopPropagation();
       flagList(list);
+      this.setState({ hasChange: true });
       if (list._id === currentList._id) {
         resetCurrentList();
       }
@@ -130,6 +142,7 @@ class AddEditLists extends Component {
         {showModal ? (
           <Modal
             toggle={this.toggleShowModal}
+            onClose={this.handleCloseModal}
             // actions={[
             //   {
             //     label: "whatevs",
@@ -141,7 +154,7 @@ class AddEditLists extends Component {
           >
             <h4>Your Place Lists</h4>
 
-            <div className="d-flex justify-content-between align-items-end">
+            <div className="d-flex flex-wrap justify-content-between align-items-end">
               <h5>Select a specific list to use</h5>
               <Button
                 clickOrTo={this.toggleAddForm}
@@ -180,6 +193,7 @@ class AddEditLists extends Component {
 
 AddEditLists.propTypes = {
   lists: PropTypes.array.isRequired,
+  getAllPlaces: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   saveList: PropTypes.func.isRequired,
   setList: PropTypes.func.isRequired,
@@ -196,5 +210,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { saveList, deleteList, setList, resetCurrentList, flagList }
+  { saveList, deleteList, setList, resetCurrentList, flagList, getAllPlaces }
 )(AddEditLists);

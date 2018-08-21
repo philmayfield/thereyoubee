@@ -112,6 +112,7 @@ export const saveList = list => dispatch => {
           icon: "thumb_up"
         })
       );
+      dispatch(setList(payload.data));
     })
     .catch(err => {
       const error = err.response ? err.response.data : err;

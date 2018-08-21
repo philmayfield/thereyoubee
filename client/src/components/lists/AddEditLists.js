@@ -41,7 +41,7 @@ class AddEditLists extends Component {
     const ppNum = prevProps.lists.length;
 
     // added a new list, hide the form
-    if (pNum && ppNum && pNum > ppNum) {
+    if (pNum > ppNum) {
       this.toggleAddForm(false);
     }
   }
@@ -54,6 +54,7 @@ class AddEditLists extends Component {
   handleCloseModal() {
     const { getAllPlaces, currentList = {} } = this.props;
     if (this.state.hasChange) {
+      this.setState({ hasChange: false });
       getAllPlaces(currentList._id);
     }
   }

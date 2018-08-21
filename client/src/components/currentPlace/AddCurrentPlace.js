@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { notEmpty } from "../../common/empty";
 import Button from "../common/Button";
 import Icon from "../common/Icon";
+import AddEditLists from "../lists/AddEditLists";
 import {
   saveCurrentPlace,
   resetCurrentPlace
@@ -31,9 +32,11 @@ class AddCurrentPlace extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const hasCurrentPlace = notEmpty(this.props.currentPlace.place_id);
+    // show the component if currentPlace has been set
     if (hasCurrentPlace && !prevState.show) {
       this.setState({ show: true });
     }
+    // hide the component if currentPlace has been removed
     if (!hasCurrentPlace && prevState.show) {
       this.setState({ show: false });
     }
@@ -68,7 +71,7 @@ class AddCurrentPlace extends Component {
     } = this.props;
     const { address, suggestion, place_id } = currentPlace;
     const { show } = this.state;
-    const listName = notEmpty(currentList) ? currentList.name : "All lists";
+    const listName = notEmpty(currentList) ? currentList.name : "Default list";
     const hasAnIssue = notEmpty(errors) && errors.status !== 404;
     const alreadyHavePlace = notEmpty(
       places.find(place => place.place_id === place_id)
@@ -93,8 +96,12 @@ class AddCurrentPlace extends Component {
             {suggestion}
           </div>
           <hr />
-          <p className="mt-0 truncate">{address}</p>
-          <p>List: {listName}</p>
+          <p className="mt-0 mb-1 truncate">{address}</p>
+          <small className="d-flex mb-3 align-items-baseline">
+            Adding to the list:{" "}
+            <strong className="ml-1 mr-2">{listName}</strong>
+            <AddEditLists lists={lists} />
+          </small>
           {showMessage ? (
             <p className="m-0">{whatsTheProb}</p>
           ) : (

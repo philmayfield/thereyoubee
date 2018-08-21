@@ -113,7 +113,7 @@ class AddEditLists extends Component {
 
   render() {
     const { showModal, showAdd } = this.state;
-    const { lists, resetCurrentList, currentList, errors } = this.props;
+    const { lists, currentList, errors, showBtnIcon = false } = this.props;
     const listOfLists = lists.map(list => (
       <ListItem
         key={list._id}
@@ -140,7 +140,7 @@ class AddEditLists extends Component {
     return (
       <Fragment>
         <button onClick={this.toggleShowModal} className="btn-empty btn-link">
-          <Icon name="low_priority" classes={["mr-2"]} />
+          {showBtnIcon ? <Icon name="low_priority" classes={["mr-2"]} /> : null}
           Change List
         </button>
         {showModal ? (
@@ -197,6 +197,7 @@ class AddEditLists extends Component {
 
 AddEditLists.propTypes = {
   lists: PropTypes.array.isRequired,
+  showBtnIcon: PropTypes.bool,
   getAllPlaces: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   saveList: PropTypes.func.isRequired,

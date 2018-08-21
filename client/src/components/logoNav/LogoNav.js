@@ -89,7 +89,7 @@ class LogoNav extends Component {
                 </Link>
               </li>
               <li>
-                <AddEditLists lists={lists} />
+                <AddEditLists lists={lists} showBtnIcon={true} />
               </li>
             </ul>
             <small className="d-block center-align">

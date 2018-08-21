@@ -11,6 +11,10 @@ const PlaceSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  list_id: {
+    type: Schema.Types.String,
+    default: ""
+  },
   address: {
     type: Schema.Types.String,
     required: true

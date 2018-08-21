@@ -58,7 +58,12 @@ class ListItem extends Component {
         <div className="card place-card">
           <div className="card-title-area with-fab teal">
             <Icon name="place" classes={["mr-2"]} color="white" />
-            <span className="card-title white-text">{suggestion}</span>
+            <span
+              onClick={this.handleViewPlace}
+              className="card-title white-text cursor-pointer"
+            >
+              {suggestion}
+            </span>
             <Button
               icon="more_vert"
               fab={true}

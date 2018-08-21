@@ -58,19 +58,34 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    // get fields
-    const listFields = {};
-    listFields.author = author ? author : "";
-    listFields.name = body.name ? body.name : "";
+    // check to see if that list name already exists
+    List.findOne({ name: req.body.name }).then(list => {
+      if (list) {
+        // list name already exists
 
-    // save list to db
-    new List(listFields)
-      .save()
-      .then(list => res.json(list))
-      .catch(err => {
-        errors.listError = "We ran into a problem saving this list.";
-        res.status(400).json(errors);
-      });
+        const { name } = req.body;
+
+        errors.listname = `You've already got a list named ${name} 😎`;
+
+        return res.status(400).json(errors);
+      } else {
+        // list name does not exist, make a new one
+
+        // get fields
+        const listFields = {};
+        listFields.author = author ? author : "";
+        listFields.name = body.name ? body.name : "";
+
+        // save list to db
+        new List(listFields)
+          .save()
+          .then(list => res.json(list))
+          .catch(err => {
+            errors.listError = "We ran into a problem saving this list.";
+            res.status(400).json(errors);
+          });
+      }
+    });
   }
 );
 

@@ -35,13 +35,17 @@ class Button extends Component {
           }
         </button>
         <ul>
-          {React.Children.map(this.props.children, (child, i) => (
-            <CSSTransition in={showFab} timeout={0} classNames="growFade">
-              <li style={{ transitionDelay: `${(delayAmt - i) * 50}ms` }}>
-                {child}
-              </li>
-            </CSSTransition>
-          ))}
+          {React.Children.map(this.props.children, (child, i) => {
+            return (
+              child && (
+                <CSSTransition in={showFab} timeout={0} classNames="growFade">
+                  <li style={{ transitionDelay: `${(delayAmt - i) * 50}ms` }}>
+                    {child}
+                  </li>
+                </CSSTransition>
+              )
+            );
+          })}
         </ul>
       </div>
     );

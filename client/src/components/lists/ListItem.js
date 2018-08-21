@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import Button from "../common/Button";
 
 const ListItem = props => {
-  const { list, setList, isCurrent } = props;
+  const { list, setList, editList, deleteList, isCurrent } = props;
   return (
     <li
       className={`collection-item d-flex justify-content-between align-items-center ${
         isCurrent ? "active" : ""
       }`}
+      onClick={setList}
     >
       <div>{list.name}</div>
       <Button
@@ -24,12 +25,12 @@ const ListItem = props => {
         <Button
           icon="edit"
           classes={["btn-floating", "blue"]}
-          // clickOrTo={this.handleViewPlace}
+          clickOrTo={editList}
         />
         <Button
           icon="delete_forever"
           classes={["btn-floating", "red"]}
-          // clickOrTo={this.handleDelete}
+          clickOrTo={deleteList}
         />
       </Button>
     </li>
@@ -38,6 +39,8 @@ const ListItem = props => {
 
 ListItem.propTypes = {
   list: PropTypes.object.isRequired,
+  editList: PropTypes.func,
+  deleteList: PropTypes.func,
   setList: PropTypes.func.isRequired,
   isCurrent: PropTypes.bool.isRequired
 };

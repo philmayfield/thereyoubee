@@ -3,6 +3,14 @@
   top: 10%;
   z-index: 1000;
   @include txGrowFadeStart();
+
+  @media #{$medium-and-down} {
+    width: calc(100% - #{$spacer});
+  }
+
+  & .modal-content {
+    padding: $spacer;
+  }
 }
 .modal-overlay {
   cursor: not-allowed;

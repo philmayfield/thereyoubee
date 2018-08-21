@@ -30,3 +30,17 @@
     right: 1rem;
   }
 }
+
+.collection .fab {
+  position: relative;
+
+  & > .btn {
+    right: 0;
+    bottom: auto;
+  }
+  & > ul {
+    right: $spacer * 2.25;
+    transform: none;
+    width: auto;
+  }
+}

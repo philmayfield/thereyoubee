@@ -6044,6 +6044,9 @@ hr {
       margin-left: -0.75rem;
       margin-right: -0.75rem; } }
 
+.collection-item {
+  position: relative; }
+
 .d-none {
   display: none !important; }
 
@@ -6096,6 +6099,16 @@ hr {
   .fab .halfway-fab {
     right: 1rem; }
 
+.collection .fab {
+  position: relative; }
+  .collection .fab > .btn, .collection .fab > .btn-large, .collection .fab > .btn-small {
+    right: 0;
+    bottom: auto; }
+  .collection .fab > ul {
+    right: 2.25rem;
+    transform: none;
+    width: auto; }
+
 .floating-input {
   display: block;
   width: 100%;
@@ -6136,6 +6149,11 @@ hr {
   opacity: 0;
   transform: scale(0.2) translateX(25px);
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+  @media only screen and (max-width: 992px) {
+    .modal {
+      width: calc(100% - 1rem); } }
+  .modal .modal-content {
+    padding: 1rem; }
 
 .modal-overlay {
   cursor: not-allowed;

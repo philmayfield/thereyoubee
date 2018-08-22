@@ -19,7 +19,11 @@ const MapView = props => {
   return (
     <div className="map-view" key="map-view">
       <h2 className="sr-only">Map View</h2>
-      <Map places={places} setShowTopNav={setShowTopNav} />
+      <Map
+        currentPlace={currentPlace}
+        places={places}
+        setShowTopNav={setShowTopNav}
+      />
       <LocationSearchInput
         isLoading={isLoading}
         numPlaces={places.length}

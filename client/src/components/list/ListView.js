@@ -7,12 +7,12 @@ import List from "./List";
 import totalPlaces from "../../common/totalPlaces";
 
 const ListView = props => {
-  const { isAuth, isLoading, places, currentList } = props;
+  const { isAuth, isLoading, places, lists, currentList } = props;
   const hasPlaces = notEmpty(places);
   let content;
 
   if (hasPlaces && !isLoading) {
-    content = <List places={places} />;
+    content = <List places={places} lists={lists} />;
   } else if (!isLoading)
     content = (
       <div className="px-3 pt-5">
@@ -50,6 +50,7 @@ ListView.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
   places: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   currentList: PropTypes.object.isRequired
 };
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { isEmpty, notEmpty } from "../../common/empty";
 import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
@@ -145,8 +144,4 @@ Map.propTypes = {
   text: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-  currentPlace: state.currentPlace
-});
-
-export default connect(mapStateToProps)(Map);
+export default Map;

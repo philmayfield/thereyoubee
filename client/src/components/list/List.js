@@ -10,13 +10,11 @@ class List extends Component {
   }
 
   render() {
-    const {
-      // isAuth
-      places = []
-    } = this.props;
-    const placeItems = places.map(place => (
-      <ListItem key={place._id} item={place} />
-    ));
+    const { places = [], lists = [] } = this.props;
+    const placeItems = places.map(place => {
+      const list = lists.find(list => list._id === place.list_id);
+      return <ListItem key={place._id} item={place} list={list && list.name} />;
+    });
 
     return <div className="list-view__holder px-3">{placeItems}</div>;
   }
@@ -24,8 +22,8 @@ class List extends Component {
 
 List.propTypes = {
   places: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired
-  // isAuth: PropTypes.object.isRequired
 };
 
 export default connect(

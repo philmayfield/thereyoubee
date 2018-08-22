@@ -39,14 +39,15 @@ class ListItem extends Component {
   }
 
   render() {
+    const { item, list = "" } = this.props;
     const {
       // place_id,
       // author,
       address,
       date,
-      suggestion,
-      latLng = {}
-    } = this.props.item;
+      suggestion
+      // latLng = {}
+    } = item;
 
     return (
       <CSSTransition
@@ -90,8 +91,8 @@ class ListItem extends Component {
                   {moment(date).format("MMM D, YYYY")}
                 </span>
               </span>
-              <span className="right-align">
-                {latLng.lat}, {latLng.lng}
+              <span className={`right-align ${list ? "" : "red-text"}`}>
+                On {list ? list : "Unknown"} list
               </span>
             </small>
           </div>
@@ -104,7 +105,8 @@ class ListItem extends Component {
 ListItem.propTypes = {
   flagPlace: PropTypes.func.isRequired,
   setCurrentPlace: PropTypes.func.isRequired,
-  item: PropTypes.object,
+  item: PropTypes.object.isRequired,
+  list: PropTypes.string,
   history: PropTypes.object
 };
 

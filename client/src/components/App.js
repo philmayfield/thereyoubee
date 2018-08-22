@@ -170,6 +170,7 @@ class App extends Component {
                             isAuth={isAuth}
                             isLoading={isLoading}
                             places={placesToRender}
+                            lists={lists}
                             currentList={currentList}
                           />
                         )}

@@ -21,6 +21,7 @@ class AddEditLists extends Component {
     super(props);
     this.state = {
       listname: "",
+      editListId: "",
       startingListId:
         localStorage.getItem("currentList") || props.currentList._id || "",
       showModal: false,
@@ -95,7 +96,10 @@ class AddEditLists extends Component {
     return e => {
       e.stopPropagation();
       this.toggleAddForm(true);
-      this.setState({ listname: list.name });
+      this.setState({
+        listname: list.name,
+        editListId: list._id
+      });
     };
   }
 
@@ -118,11 +122,17 @@ class AddEditLists extends Component {
 
   handleAddListSubmit(e) {
     e.preventDefault();
-    this.props.saveList({ name: this.state.listname });
+    this.props.saveList({
+      _id: this.state.editListId,
+      name: this.state.listname
+    });
   }
 
   resetForm() {
-    this.setState({ listname: "" });
+    this.setState({
+      listname: "",
+      editListId: ""
+    });
   }
 
   render() {
@@ -161,14 +171,15 @@ class AddEditLists extends Component {
           <Modal
             toggle={this.toggleShowModal}
             onClose={this.handleCloseModal}
-            // actions={[
-            //   {
-            //     label: "whatevs",
-            //     btnClasses: ["blue"],
-            //     action: this.whatevs,
-            //     toggle: true
-            //   }
-            // ]}
+            actions={[
+              {
+                label: "Save List",
+                show: showAdd,
+                // btnClasses: ["blue"],
+                action: this.handleAddListSubmit.bind(this),
+                toggle: false
+              }
+            ]}
           >
             <h4>Your Place Lists</h4>
 
@@ -193,11 +204,6 @@ class AddEditLists extends Component {
                   error={errors.listname}
                   onChange={this.inputChange}
                 />
-                <div className="right-align">
-                  <Button type="submit" icon="check">
-                    Save List
-                  </Button>
-                </div>
               </form>
             ) : (
               <ul className="collection mb-0">{listOfLists}</ul>

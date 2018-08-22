@@ -95,24 +95,31 @@ export const deleteList = list => dispatch => {
 };
 
 // save a new list to the database
-export const saveList = list => dispatch => {
+export const saveList = ({ _id = "", name }) => dispatch => {
+  const editing = _id ? true : false;
+
   dispatch(clearErrors());
   dispatch(isLoading("saveCurrentList"));
 
   axios
-    .post("/api/list/", list)
-    .then(payload => {
-      dispatch({
-        payload,
-        type: SAVE_LIST
-      });
+    .post(`/api/list/${_id}`, { name })
+    .then(res => {
       dispatch(
         addToast({
-          value: `Added ${list.name} list`,
+          value: `${editing ? "Updated" : "Added"} ${name} list`,
           icon: "thumb_up"
         })
       );
-      dispatch(setList(payload.data));
+      if (editing) {
+        dispatch(resetLists());
+        dispatch(getAllLists());
+      } else {
+        dispatch({
+          payload: res.data,
+          type: SAVE_LIST
+        });
+        dispatch(setList(res.data));
+      }
     })
     .catch(err => {
       const error = err.response ? err.response.data : err;

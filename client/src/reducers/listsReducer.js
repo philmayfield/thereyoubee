@@ -13,22 +13,22 @@ export default (state = [], action) => {
       return action.payload;
 
     case SAVE_LIST:
-      return [...state, action.payload.data];
+      return [...state, action.payload];
 
     case FLAG_LIST:
-      return state.map(place => {
-        if (place._id === action.payload) {
-          place.deleteFlag = true;
+      return state.map(list => {
+        if (list._id === action.payload) {
+          list.deleteFlag = true;
         }
-        return place;
+        return list;
       });
 
     case UNFLAG_LIST:
-      return state.map(place => {
-        if (place._id === action.payload) {
-          delete place.deleteFlag;
+      return state.map(list => {
+        if (list._id === action.payload) {
+          delete list.deleteFlag;
         }
-        return place;
+        return list;
       });
 
     case DELETE_LIST:

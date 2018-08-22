@@ -20,6 +20,7 @@ import LogoNav from "../components/logoNav/LogoNav";
 import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
+import Landing from "./landing/Landing";
 import Login from "./login/Login";
 import Register from "./register/Register";
 
@@ -95,7 +96,7 @@ class App extends Component {
                             </RedirectWrap>
                           ) : (
                             <RedirectWrap action={history.action}>
-                              <Redirect to="/login" />
+                              <Redirect to="/landing" />
                             </RedirectWrap>
                           )
                         }
@@ -113,6 +114,7 @@ class App extends Component {
                           )
                         }
                       />
+                      <Route exact path="/landing" component={Landing} />
                       <Route
                         exact
                         path="/register"

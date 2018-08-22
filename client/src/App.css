@@ -5958,12 +5958,9 @@ input[type=range]::-ms-thumb {
   white-space: nowrap;
   border: 0; }
 
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden; }
-
+body,
 .App,
+.landing-view,
 .login-view,
 .register-view,
 .list-view,
@@ -5971,6 +5968,9 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden; }
+
+.landing-view {
+  overflow-y: scroll; }
 
 .vw100 {
   width: 100vw; }
@@ -5993,10 +5993,12 @@ i.right {
 .cursor-pointer {
   cursor: pointer; }
 
+.landing main,
 .login main,
 .register main {
   height: 100vh; }
 
+.landing main,
 .login main,
 .register main,
 .list-view__list {
@@ -6133,6 +6135,19 @@ i.right {
     color: #9e9e9e;
     opacity: 1; }
 
+.tech-logos .tech-icon {
+  height: 2rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  width: 2rem; }
+
+.tech-logos svg {
+  height: auto;
+  opacity: 0.75; }
+
+.tech-logos svg:hover {
+  opacity: 1; }
+
 .app-loading {
   background-color: rgba(255, 255, 255, 0.5);
   align-items: center;
@@ -6151,6 +6166,13 @@ i.right {
 
 .app-loading-out {
   opacity: 0; }
+
+.round-img {
+  border-radius: 50%; }
+
+.phil {
+  max-width: 15rem;
+  height: auto; }
 
 .modal {
   display: block;

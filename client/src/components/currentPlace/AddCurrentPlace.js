@@ -77,6 +77,8 @@ class AddCurrentPlace extends Component {
     const hasStorePlace = notEmpty(storePlace);
     const storePlaceList =
       hasStorePlace && lists.find(list => list._id === storePlace.list_id);
+    const hasStorePlaceList = notEmpty(storePlaceList);
+    const isOnUnknownList = hasStorePlace && !hasStorePlaceList;
     const showMessage = !isAuth || hasAnIssue;
     const whatsTheProb =
       showMessage && !isAuth ? (
@@ -102,28 +104,33 @@ class AddCurrentPlace extends Component {
             <p className="m-0">{whatsTheProb}</p>
           ) : (
             <Fragment>
-              <small className="d-flex mb-3 align-items-baseline">
-                {storePlaceList
-                  ? "Already on the list:"
-                  : "Adding to the list:"}
-                <strong className="ml-1 mr-2">
-                  {storePlaceList ? storePlaceList.name : listName}
-                </strong>
-                <AddEditLists lists={lists} />
-              </small>
+              {isOnUnknownList ? (
+                <p className="red-text">
+                  This place was saved to a list but that list has been removed.
+                </p>
+              ) : (
+                <small className="d-flex mb-3 align-items-baseline">
+                  {storePlaceList
+                    ? "Already on the list:"
+                    : "Adding to the list:"}
+                  <strong className="ml-1 mr-2">
+                    {storePlaceList ? storePlaceList.name : listName}
+                  </strong>
+                  <AddEditLists lists={lists} />
+                </small>
+              )}
               <div className="right-align">
                 <Button
                   clickOrTo={this.handleClose}
-                  classes={["btn-flat", "red-text", "mr-3"]}
+                  classes={["btn-flat", "red-text"]}
                 >
                   Close
                 </Button>
-                {hasStorePlace ? (
-                  <span className="teal-text">On the list!</span>
-                ) : (
+                {hasStorePlace ? null : (
                   <Button
                     clickOrTo={this.handleAddPlace}
                     value={currentPlace}
+                    classes={["ml-3"]}
                     icon="add_circle"
                   >
                     Add This Place

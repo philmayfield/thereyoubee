@@ -9,9 +9,11 @@ const modalRoot = document.getElementById("modal-root");
 // Modal Props
 // -----------------
 // toggle: (bool) - show / hide the modal
+// onClose: (function) - callback when the modal is closed
 // actions: (array) [ - array of actions that get turned into buttons in the footer of the modal
 //   {
 //     label: (string), - label for button
+//     show: (bool), - whether or not to show the button
 //     btnClasses: (array), - classes for the button
 //     action: (function), - action for the button
 //     toggle: (bool) - optionally close the array with the action
@@ -59,17 +61,17 @@ class Modal extends Component {
   render() {
     const { show } = this.state;
     const { actions = [] } = this.props;
-    const actionButtons = actions.map(action => (
-      <Button
-        key={action.label}
-        clickOrTo={
-          action.toggle ? this.withRemove(action.action) : action.action
-        }
-        classes={[...action.btnClasses, "ml-2"]}
-      >
-        {action.label}
-      </Button>
-    ));
+    const actionButtons = actions.map(
+      ({ show = true, label, toggle = false, action, btnClasses = [] }) => (
+        <Button
+          key={label}
+          clickOrTo={toggle ? this.withRemove(action) : action}
+          classes={[show ? "" : "d-none", ...btnClasses, "ml-2"]}
+        >
+          {label}
+        </Button>
+      )
+    );
 
     return ReactDOM.createPortal(
       <Fragment>

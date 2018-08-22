@@ -38,20 +38,26 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const cIsAuth = this.props.auth.isAuth;
+    const {
+      currentList,
+      lists,
+      auth,
+      setList,
+      getAllLists,
+      getAllPlaces
+    } = this.props;
+    const cIsAuth = auth.isAuth;
     const pIsAuth = prevProps.auth.isAuth;
     const localStorageListId = localStorage.getItem("currentList");
 
     if (cIsAuth && !pIsAuth) {
       // if we go from not isAuth to isAuth (refresh or login) fetch places and lists
-      this.props.getAllPlaces();
-      this.props.getAllLists();
-    } else if (this.props.lists.length && localStorageListId) {
-      const list = this.props.lists.find(
-        list => list._id === localStorageListId
-      );
+      getAllPlaces();
+      getAllLists();
+    } else if (lists.length && localStorageListId && !currentList._id) {
+      const list = lists.find(list => list._id === localStorageListId);
 
-      if (list) this.props.setList(list);
+      if (list) setList(list);
     }
   }
 

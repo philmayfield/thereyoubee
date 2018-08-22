@@ -69,15 +69,14 @@ class AddCurrentPlace extends Component {
       lists,
       errors
     } = this.props;
-    const { address, suggestion, place_id, list_id } = currentPlace;
+    const { address, suggestion, place_id } = currentPlace;
     const { show } = this.state;
     const listName = notEmpty(currentList) ? currentList.name : "Default list";
     const hasAnIssue = notEmpty(errors) && errors.status !== 404;
-    const alreadyHavePlace = notEmpty(
-      places.find(place => place.place_id === place_id)
-    );
-    const onWhatList =
-      alreadyHavePlace && lists.find(list => list._id === list_id);
+    const storePlace = places.find(place => place.place_id === place_id);
+    const hasStorePlace = notEmpty(storePlace);
+    const storePlaceList =
+      hasStorePlace && lists.find(list => list._id === storePlace.list_id);
     const showMessage = !isAuth || hasAnIssue;
     const whatsTheProb =
       showMessage && !isAuth ? (
@@ -100,9 +99,9 @@ class AddCurrentPlace extends Component {
           <hr />
           <p className="mt-0 mb-1 truncate">{address}</p>
           <small className="d-flex mb-3 align-items-baseline">
-            {onWhatList ? "Already on the list:" : "Adding to the list:"}
+            {storePlaceList ? "Already on the list:" : "Adding to the list:"}
             <strong className="ml-1 mr-2">
-              {onWhatList ? onWhatList.name : listName}
+              {storePlaceList ? storePlaceList.name : listName}
             </strong>
             <AddEditLists lists={lists} />
           </small>
@@ -116,7 +115,7 @@ class AddCurrentPlace extends Component {
               >
                 Close
               </Button>
-              {alreadyHavePlace ? (
+              {hasStorePlace ? (
                 <span className="teal-text">On the list!</span>
               ) : (
                 <Button

@@ -4,6 +4,7 @@ const initialState = {
   address: "",
   suggestion: "",
   place_id: "",
+  list_id: "",
   latLng: {
     lat: "",
     lng: ""

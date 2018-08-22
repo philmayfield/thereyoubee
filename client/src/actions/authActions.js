@@ -3,17 +3,8 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../common/setAuthToken";
 import { SET_CURRENT_USER } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
-import {
-  // getAllPlaces,
-  resetCurrentPlace,
-  resetPlaces
-} from "./placeActions";
-import {
-  saveList,
-  // getAllLists,
-  resetCurrentList,
-  resetLists
-} from "./listActions";
+import { resetCurrentPlace, resetPlaces } from "./placeActions";
+import { saveList, resetCurrentList, resetLists } from "./listActions";
 import { addToast } from "./toastActions";
 
 // register a new user
@@ -64,10 +55,6 @@ export const loginUser = userData => async dispatch => {
 
       // set current user with decoded data
       dispatch(setCurrentUser(decoded));
-
-      // go fetch the lists and places for the user
-      // dispatch(getAllLists());
-      // dispatch(getAllPlaces());
 
       // show a toast!
       dispatch(

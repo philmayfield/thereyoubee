@@ -10,7 +10,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
 // actions
-import { getAllPlaces } from "../actions/placeActions";
+import { getAllPlaces, filterPlaces } from "../actions/placeActions";
 import { getAllLists, setList } from "../actions/listActions";
 
 // routes / componenets
@@ -44,6 +44,7 @@ class App extends Component {
       auth,
       setList,
       getAllLists,
+      filterPlaces,
       getAllPlaces
     } = this.props;
     const cIsAuth = auth.isAuth;
@@ -51,13 +52,17 @@ class App extends Component {
     const localStorageListId = localStorage.getItem("currentList");
 
     if (cIsAuth && !pIsAuth) {
-      // if we go from not isAuth to isAuth (refresh or login) fetch places and lists
+      // going from not isAuth to isAuth (refresh or login) fetch places and lists
       getAllPlaces();
       getAllLists();
     } else if (lists.length && localStorageListId && !currentList._id) {
+      // if a list id is saved in local storage, and we have a list of lists, but no current list, set the current list to the localstorage id, and filter places that match
       const list = lists.find(list => list._id === localStorageListId);
 
-      if (list) setList(list);
+      if (list) {
+        setList(list);
+        filterPlaces(list._id);
+      }
     }
   }
 
@@ -187,9 +192,10 @@ App.propTypes = {
   auth: PropTypes.object.isRequired,
   currentPlace: PropTypes.object.isRequired,
   currentList: PropTypes.object.isRequired,
+  setList: PropTypes.func.isRequired,
   getAllLists: PropTypes.func.isRequired,
-  getAllPlaces: PropTypes.func.isRequired,
-  setList: PropTypes.func.isRequired
+  filterPlaces: PropTypes.func.isRequired,
+  getAllPlaces: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -203,5 +209,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllPlaces, getAllLists, setList }
+  { getAllPlaces, getAllLists, setList, filterPlaces }
 )(App);

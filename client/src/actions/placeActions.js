@@ -7,7 +7,8 @@ import {
   SAVE_CURRENT_PLACE,
   RESET_CURRENT_PLACE,
   DELETE_PLACE,
-  RESET_PLACES
+  RESET_PLACES,
+  FILTER_PLACES
 } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { addToast } from "./toastActions";
@@ -140,5 +141,14 @@ export const resetCurrentPlace = () => {
 export const resetPlaces = () => {
   return {
     type: RESET_PLACES
+  };
+};
+
+// filter places by list id
+export const filterPlaces = payload => {
+  // payload is a list id
+  return {
+    payload,
+    type: FILTER_PLACES
   };
 };

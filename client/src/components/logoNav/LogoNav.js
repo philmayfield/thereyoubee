@@ -7,8 +7,6 @@ import { logoutUser } from "../../actions/authActions";
 import Button from "../common/Button";
 import Icon from "../common/Icon";
 import AddEditLists from "../lists/AddEditLists";
-// import getImg from "../../common/getImg";
-// import ReactSVG from "react-svg";
 
 class LogoNav extends Component {
   constructor(props) {
@@ -88,13 +86,15 @@ class LogoNav extends Component {
                   List of {buttonString}
                 </Link>
               </li>
-              <li>
-                <AddEditLists
-                  lists={lists}
-                  showBtnIcon={true}
-                  hideMenu={this.hideMenu}
-                />
-              </li>
+              {isAuth && (
+                <li>
+                  <AddEditLists
+                    lists={lists}
+                    showBtnIcon={true}
+                    hideMenu={this.hideMenu}
+                  />
+                </li>
+              )}
             </ul>
             <small className="d-block center-align">
               Viewing {showingListString}

@@ -98,35 +98,39 @@ class AddCurrentPlace extends Component {
           </div>
           <hr />
           <p className="mt-0 mb-1 truncate">{address}</p>
-          <small className="d-flex mb-3 align-items-baseline">
-            {storePlaceList ? "Already on the list:" : "Adding to the list:"}
-            <strong className="ml-1 mr-2">
-              {storePlaceList ? storePlaceList.name : listName}
-            </strong>
-            <AddEditLists lists={lists} />
-          </small>
           {showMessage ? (
             <p className="m-0">{whatsTheProb}</p>
           ) : (
-            <div className="right-align">
-              <Button
-                clickOrTo={this.handleClose}
-                classes={["btn-flat", "red-text", "mr-3"]}
-              >
-                Close
-              </Button>
-              {hasStorePlace ? (
-                <span className="teal-text">On the list!</span>
-              ) : (
+            <Fragment>
+              <small className="d-flex mb-3 align-items-baseline">
+                {storePlaceList
+                  ? "Already on the list:"
+                  : "Adding to the list:"}
+                <strong className="ml-1 mr-2">
+                  {storePlaceList ? storePlaceList.name : listName}
+                </strong>
+                <AddEditLists lists={lists} />
+              </small>
+              <div className="right-align">
                 <Button
-                  clickOrTo={this.handleAddPlace}
-                  value={currentPlace}
-                  icon="add_circle"
+                  clickOrTo={this.handleClose}
+                  classes={["btn-flat", "red-text", "mr-3"]}
                 >
-                  Add This Place
+                  Close
                 </Button>
-              )}
-            </div>
+                {hasStorePlace ? (
+                  <span className="teal-text">On the list!</span>
+                ) : (
+                  <Button
+                    clickOrTo={this.handleAddPlace}
+                    value={currentPlace}
+                    icon="add_circle"
+                  >
+                    Add This Place
+                  </Button>
+                )}
+              </div>
+            </Fragment>
           )}
         </div>
       </CSSTransition>

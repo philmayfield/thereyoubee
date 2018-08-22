@@ -123,20 +123,24 @@ export const saveList = list => dispatch => {
 
 // set the current list on the app
 export const setList = payload => {
+  // set the current list on local storage
+  localStorage.setItem("currentList", payload._id);
   return {
     payload,
     type: SET_LIST
   };
 };
 
-// set the current list on the app
+// reset the current list on the app
 export const resetCurrentList = () => {
+  // set the current list on local storage
+  localStorage.setItem("currentList", null);
   return {
     type: RESET_LIST
   };
 };
 
-// set the current list on the app
+// reset all the lists on the app
 export const resetLists = () => {
   return {
     type: RESET_LISTS

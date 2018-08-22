@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 
 // actions
 import { getAllPlaces } from "../actions/placeActions";
-import { getAllLists } from "../actions/listActions";
+import { getAllLists, setList } from "../actions/listActions";
 
 // routes / componenets
 import IsAuth from "../components/common/IsAuth";
@@ -40,11 +40,18 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     const cIsAuth = this.props.auth.isAuth;
     const pIsAuth = prevProps.auth.isAuth;
+    const localStorageListId = localStorage.getItem("currentList");
 
-    // if we go from not isAuth to isAuth (refresh or login) fetch places and lists
     if (cIsAuth && !pIsAuth) {
+      // if we go from not isAuth to isAuth (refresh or login) fetch places and lists
       this.props.getAllPlaces();
       this.props.getAllLists();
+    } else if (this.props.lists.length && localStorageListId) {
+      const list = this.props.lists.find(
+        list => list._id === localStorageListId
+      );
+
+      if (list) this.props.setList(list);
     }
   }
 
@@ -175,7 +182,8 @@ App.propTypes = {
   currentPlace: PropTypes.object.isRequired,
   currentList: PropTypes.object.isRequired,
   getAllLists: PropTypes.func.isRequired,
-  getAllPlaces: PropTypes.func.isRequired
+  getAllPlaces: PropTypes.func.isRequired,
+  setList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -189,5 +197,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllPlaces, getAllLists }
+  { getAllPlaces, getAllLists, setList }
 )(App);

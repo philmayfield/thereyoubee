@@ -22,7 +22,10 @@ const ListView = props => {
               "Looks like you havent added any places here yet, why don&rsquo;t you flip over to the map view and start adding some!"
             ) : (
               <Fragment>
-                How can you have places on your list if you havent logged in? 🤔
+                How can you have places on your list if you havent logged in?{" "}
+                <span role="img" aria-label="thinking face emoji">
+                  🤔
+                </span>
                 Please <Link to="/login">log in</Link> or{" "}
                 <Link to="/register">make an account</Link> to save places.
               </Fragment>

@@ -7,7 +7,7 @@ import List from "./List";
 import totalPlaces from "../../common/totalPlaces";
 
 const ListView = props => {
-  const { isAuth, isLoading, places } = props;
+  const { isAuth, isLoading, places, currentList } = props;
   const hasPlaces = notEmpty(places);
   let content;
 
@@ -39,7 +39,7 @@ const ListView = props => {
     <div className="list-view">
       <header className="list-view__header z-depth-3 d-flex justify-content-end align-items-center pr-3">
         <h2 className="sr-only">List View</h2>
-        <span>{totalPlaces(places.length, isLoading)}</span>
+        <span>{totalPlaces(places.length, isLoading, currentList.name)}</span>
       </header>
       <section className="list-view__list">{content}</section>
     </div>
@@ -49,7 +49,8 @@ const ListView = props => {
 ListView.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
-  places: PropTypes.array.isRequired
+  places: PropTypes.array.isRequired,
+  currentList: PropTypes.object.isRequired
 };
 
 export default ListView;

@@ -87,10 +87,11 @@ class LocationSearchInput extends Component {
   }
 
   render() {
-    const { numPlaces, isLoading, showTopNav } = this.props;
+    const { numPlaces, isLoading, showTopNav, currentList } = this.props;
     const placeholderText = `Find a Place - ${totalPlaces(
       numPlaces,
-      isLoading
+      isLoading,
+      currentList.name
     )}`;
     const renderFunc = ({
       getInputProps,
@@ -165,14 +166,11 @@ LocationSearchInput.propTypes = {
   setCurrentPlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired,
   numPlaces: PropTypes.number.isRequired,
-  currentPlace: PropTypes.object.isRequired
+  currentPlace: PropTypes.object.isRequired,
+  currentList: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  currentPlace: state.currentPlace
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { setCurrentPlace, resetCurrentPlace }
 )(LocationSearchInput);

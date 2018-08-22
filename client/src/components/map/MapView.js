@@ -24,6 +24,8 @@ const MapView = props => {
         isLoading={isLoading}
         numPlaces={places.length}
         showTopNav={showTopNav}
+        currentPlace={currentPlace}
+        currentList={currentList}
       />
       <AddCurrentPlace
         isAuth={isAuth}

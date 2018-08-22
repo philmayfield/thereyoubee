@@ -89,6 +89,49 @@ router.post(
   }
 );
 
+// @route   POST api/list/:id
+// @desc    Update a list
+// @access  Private
+router.post(
+  "/:list_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // validate request
+    const listId = req.params.list_id;
+    const { body } = req;
+    const { errors, isValid } = validateListInput(body);
+
+    // check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // get fields
+    const listFields = {
+      name: body.name
+    };
+
+    // check to see if that list name already exists
+    List.findOneAndUpdate(
+      { _id: listId }, // query
+      { $set: listFields }, // set data
+      { new: true } // return updated object
+    )
+      .then(list => {
+        if (notEmpty(list)) {
+          return res.json(list);
+        }
+        errors.listError = "Could not find that list to update";
+        return res.status(404).json(errors);
+      })
+      .catch(err => {
+        errors.listError = "Could not find that list to update";
+        errors.err = err;
+        return res.status(404).json(errors);
+      });
+  }
+);
+
 // @route   DELETE api/list/:id
 // @desc    Delete a list
 // @access  Private

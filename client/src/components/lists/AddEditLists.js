@@ -21,6 +21,8 @@ class AddEditLists extends Component {
     super(props);
     this.state = {
       listname: "",
+      startingListId:
+        localStorage.getItem("currentList") || props.currentList._id || "",
       showModal: false,
       showAdd: false,
       hasChange: false
@@ -39,10 +41,17 @@ class AddEditLists extends Component {
   componentDidUpdate(prevProps) {
     const pNum = this.props.lists.length;
     const ppNum = prevProps.lists.length;
+    const pListId = this.props.currentList._id;
+    const ppListId = prevProps.currentList._id;
+    const { startingListId } = this.state;
 
     // added a new list, hide the form
     if (pNum > ppNum) {
       this.toggleAddForm(false);
+    }
+    // only set hasChange state if the current list does not match the starting list
+    if (pListId !== ppListId) {
+      this.setState({ hasChange: pListId !== startingListId });
     }
   }
 
@@ -54,9 +63,13 @@ class AddEditLists extends Component {
   }
 
   handleCloseModal() {
-    const { getAllPlaces, currentList = {} } = this.props;
+    const { getAllPlaces, currentList } = this.props;
     if (this.state.hasChange) {
-      this.setState({ hasChange: false });
+      // if the current list has changed, set the new list id to the starting list id, and fetch places
+      this.setState({
+        hasChange: false,
+        startingListId: currentList._id
+      });
       getAllPlaces(currentList._id);
     }
   }
@@ -73,7 +86,6 @@ class AddEditLists extends Component {
       e.stopPropagation();
       const { setList, currentList } = this.props;
       if (list._id !== currentList._id) {
-        this.setState({ hasChange: true });
         setList(list);
       }
     };
@@ -92,8 +104,8 @@ class AddEditLists extends Component {
     return e => {
       e.stopPropagation();
       flagList(list);
-      this.setState({ hasChange: true });
       if (list._id === currentList._id) {
+        // deleted the current list, reset to default
         resetCurrentList();
       }
     };

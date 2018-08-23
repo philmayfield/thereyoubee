@@ -41,7 +41,6 @@ class LogoNav extends Component {
     const { isAuth, user } = auth;
     const { show } = this.state;
     const buttonString = hasCurrentList ? currentList.name : "All Places";
-    const showingListString = hasCurrentList ? currentList.name : "All lists";
 
     return (
       <header className={`${showTopNav ? "logo-nav" : "hide"}`}>

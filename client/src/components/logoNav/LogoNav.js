@@ -7,6 +7,8 @@ import { logoutUser } from "../../actions/authActions";
 import Button from "../common/Button";
 import Icon from "../common/Icon";
 import AddEditLists from "../lists/AddEditLists";
+import getImg from "../../common/getImg";
+import ReactSVG from "react-svg";
 
 class LogoNav extends Component {
   constructor(props) {
@@ -35,13 +37,8 @@ class LogoNav extends Component {
   }
 
   render() {
-    const {
-      isAuth,
-      showTopNav,
-      lists,
-      currentList,
-      hasCurrentList
-    } = this.props;
+    const { auth, showTopNav, lists, currentList, hasCurrentList } = this.props;
+    const { isAuth, user } = auth;
     const { show } = this.state;
     const buttonString = hasCurrentList ? currentList.name : "All Places";
     const showingListString = hasCurrentList ? currentList.name : "All lists";
@@ -60,6 +57,14 @@ class LogoNav extends Component {
         </Button>
         <CSSTransition in={show} timeout={0} classNames="growFade">
           <nav className="z-depth-3">
+            <div className="logo">
+              <ReactSVG
+                path={getImg("logo")}
+                className="mx-auto d-flex justify-content-center"
+                svgClassName="logo-img"
+              />
+              <strong>ThereYouBee</strong>
+            </div>
             <ul className="m-0">
               <li>
                 {isAuth ? (
@@ -97,7 +102,7 @@ class LogoNav extends Component {
               )}
             </ul>
             <small className="d-block center-align">
-              Viewing {showingListString}
+              {user.username ? user.username : "Nobody"} is logged in
             </small>
           </nav>
         </CSSTransition>
@@ -109,7 +114,7 @@ class LogoNav extends Component {
 LogoNav.propTypes = {
   lists: PropTypes.array.isRequired,
   hasCurrentList: PropTypes.bool.isRequired,
-  isAuth: PropTypes.bool.isRequired,
+  auth: PropTypes.object.isRequired,
   showTopNav: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
   currentList: PropTypes.object.isRequired

@@ -90,7 +90,7 @@ class App extends Component {
               <Loading />
               <ToastContainer test={false} />
               <LogoNav
-                isAuth={isAuth}
+                auth={auth}
                 showTopNav={showTopNav}
                 lists={listsToRender}
                 currentList={currentList}

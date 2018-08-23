@@ -3,7 +3,23 @@
   transition: $bouncy;
   transition-delay: 250ms;
 
-  .logo,
+  .logo {
+    padding: 0 $spacer/2;
+    text-align: center;
+    font-size: 75%;
+
+    .logo-img {
+      display: block;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      margin: $spacer/4 $spacer;
+      border-bottom: 1px solid rgba(black, 0.15);
+    }
+  }
+
   .menu-btn {
     width: 1.5 * $spacer;
     height: 1.5 * $spacer;

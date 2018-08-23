@@ -6256,7 +6256,17 @@ i.right {
   position: absolute;
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
   transition-delay: 250ms; }
-  .logo-nav .logo,
+  .logo-nav .logo {
+    padding: 0 0.5rem;
+    text-align: center;
+    font-size: 75%; }
+    .logo-nav .logo .logo-img {
+      display: block; }
+    .logo-nav .logo::after {
+      content: "";
+      display: block;
+      margin: 0.25rem 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
   .logo-nav .menu-btn {
     width: 1.5rem;
     height: 1.5rem;
@@ -6265,7 +6275,6 @@ i.right {
     top: 0;
     left: 0;
     cursor: pointer; }
-    .logo-nav .logo i,
     .logo-nav .menu-btn i {
       font-size: 1.5rem;
       line-height: 1; }

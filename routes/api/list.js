@@ -58,8 +58,8 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    // check to see if that list name already exists
-    List.findOne({ name: req.body.name }).then(list => {
+    // check to see if that list name already exists for a user
+    List.findOne({ author: author, name: req.body.name }).then(list => {
       if (list) {
         // list name already exists
 

@@ -89,6 +89,49 @@ router.post(
   }
 );
 
+// @route   POST api/place/:id
+// @desc    Update a place
+// @access  Private
+router.post(
+  "/:place_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // validate request
+    const placeId = req.params.place_id;
+    const { body } = req;
+    const { errors, isValid } = validatePlaceInput(body);
+
+    // check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // get fields
+    const placeFields = {
+      list_id: body.list_id
+    };
+
+    // check to see if that list name already exists
+    Place.findOneAndUpdate(
+      { _id: placeId }, // query
+      { $set: placeFields }, // set data
+      { new: true } // return updated object
+    )
+      .then(place => {
+        if (notEmpty(place)) {
+          return res.json(place);
+        }
+        errors.placeError = "Could not find that place to update";
+        return res.status(404).json(errors);
+      })
+      .catch(err => {
+        errors.placeError = "Could not find that place to update";
+        errors.err = err;
+        return res.status(404).json(errors);
+      });
+  }
+);
+
 // @route   DELETE api/place/:id
 // @desc    Delete a place
 // @access  Private

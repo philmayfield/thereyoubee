@@ -97,30 +97,36 @@ export const deletePlace = place => dispatch => {
     });
 };
 
-// save the current place to the database
-export const saveCurrentPlace = place => dispatch => {
-  dispatch(clearErrors());
-  dispatch(isLoading("saveCurrentPlace"));
+// save a new or update an existing place on the database
+export const savePlace = ({ _id = "", ...place }) => async dispatch => {
+  const editing = _id ? true : false;
 
-  axios
-    .post("/api/place/", place)
-    .then(payload => {
-      dispatch({
-        payload,
-        type: SAVE_CURRENT_PLACE
-      });
+  dispatch(clearErrors());
+  dispatch(isLoading("savePlace"));
+
+  await axios
+    .post(`/api/place/${_id}`, place)
+    .then(res => {
       dispatch(
         addToast({
-          value: `Added ${place.suggestion}`,
+          value: `${editing ? "Updated" : "Added"} ${place.suggestion}`,
           icon: "thumb_up"
         })
       );
+      if (editing) {
+        dispatch(setPlaceList(res.data._id, res.data.list_id));
+      } else {
+        dispatch({
+          payload: res.data,
+          type: SAVE_CURRENT_PLACE
+        });
+      }
     })
     .catch(err => {
       const error = err.response ? err.response.data : err;
       dispatch(getErrors(error));
     })
-    .finally(() => dispatch(notLoading("saveCurrentPlace")));
+    .finally(() => dispatch(notLoading("savePlace")));
 };
 
 // set the current place on the app

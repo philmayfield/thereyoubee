@@ -113,6 +113,7 @@ export const saveList = ({ _id = "", name }) => dispatch => {
       if (editing) {
         dispatch(resetLists());
         dispatch(getAllLists());
+        dispatch(setList(res.data));
       } else {
         dispatch({
           payload: res.data,
@@ -130,6 +131,7 @@ export const saveList = ({ _id = "", name }) => dispatch => {
 
 // set the current list on the app
 export const setList = payload => {
+  // payload is list object
   // set the current list on local storage
   localStorage.setItem("currentList", payload._id);
   return {

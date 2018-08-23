@@ -6293,7 +6293,12 @@ i.right {
     .logo-nav nav button {
       display: flex;
       align-items: center;
-      padding: 0.5rem 1rem 0.5rem 0.5rem; }
+      padding: 0.5rem 1rem 0.5rem 0.5rem;
+      opacity: 0.9;
+      width: 100%; }
+      .logo-nav nav a:hover,
+      .logo-nav nav button:hover {
+        opacity: 1; }
 
 .logo-nav {
   top: 1rem;

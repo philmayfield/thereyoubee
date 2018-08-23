@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { clearErrors } from "../../actions/appActions";
 import {
   saveList,
   deleteList,
@@ -133,6 +134,7 @@ class AddEditLists extends Component {
       listname: "",
       editListId: ""
     });
+    this.props.clearErrors();
   }
 
   render() {
@@ -230,6 +232,7 @@ AddEditLists.propTypes = {
   saveList: PropTypes.func.isRequired,
   setList: PropTypes.func.isRequired,
   resetCurrentList: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   flagList: PropTypes.func.isRequired,
   currentList: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
@@ -242,5 +245,13 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { saveList, deleteList, setList, resetCurrentList, flagList, getAllPlaces }
+  {
+    saveList,
+    deleteList,
+    setList,
+    resetCurrentList,
+    flagList,
+    getAllPlaces,
+    clearErrors
+  }
 )(AddEditLists);

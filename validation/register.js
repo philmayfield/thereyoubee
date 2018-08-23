@@ -17,7 +17,7 @@ module.exports = function validateRegisterInput(data = {}) {
     errors.username = "Username can only be alpha-numeric";
   }
   if (!Validator.equals(data.username.split(" ").length.toString(), "1")) {
-    errors.username = "Username cant have spaces (duh)";
+    errors.username = "Username cant have spaces 🙄";
   }
   if (Validator.isEmpty(data.username)) {
     errors.username = "Username field is required";

@@ -11,10 +11,10 @@ class Button extends Component {
       showFab: false
     };
     this.renderFab = this.renderFab.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.handleFabToggle = this.handleFabToggle.bind(this);
   }
 
-  handleToggle(e) {
+  handleFabToggle(e) {
     e.preventDefault();
     e.stopPropagation();
     this.setState({ showFab: !this.state.showFab });
@@ -26,7 +26,11 @@ class Button extends Component {
 
     return (
       <div className={`fab`}>
-        <button type="button" className={className} onClick={this.handleToggle}>
+        <button
+          type="button"
+          className={className}
+          onClick={this.handleFabToggle}
+        >
           {
             <Icon
               name={showFab ? "close" : icon}
@@ -34,7 +38,7 @@ class Button extends Component {
             />
           }
         </button>
-        <ul>
+        <ul className={showFab ? "" : "no-click"}>
           {React.Children.map(
             this.props.children,
             (child, i) =>
@@ -67,7 +71,6 @@ class Button extends Component {
     const className = `btn ${classes.join(" ")} ${pulse ? "pulse" : ""}`;
 
     if (fab) {
-      // do something
       return this.renderFab(className, icon);
     } else {
       return type === "link" ? (

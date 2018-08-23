@@ -5993,6 +5993,9 @@ i.right {
 .cursor-pointer {
   cursor: pointer; }
 
+.no-click {
+  pointer-events: none; }
+
 .landing main,
 .login main,
 .register main {

@@ -41,6 +41,10 @@ i {
   cursor: pointer;
 }
 
+.no-click {
+  pointer-events: none;
+}
+
 // body {
 //   overflow-y: scroll;
 // }

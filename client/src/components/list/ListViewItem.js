@@ -3,21 +3,24 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "../common/Button";
 import Icon from "../common/Icon";
+import SetList from "../lists/SetList";
 import { flagPlace, setCurrentPlace } from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 
-class ListItem extends Component {
+class ListViewItem extends Component {
   constructor(props) {
     super(props);
     this.animationTime = 250;
     this.state = {
-      show: true
+      show: true,
+      showEditModal: false
     };
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleViewPlace = this.handleViewPlace.bind(this);
+    this.handleEditPlace = this.handleEditPlace.bind(this);
   }
 
   handleDelete() {
@@ -38,8 +41,12 @@ class ListItem extends Component {
     history.push("/map");
   }
 
+  handleEditPlace() {
+    this.setState({ showEditModal: !this.state.showEditModal });
+  }
+
   render() {
-    const { item, list = "" } = this.props;
+    const { item, list = { name: "Default" } } = this.props;
     const {
       // place_id,
       // author,
@@ -48,6 +55,7 @@ class ListItem extends Component {
       suggestion
       // latLng = {}
     } = item;
+    const { showEditModal } = this.state;
 
     return (
       <CSSTransition
@@ -72,8 +80,13 @@ class ListItem extends Component {
             >
               <Button
                 icon="visibility"
-                classes={["btn-floating", "blue"]}
+                classes={["btn-floating", "green"]}
                 clickOrTo={this.handleViewPlace}
+              />
+              <Button
+                icon="edit"
+                classes={["btn-floating", "blue"]}
+                clickOrTo={this.handleEditPlace}
               />
               <Button
                 icon="delete_forever"
@@ -91,26 +104,34 @@ class ListItem extends Component {
                   {moment(date).format("MMM D, YYYY")}
                 </span>
               </span>
-              <span className={`right-align ${list ? "" : "red-text"}`}>
-                On {list ? list : "Unknown"} list
+              <span className="right-align">
+                On <strong>{list.name}</strong> list
               </span>
             </small>
           </div>
+          {showEditModal && (
+            <SetList
+              toggle={this.handleEditPlace}
+              showModal={showEditModal}
+              item={item}
+              startingList={list}
+            />
+          )}
         </div>
       </CSSTransition>
     );
   }
 }
 
-ListItem.propTypes = {
+ListViewItem.propTypes = {
   flagPlace: PropTypes.func.isRequired,
   setCurrentPlace: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  list: PropTypes.string,
+  list: PropTypes.object,
   history: PropTypes.object
 };
 
 export default connect(
   null,
   { flagPlace, setCurrentPlace }
-)(withRouter(ListItem));
+)(withRouter(ListViewItem));

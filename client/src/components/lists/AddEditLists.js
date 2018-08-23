@@ -61,6 +61,7 @@ class AddEditLists extends Component {
     const { hideMenu } = this.props;
     if (typeof hideMenu === "function") hideMenu();
     this.resetForm();
+    this.toggleAddForm(false);
     this.setState({ showModal: !this.state.showModal });
   }
 

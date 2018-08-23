@@ -20,6 +20,7 @@ export const UNFLAG_PLACE = "UNFLAG_PLACE";
 export const RESET_PLACES = "RESET_PLACES";
 export const RESET_CURRENT_PLACE = "RESET_CURRENT_PLACE";
 export const FILTER_PLACES = "FILTER_PLACES";
+export const SET_PLACE_LIST = "SET_PLACE_LIST";
 
 // lists
 export const GET_LISTS = "GET_LISTS";

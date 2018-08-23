@@ -8,12 +8,13 @@ import {
   RESET_CURRENT_PLACE,
   DELETE_PLACE,
   RESET_PLACES,
-  FILTER_PLACES
+  FILTER_PLACES,
+  SET_PLACE_LIST
 } from "./actionTypes";
 import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { addToast } from "./toastActions";
 
-// get all of the saved places
+// get all of the saved places for a specific list id or all
 export const getAllPlaces = (list_id = "all") => async dispatch => {
   dispatch(isLoading("getAllPlaces"));
   dispatch(resetPlaces());
@@ -150,5 +151,16 @@ export const filterPlaces = payload => {
   return {
     payload,
     type: FILTER_PLACES
+  };
+};
+
+// set the list prop on a place
+export const setPlaceList = (place_id, list_id) => {
+  return {
+    payload: {
+      place_id,
+      list_id
+    },
+    type: SET_PLACE_LIST
   };
 };

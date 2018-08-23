@@ -6,8 +6,8 @@ import {
   DELETE_PLACE,
   RESET_PLACES,
   SAVE_LIST,
-  FILTER_PLACES
-  // SET_CURRENT_PLACE
+  FILTER_PLACES,
+  SET_PLACE_LIST
 } from "../actions/actionTypes";
 // import { notEmpty } from "../common/empty";
 
@@ -17,7 +17,7 @@ export default (state = [], action) => {
       return action.payload;
 
     case SAVE_CURRENT_PLACE:
-      return [...state, action.payload.data];
+      return [...state, action.payload];
 
     case FLAG_PLACE:
       return state.map(place => {
@@ -44,6 +44,14 @@ export default (state = [], action) => {
 
     case FILTER_PLACES:
       return state.filter(place => place.list_id === action.payload);
+
+    case SET_PLACE_LIST:
+      return state.map(place => {
+        if (place._id === action.payload.place_id) {
+          place.list_id = action.payload.list_id;
+        }
+        return place;
+      });
 
     default:
       return state;

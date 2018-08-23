@@ -8,7 +8,7 @@ const modalRoot = document.getElementById("modal-root");
 
 // Modal Props
 // -----------------
-// toggle: (bool) - show / hide the modal
+// toggle: (function) - show / hide the modal
 // onClose: (function) - callback when the modal is closed
 // actions: (array) [ - array of actions that get turned into buttons in the footer of the modal
 //   {
@@ -45,9 +45,9 @@ class Modal extends Component {
   handleRemove() {
     const { onClose } = this.props;
     this.setState({ show: false });
-    if (typeof onClose === "function") onClose();
     setTimeout(() => {
       this.props.toggle();
+      if (typeof onClose === "function") onClose();
     }, this.animationTime);
   }
 

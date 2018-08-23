@@ -11,7 +11,7 @@ const ListView = props => {
   const hasPlaces = notEmpty(places);
   let content;
 
-  if (hasPlaces && !isLoading) {
+  if (hasPlaces) {
     content = <List places={places} lists={lists} />;
   } else if (!isLoading)
     content = (

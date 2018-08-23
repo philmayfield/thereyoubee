@@ -1,4 +1,5 @@
 const isEmpty = val =>
+  val === false ||
   val === undefined ||
   val === null ||
   (typeof val === "object" && Object.keys(val).length === 0) ||

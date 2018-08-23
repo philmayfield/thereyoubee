@@ -136,30 +136,36 @@ class AddEditLists extends Component {
   }
 
   render() {
+    let listOfLists;
     const { showModal, showAdd } = this.state;
     const { lists, currentList, errors, showBtnIcon = false } = this.props;
-    const listOfLists = lists.map(list => (
-      <ListItem
-        key={list._id}
-        allList={false}
-        list={list}
-        setList={this.handleSetList(list)}
-        editList={this.handleEditList(list)}
-        deleteList={this.handleDeleteList(list)}
-        isCurrent={list._id === currentList._id}
-      />
-    ));
-    // add an all lists option
-    listOfLists.unshift(
-      <ListItem
-        key="all_lists"
-        allList={true}
-        list={{ name: "All Lists" }}
-        setList={this.handleSetList({})}
-        editList={null}
-        isCurrent={isEmpty(currentList)}
-      />
-    );
+
+    if (showModal) {
+      listOfLists = lists.map(list => (
+        <ListItem
+          key={list._id}
+          allList={false}
+          list={list}
+          setList={this.handleSetList(list)}
+          editList={this.handleEditList(list)}
+          deleteList={this.handleDeleteList(list)}
+          isCurrent={list._id === currentList._id}
+          showButtons={true}
+        />
+      ));
+      // add an all lists option
+      listOfLists.unshift(
+        <ListItem
+          key="all_lists"
+          allList={true}
+          list={{ name: "All Lists" }}
+          setList={this.handleSetList({})}
+          editList={null}
+          isCurrent={isEmpty(currentList)}
+          showButtons={true}
+        />
+      );
+    }
 
     return (
       <Fragment>

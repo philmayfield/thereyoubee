@@ -6,10 +6,7 @@ import { notEmpty } from "../../common/empty";
 import Button from "../common/Button";
 import Icon from "../common/Icon";
 import AddEditLists from "../lists/AddEditLists";
-import {
-  saveCurrentPlace,
-  resetCurrentPlace
-} from "../../actions/placeActions";
+import { savePlace, resetCurrentPlace } from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
 
 class AddCurrentPlace extends Component {
@@ -51,12 +48,16 @@ class AddCurrentPlace extends Component {
     };
     delete newPlace.latLng;
 
-    this.props.saveCurrentPlace(newPlace);
+    this.props.savePlace(newPlace);
     this.handleClose();
   }
 
   handleClose() {
     this.setState({ show: false });
+    this.props.resetCurrentPlace();
+  }
+
+  componentWillUnmount() {
     this.props.resetCurrentPlace();
   }
 
@@ -149,7 +150,7 @@ AddCurrentPlace.propTypes = {
   places: PropTypes.array.isRequired,
   lists: PropTypes.array.isRequired,
   isAuth: PropTypes.bool.isRequired,
-  saveCurrentPlace: PropTypes.func.isRequired,
+  savePlace: PropTypes.func.isRequired,
   resetCurrentPlace: PropTypes.func.isRequired,
   currentPlace: PropTypes.object.isRequired,
   currentList: PropTypes.object.isRequired,
@@ -162,5 +163,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { saveCurrentPlace, resetCurrentPlace }
+  { savePlace, resetCurrentPlace }
 )(AddCurrentPlace);

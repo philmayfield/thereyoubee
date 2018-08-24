@@ -21,6 +21,7 @@ router.get(
     const errors = {};
 
     List.find({ author: req.user._id })
+      .sort("name")
       .then(lists => {
         if (notEmpty(lists)) {
           // found some lists, return with 200 status

@@ -9,7 +9,7 @@ import {
   FILTER_PLACES,
   SET_PLACE_LIST
 } from "../actions/actionTypes";
-// import { notEmpty } from "../common/empty";
+import compare from "../common/compare";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -17,7 +17,7 @@ export default (state = [], action) => {
       return action.payload;
 
     case SAVE_CURRENT_PLACE:
-      return [...state, action.payload];
+      return [...state, action.payload].sort(compare("suggestion"));
 
     case FLAG_PLACE:
       return state.map(place => {

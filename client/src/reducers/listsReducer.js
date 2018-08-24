@@ -6,6 +6,7 @@ import {
   DELETE_LIST,
   RESET_LISTS
 } from "../actions/actionTypes";
+import compare from "../common/compare";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -13,7 +14,7 @@ export default (state = [], action) => {
       return action.payload;
 
     case SAVE_LIST:
-      return [...state, action.payload];
+      return [...state, action.payload].sort(compare("name"));
 
     case FLAG_LIST:
       return state.map(list => {

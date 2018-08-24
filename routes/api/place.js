@@ -29,6 +29,7 @@ router.get(
     }
 
     Place.find(conditions)
+      .sort("suggestion")
       .then(places => {
         if (notEmpty(places)) {
           // found some places, return with 200 status

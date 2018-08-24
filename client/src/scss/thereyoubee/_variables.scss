@@ -3,23 +3,19 @@ $bouncy: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
 $lessBouncy: all 250ms cubic-bezier(0.5, -0.2, 0.5, 1.2);
 
 $spacer: 1rem !default;
-$spacers: () !default;
-$spacers: map-merge(
-  (
-    0: 0,
-    1: (
-      $spacer * 0.25
-    ),
-    2: (
-      $spacer * 0.5
-    ),
-    3: $spacer,
-    4: (
-      $spacer * 1.5
-    ),
-    5: (
-      $spacer * 3
-    )
+$spacers: (
+  0: 0,
+  1: (
+    $spacer * 0.25
   ),
-  $spacers
+  2: (
+    $spacer * 0.5
+  ),
+  3: $spacer,
+  4: (
+    $spacer * 1.5
+  ),
+  5: (
+    $spacer * 3
+  )
 );

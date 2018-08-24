@@ -52,10 +52,13 @@
       display: flex;
       align-items: center;
       padding: $spacer/2 $spacer $spacer/2 $spacer/2;
-      opacity: 0.9;
       width: 100%;
 
-      &:hover {
+      i {
+        opacity: 0.75;
+      }
+
+      &:hover i {
         opacity: 1;
       }
     }

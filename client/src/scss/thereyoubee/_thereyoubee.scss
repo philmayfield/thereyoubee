@@ -1,6 +1,7 @@
 @import "variables";
 @import "mixins";
 
+@import "utilities/display";
 @import "utilities/grid";
 @import "utilities/spacing";
 @import "utilities/flex";
@@ -11,7 +12,6 @@
 @import "buttons";
 @import "card";
 @import "collection";
-@import "display";
 @import "fab";
 @import "forms";
 @import "landing";

@@ -147,7 +147,6 @@ class AddEditLists extends Component {
       listOfLists = lists.map(list => (
         <ListItem
           key={list._id}
-          allList={false}
           list={list}
           setList={this.handleSetList(list)}
           editList={this.handleEditList(list)}
@@ -156,7 +155,7 @@ class AddEditLists extends Component {
           showButtons={true}
         />
       ));
-      // add an all lists option
+      // manually add an all lists option to the front of the array
       listOfLists.unshift(
         <ListItem
           key="all_lists"
@@ -173,10 +172,10 @@ class AddEditLists extends Component {
     return (
       <Fragment>
         <button onClick={this.toggleShowModal} className="btn-empty btn-link">
-          {showBtnIcon ? <Icon name="low_priority" classes={["mr-2"]} /> : null}
+          {showBtnIcon && <Icon name="low_priority" classes={["mr-2"]} />}
           Change List
         </button>
-        {showModal ? (
+        {showModal && (
           <Modal
             toggle={this.toggleShowModal}
             onClose={this.handleCloseModal}
@@ -218,7 +217,7 @@ class AddEditLists extends Component {
               <ul className="collection mb-0">{listOfLists}</ul>
             )}
           </Modal>
-        ) : null}
+        )}
       </Fragment>
     );
   }

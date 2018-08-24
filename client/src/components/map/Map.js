@@ -32,22 +32,21 @@ class Map extends Component {
     const lats = [];
     const lngs = [];
 
+    // put lats and lngs for all places in their respective arrays
     placesArr.forEach(({ latLng }) => {
       lats.push(latLng.lat);
       lngs.push(latLng.lng);
     });
 
-    lats.sort((a, b) => a - b);
-    lngs.sort((a, b) => a - b);
-
+    // spreading on Math.max/min can run into a maximum args limit for the js engine, but according to docs, thats well into the tens of thousands, so shouldnt be a problem for this app.
     return {
       nw: {
-        lat: lats[lats.length - 1],
-        lng: lngs[0]
+        lat: Math.max(...lats),
+        lng: Math.min(...lngs)
       },
       se: {
-        lat: lats[0],
-        lng: lngs[lngs.length - 1]
+        lat: Math.min(...lats),
+        lng: Math.max(...lngs)
       }
     };
   }

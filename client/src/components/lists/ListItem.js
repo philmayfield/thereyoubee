@@ -9,7 +9,7 @@ const ListItem = props => {
     editList,
     deleteList,
     isCurrent,
-    allList,
+    allList = false,
     showButtons = false
   } = props;
   return (
@@ -20,7 +20,7 @@ const ListItem = props => {
       onClick={setList}
     >
       <div>{list.name}</div>
-      {showButtons ? (
+      {showButtons && (
         <Button
           icon="more_vert"
           fab={true}
@@ -31,22 +31,22 @@ const ListItem = props => {
             classes={["btn-floating", "green"]}
             clickOrTo={setList}
           />
-          {!allList ? (
+          {!allList && (
             <Button
               icon="edit"
               classes={["btn-floating", "blue"]}
               clickOrTo={editList}
             />
-          ) : null}
-          {!allList ? (
+          )}
+          {!allList && (
             <Button
               icon="delete_forever"
               classes={["btn-floating", "red"]}
               clickOrTo={deleteList}
             />
-          ) : null}
+          )}
         </Button>
-      ) : null}
+      )}
     </li>
   );
 };

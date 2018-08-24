@@ -81,18 +81,18 @@ export const setCurrentUser = payload => {
 
 // log out current user
 export const logoutUser = () => dispatch => {
-  // remove jwt token from local storage
-  localStorage.removeItem("jwtToken");
+  // reset current places and lists
+  dispatch(resetCurrentPlace());
+  dispatch(resetPlaces());
+  dispatch(resetCurrentList());
+  dispatch(resetLists());
+
+  // remove jwtToken and currentList from local storage
+  localStorage.clear();
 
   // remove auth header for future axios calls
   setAuthToken(false);
 
   // set current user to empty object
   dispatch(setCurrentUser({}));
-
-  // reset current places and lists
-  dispatch(resetCurrentPlace());
-  dispatch(resetPlaces());
-  dispatch(resetCurrentList());
-  dispatch(resetLists());
 };

@@ -133,7 +133,7 @@ export const saveList = ({ _id = "", name }) => dispatch => {
 export const setList = payload => {
   // payload is list object
   // set the current list on local storage
-  localStorage.setItem("currentList", payload._id);
+  localStorage.setItem("currentList", payload._id || null);
   return {
     payload,
     type: SET_LIST
@@ -143,7 +143,7 @@ export const setList = payload => {
 // reset the current list on the app
 export const resetCurrentList = () => {
   // set the current list on local storage
-  localStorage.setItem("currentList", null);
+  localStorage.removeItem("currentList");
   return {
     type: RESET_LIST
   };

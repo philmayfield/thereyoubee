@@ -61,7 +61,7 @@ class RegLogin extends Component {
     const title = isRegister ? "Register" : "Login";
 
     return (
-      <div className="row">
+      <div className="row h100">
         <div className="col-11 col-sm-8 col-md-6 col-lg-5 mx-auto my-auto">
           <div className="card">
             <form onSubmit={this.handleSubmit}>

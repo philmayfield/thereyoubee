@@ -12,7 +12,7 @@ const Landing = () => {
         svgClassName="phil round-img"
       />
       <div className="row">
-        <div className="col-md-8 col-lg-6 mx-auto">
+        <div className="col-11 col-md-8 col-lg-6 mx-auto">
           <div className="card-panel">
             <h1 className="mt-0">Hello Friends!</h1>
             <p>If you&rsquo;ve found this, then welcome!</p>

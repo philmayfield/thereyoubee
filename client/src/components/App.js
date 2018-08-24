@@ -37,7 +37,7 @@ class App extends Component {
     this.setShowTopNav = this.setShowTopNav.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     const {
       currentList,
       lists,
@@ -53,8 +53,8 @@ class App extends Component {
 
     if (cIsAuth && !pIsAuth) {
       // going from not isAuth to isAuth (refresh or login) fetch places and lists
-      getAllPlaces();
-      getAllLists();
+      await getAllPlaces();
+      await getAllLists();
     } else if (lists.length && localStorageListId && !currentList._id) {
       // if a list id is saved in local storage, and we have a list of lists, but no current list, set the current list to the localstorage id, and filter places that match
       const list = lists.find(list => list._id === localStorageListId);
@@ -88,7 +88,7 @@ class App extends Component {
             <div className={`App ${location.pathname.replace("/", "")}`}>
               <IsAuth />
               <Loading />
-              <ToastContainer test={false} />
+              <ToastContainer />
               <LogoNav
                 auth={auth}
                 showTopNav={showTopNav}

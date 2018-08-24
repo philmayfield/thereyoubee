@@ -13,10 +13,10 @@ import { getErrors, clearErrors, isLoading, notLoading } from "./appActions";
 import { addToast } from "./toastActions";
 
 // get all of the saved lists
-export const getAllLists = () => dispatch => {
+export const getAllLists = () => async dispatch => {
   dispatch(isLoading("getAllLists"));
 
-  axios
+  await axios
     .get("/api/list/all")
     .then(res => {
       dispatch({

@@ -37,10 +37,9 @@ class LogoNav extends Component {
   }
 
   render() {
-    const { auth, showTopNav, lists, currentList, hasCurrentList } = this.props;
+    const { auth, showTopNav, lists } = this.props;
     const { isAuth, user } = auth;
     const { show } = this.state;
-    const buttonString = hasCurrentList ? currentList.name : "All Places";
 
     return (
       <header className={`${showTopNav ? "logo-nav" : "hide"}`}>
@@ -64,7 +63,10 @@ class LogoNav extends Component {
               />
               <strong>ThereYouBee</strong>
             </div>
-            <ul className="m-0">
+            <small className="d-block center-align">
+              {user.username ? user.username : "Nobody"} is logged in
+            </small>
+            <ul className="mb-0 mt-2">
               <li>
                 {isAuth ? (
                   <Link onClick={this.handleLogout} to="/login">
@@ -78,18 +80,6 @@ class LogoNav extends Component {
                   </Link>
                 )}
               </li>
-              <li>
-                <Link onClick={this.hideMenu} to="/map">
-                  <Icon name="place" classes={["mr-2"]} />
-                  Map of {buttonString}
-                </Link>
-              </li>
-              <li>
-                <Link onClick={this.hideMenu} to="/list">
-                  <Icon name="list" classes={["mr-2"]} />
-                  List of {buttonString}
-                </Link>
-              </li>
               {isAuth && (
                 <li>
                   <AddEditLists
@@ -100,9 +90,6 @@ class LogoNav extends Component {
                 </li>
               )}
             </ul>
-            <small className="d-block center-align">
-              {user.username ? user.username : "Nobody"} is logged in
-            </small>
           </nav>
         </CSSTransition>
       </header>
@@ -112,11 +99,9 @@ class LogoNav extends Component {
 
 LogoNav.propTypes = {
   lists: PropTypes.array.isRequired,
-  hasCurrentList: PropTypes.bool.isRequired,
   auth: PropTypes.object.isRequired,
   showTopNav: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.func.isRequired,
-  currentList: PropTypes.object.isRequired
+  logoutUser: PropTypes.func.isRequired
 };
 
 export default connect(

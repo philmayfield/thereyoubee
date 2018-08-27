@@ -16,7 +16,7 @@ import { getAllLists, setList } from "../actions/listActions";
 // routes / componenets
 import IsAuth from "../components/common/IsAuth";
 import ToastContainer from "./toast/ToastContainer";
-import LogoNav from "../components/logoNav/LogoNav";
+import TopNav from "./nav/TopNav";
 import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
@@ -89,7 +89,7 @@ class App extends Component {
               <IsAuth />
               <Loading />
               <ToastContainer />
-              <LogoNav
+              <TopNav
                 auth={auth}
                 showTopNav={showTopNav}
                 lists={listsToRender}

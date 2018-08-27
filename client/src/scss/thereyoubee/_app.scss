@@ -3,11 +3,25 @@ body,
 .landing-view,
 .login-view,
 .register-view,
-.list-view,
-.map-view {
+.map-view,
+.list-view {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.with-bottom-nav {
+  .landing-view,
+  .login-view,
+  .register-view,
+  // .map-view,
+  .list-view {
+    height: calc(100% - 48px);
+  }
+
+  .the-map {
+    bottom: 48px;
+  }
 }
 
 .landing-view {

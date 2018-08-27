@@ -5630,11 +5630,20 @@ body,
 .landing-view,
 .login-view,
 .register-view,
-.list-view,
-.map-view {
+.map-view,
+.list-view {
   width: 100%;
   height: 100%;
   overflow: hidden; }
+
+.with-bottom-nav .landing-view,
+.with-bottom-nav .login-view,
+.with-bottom-nav .register-view,
+.with-bottom-nav .list-view {
+  height: calc(100% - 48px); }
+
+.with-bottom-nav .the-map {
+  bottom: 48px; }
 
 .landing-view {
   overflow-y: scroll; }
@@ -5843,6 +5852,10 @@ i.right {
   transition: opacity 250ms ease-in-out;
   z-index: 98; }
 
+.tabs .tab a:focus,
+.tabs .tab a.active:focus {
+  background-color: transparent; }
+
 .text-nowrap {
   white-space: nowrap; }
 
@@ -5853,6 +5866,13 @@ i.right {
   opacity: 0;
   transform: scale(0.2) translateX(25px);
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+
+.bottom-nav {
+  position: absolute;
+  bottom: 0; }
+  .bottom-nav .tabs {
+    display: flex;
+    justify-content: center; }
 
 .add-current-place {
   background-color: #fff;
@@ -5865,6 +5885,9 @@ i.right {
   opacity: 0;
   transform: scale(0.2) translateX(25px);
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+
+.with-bottom-nav .add-current-place {
+  bottom: calc(48px + 0.5rem); }
 
 .add-current-place__place-name {
   display: flex;
@@ -5880,12 +5903,12 @@ i.right {
       height: 3.5rem; } }
 
 .list-view__list {
-  height: calc(100vh - 2.5rem);
-  padding-bottom: 5rem;
+  height: calc(100vh - 5.25rem);
+  padding-bottom: calc(48px + 1rem);
   overflow-y: scroll; }
   @media only screen and (min-width: 601px) {
     .list-view__list {
-      height: calc(100vh - 3.5rem); } }
+      height: calc(100vh - 6.25rem); } }
 
 .list-view__holder {
   display: grid;
@@ -5897,83 +5920,6 @@ i.right {
   @media only screen and (min-width: 1201px) {
     .list-view__holder {
       grid-template-columns: 1fr 1fr 1fr; } }
-
-.logo-nav {
-  position: absolute;
-  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
-  transition-delay: 250ms; }
-  .logo-nav .logo {
-    padding: 0 0.5rem;
-    text-align: center;
-    font-size: 75%; }
-    .logo-nav .logo .logo-img {
-      display: block; }
-    .logo-nav .logo::after {
-      content: "";
-      display: block;
-      margin: 0.25rem 1rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
-  .logo-nav .menu-btn {
-    width: 1.5rem;
-    height: 1.5rem;
-    position: absolute;
-    z-index: 50;
-    top: 0;
-    left: 0;
-    cursor: pointer; }
-    .logo-nav .menu-btn i {
-      font-size: 1.5rem;
-      line-height: 1; }
-  .logo-nav nav {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 0.5rem 0;
-    min-width: 10rem;
-    border-radius: 2px;
-    opacity: 0;
-    transform: scale(0.2) translateX(25px);
-    transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
-    transform: scale(0.2) translateY(-100px) translateX(-100px); }
-    .logo-nav nav a,
-    .logo-nav nav button {
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 1rem 0.5rem 0.5rem;
-      width: 100%; }
-      .logo-nav nav a i,
-      .logo-nav nav button i {
-        opacity: 0.75; }
-      .logo-nav nav a:hover i,
-      .logo-nav nav button:hover i {
-        opacity: 1; }
-
-.logo-nav {
-  top: 1rem;
-  left: 1rem; }
-  .logo-nav nav {
-    top: 2rem; }
-
-.map .logo-nav {
-  top: 1.25rem;
-  left: 1.25rem; }
-  @media only screen and (min-width: 601px) {
-    .map .logo-nav {
-      left: 1.75rem;
-      top: 1.75rem; } }
-  .map .logo-nav nav {
-    top: 2.5rem;
-    left: -0.75rem; }
-
-.list .logo-nav {
-  top: 0.5rem;
-  left: 0.5rem; }
-  @media only screen and (min-width: 601px) {
-    .list .logo-nav {
-      left: 1rem;
-      top: 1rem; } }
-  .list .logo-nav nav {
-    top: 2.5rem; }
 
 .the-map {
   position: absolute;
@@ -6075,6 +6021,83 @@ i.right {
   .suggestion__item.suggestion__item--active {
     background-color: rgba(33, 150, 243, 0.1); }
 
+.logo-nav {
+  position: absolute;
+  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+  transition-delay: 250ms; }
+  .logo-nav .logo {
+    padding: 0 0.5rem;
+    text-align: center;
+    font-size: 75%; }
+    .logo-nav .logo .logo-img {
+      display: block; }
+    .logo-nav .logo::after {
+      content: "";
+      display: block;
+      margin: 0.25rem 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+  .logo-nav .menu-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    cursor: pointer; }
+    .logo-nav .menu-btn i {
+      font-size: 1.5rem;
+      line-height: 1; }
+  .logo-nav nav {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 0;
+    min-width: 10rem;
+    border-radius: 2px;
+    opacity: 0;
+    transform: scale(0.2) translateX(25px);
+    transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4);
+    transform: scale(0.2) translateY(-100px) translateX(-100px); }
+    .logo-nav nav a,
+    .logo-nav nav button {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem 0.5rem 0.5rem;
+      width: 100%; }
+      .logo-nav nav a i,
+      .logo-nav nav button i {
+        opacity: 0.75; }
+      .logo-nav nav a:hover i,
+      .logo-nav nav button:hover i {
+        opacity: 1; }
+
+.logo-nav {
+  top: 1rem;
+  left: 1rem; }
+  .logo-nav nav {
+    top: 2rem; }
+
+.map .logo-nav {
+  top: 1.25rem;
+  left: 1.25rem; }
+  @media only screen and (min-width: 601px) {
+    .map .logo-nav {
+      left: 1.75rem;
+      top: 1.75rem; } }
+  .map .logo-nav nav {
+    top: 2.5rem;
+    left: -0.75rem; }
+
+.list .logo-nav {
+  top: 0.5rem;
+  left: 0.5rem; }
+  @media only screen and (min-width: 601px) {
+    .list .logo-nav {
+      left: 1rem;
+      top: 1rem; } }
+  .list .logo-nav nav {
+    top: 2.5rem; }
+
 .slide-appear,
 .slide-appear-done,
 .slide-enter,
@@ -6092,7 +6115,7 @@ i.right {
 .slide-appear.slide-appear-active {
   opacity: 1;
   transform: translateY(0);
-  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
+  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1); }
 
 .slide-enter {
   transform: translateY(100px); }
@@ -6100,7 +6123,7 @@ i.right {
 .slide-enter.slide-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1.255); }
+  transition: all 500ms cubic-bezier(0.175, 0.19, 0.165, 1); }
 
 .slide-exit {
   opacity: 1;
@@ -6143,6 +6166,9 @@ i.right {
   max-height: 0;
   opacity: 0;
   transform: scale(0); }
+
+.tabs .indicator {
+  transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
 
 .turn {
   transition: transform 333ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }

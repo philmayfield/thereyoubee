@@ -1,0 +1,9 @@
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+  }
+}

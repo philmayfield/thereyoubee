@@ -9,6 +9,12 @@
   @include txGrowFadeStart();
 }
 
+.with-bottom-nav {
+  .add-current-place {
+    bottom: calc(48px + #{$spacer/2});
+  }
+}
+
 .add-current-place__place-name {
   display: flex;
   align-items: center;

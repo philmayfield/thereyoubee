@@ -1,0 +1,8 @@
+.tabs {
+  .tab {
+    a:focus,
+    a.active:focus {
+      background-color: transparent;
+    }
+  }
+}

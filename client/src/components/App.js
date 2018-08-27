@@ -17,6 +17,7 @@ import { getAllLists, setList } from "../actions/listActions";
 import IsAuth from "../components/common/IsAuth";
 import ToastContainer from "./toast/ToastContainer";
 import TopNav from "./nav/TopNav";
+import BottomNav from "./nav/BottomNav";
 import Loading from "./common/Loading";
 import MapView from "./map/MapView";
 import ListView from "./list/ListView";
@@ -85,7 +86,10 @@ class App extends Component {
       <Router>
         <Route
           render={({ location, history }) => (
-            <div className={`App ${location.pathname.replace("/", "")}`}>
+            <div
+              className={`App with-bottom-nav 
+              ${location.pathname.replace("/", "")}`}
+            >
               <IsAuth />
               <Loading />
               <ToastContainer />
@@ -93,8 +97,6 @@ class App extends Component {
                 auth={auth}
                 showTopNav={showTopNav}
                 lists={listsToRender}
-                currentList={currentList}
-                hasCurrentList={hasCurrentList}
               />
               <main>
                 <TransitionGroup component={null}>
@@ -179,6 +181,7 @@ class App extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               </main>
+              <BottomNav />
             </div>
           )}
         />

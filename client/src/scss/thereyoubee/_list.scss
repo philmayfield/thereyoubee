@@ -1,5 +1,6 @@
 $header-height-mobile: $spacer * 2.5;
 $header-height-desktop: $spacer * 3.5;
+$footer-height-in-rem: $spacer * 2.75;
 
 .list-view__header {
   height: $header-height-mobile;
@@ -12,12 +13,12 @@ $header-height-desktop: $spacer * 3.5;
 }
 
 .list-view__list {
-  height: calc(100vh - #{$header-height-mobile});
-  padding-bottom: $spacer * 5;
+  height: calc(100vh - #{$header-height-mobile + $footer-height-in-rem});
+  padding-bottom: calc(48px + #{$spacer});
   overflow-y: scroll;
 
   @media #{$medium-and-up} {
-    height: calc(100vh - #{$header-height-desktop});
+    height: calc(100vh - #{$header-height-desktop + $footer-height-in-rem});
   }
 }
 

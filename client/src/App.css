@@ -5852,9 +5852,17 @@ i.right {
   transition: opacity 250ms ease-in-out;
   z-index: 98; }
 
+.tabs .tab a {
+  color: #ee6e73;
+  font-weight: 700; }
+
 .tabs .tab a:focus,
 .tabs .tab a.active:focus {
   background-color: transparent; }
+
+.tabs .indicator {
+  will-change: left, width;
+  background-color: #ee6e73; }
 
 .text-nowrap {
   white-space: nowrap; }

@@ -1,8 +1,18 @@
 .tabs {
   .tab {
+    a {
+      color: $tabs-text-color;
+      font-weight: 700;
+    }
+
     a:focus,
     a.active:focus {
       background-color: transparent;
     }
+  }
+
+  .indicator {
+    will-change: left, width;
+    background-color: $tabs-text-color;
   }
 }

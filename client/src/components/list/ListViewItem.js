@@ -96,7 +96,7 @@ class ListViewItem extends Component {
             </Button>
           </div>
           <div className="card-content">
-            <p>{address}</p>
+            <small>{address}</small>
             <small className="grey-text d-flex justify-content-between mt-1">
               <span className="mr-1">
                 Added on{" "}

@@ -78,7 +78,6 @@ class App extends Component {
     const placesToRender = places.filter(place => !place.deleteFlag);
     const listsToRender = lists.filter(list => !list.deleteFlag);
     const isLoading = notEmpty(app.loadingArr);
-    const hasCurrentList = notEmpty(currentList);
     const RedirectWrap = ({ action, children }) =>
       action === "REPLACE" ? null : children;
 

@@ -26,7 +26,7 @@ class Modal extends Component {
     this.state = {
       show: false
     };
-    this.animationTime = 250;
+    this.animationTime = 333;
     this.el = document.createElement("div");
 
     this.handleRemove = this.handleRemove.bind(this);
@@ -35,11 +35,13 @@ class Modal extends Component {
 
   componentDidMount() {
     modalRoot.appendChild(this.el);
+    modalRoot.classList.add("open");
     this.setState({ show: true });
   }
 
   componentWillUnmount() {
     modalRoot.removeChild(this.el);
+    modalRoot.classList.remove("open");
   }
 
   handleRemove() {

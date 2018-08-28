@@ -1,8 +1,19 @@
+#modal-root.open {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  perspective: $spacer * 120;
+}
 .modal {
   display: block;
   top: 50%;
   z-index: 99;
-  @include txGrowFadeStart();
+  opacity: 0;
+  transform: scale(0.8) translateY(-70%) rotate3d(1, 0, 0, 60deg);
+  transition: $lessBouncy;
+  transition-duration: 333ms;
 
   @media #{$small-and-down} {
     width: calc(100% - #{$spacer});

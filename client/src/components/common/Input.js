@@ -32,7 +32,9 @@ class Input extends Component {
       disabled,
       info = "",
       required = false,
-      autoFocus = false
+      autoFocus = false,
+      minLength,
+      maxLength
     } = this.props;
 
     const errorOrInfo = error ? error : info;
@@ -52,6 +54,8 @@ class Input extends Component {
           disabled={disabled}
           required={required}
           autoFocus={autoFocus}
+          minLength={minLength}
+          maxLength={maxLength}
         />
         <label
           htmlFor={`input-${name}`}
@@ -71,17 +75,19 @@ class Input extends Component {
 }
 
 Input.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  error: PropTypes.string,
-  type: PropTypes.string,
-  disabled: PropTypes.string,
-  onChange: PropTypes.func,
-  info: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  disabled: PropTypes.bool,
   required: PropTypes.bool,
-  autoFocus: PropTypes.bool
+  onChange: PropTypes.func,
+  error: PropTypes.string,
+  info: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  minLength: PropTypes.string,
+  maxLength: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default Input;

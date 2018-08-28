@@ -74,6 +74,8 @@ class RegLogin extends Component {
                   value={this.state.username}
                   error={errors.username}
                   onChange={this.inputChange}
+                  minLength="2"
+                  maxLength="20"
                 />
                 <Input
                   label="Password"
@@ -83,6 +85,8 @@ class RegLogin extends Component {
                   value={this.state.password}
                   error={errors.password}
                   onChange={this.inputChange}
+                  minLength="5"
+                  maxLength="20"
                 />
                 {isRegister ? (
                   <Input
@@ -93,6 +97,8 @@ class RegLogin extends Component {
                     value={this.state.password2}
                     error={errors.password2}
                     onChange={this.inputChange}
+                    minLength="5"
+                    maxLength="20"
                   />
                 ) : null}
                 <div className="d-flex justify-content-between">

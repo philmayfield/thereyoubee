@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { PlaceIcon } from "../common/Icon";
-import { lightColors } from "../../common/getTextColor";
 
 class ClickablePoint extends Component {
   constructor(props) {

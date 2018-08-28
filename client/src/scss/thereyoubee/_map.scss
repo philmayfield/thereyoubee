@@ -8,5 +8,9 @@
 
 .place-icon {
   color: #ea4937;
-  text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 3px rgba(black, 0.25);
+}
+
+.place-icon-light {
+  text-shadow: 0 1px 5px rgba(black, 0.75);
 }

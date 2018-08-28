@@ -1,0 +1,29 @@
+.color-picker {
+  input {
+    position: absolute;
+
+    &:checked + label {
+      border-radius: $button-radius;
+      transform: scale(1.15);
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  label {
+    display: block;
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    transition: all 100ms ease-in-out;
+  }
+}
+
+.color-picker__colors {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  @media #{$medium-and-up} {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}

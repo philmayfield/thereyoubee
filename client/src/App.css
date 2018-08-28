@@ -6104,7 +6104,10 @@ i.right {
       left: 1rem;
       top: 1rem; } }
   .list .logo-nav nav {
-    top: 2.5rem; }
+    top: 2.25rem; }
+    @media only screen and (min-width: 601px) {
+      .list .logo-nav nav {
+        top: 2.75rem; } }
 
 .slide-appear,
 .slide-appear-done,

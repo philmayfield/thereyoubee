@@ -99,6 +99,10 @@
   }
 
   nav {
-    top: $spacer * 2.5;
+    top: $spacer * 2.25;
+
+    @media #{$medium-and-up} {
+      top: $spacer * 2.75;
+    }
   }
 }

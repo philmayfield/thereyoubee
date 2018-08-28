@@ -52,15 +52,23 @@ class Map extends Component {
   }
 
   makePoints(placesArr) {
-    return placesArr.map(place => (
-      <ClickablePoint
-        show={placesArr.length === 1}
-        key={place.place_id || place.address}
-        lat={place.latLng.lat}
-        lng={place.latLng.lng}
-        text={place.suggestion}
-      />
-    ));
+    return placesArr.map(place => {
+      const list = this.props.lists.find(list => {
+        return list._id === place.list_id;
+      });
+      const color = (list && list.color) || "default";
+
+      return (
+        <ClickablePoint
+          show={placesArr.length === 1}
+          key={place.place_id || place.address}
+          lat={place.latLng.lat}
+          lng={place.latLng.lng}
+          text={place.suggestion}
+          color={color}
+        />
+      );
+    });
   }
 
   createMapOptions(maps) {
@@ -138,6 +146,7 @@ class Map extends Component {
 
 Map.propTypes = {
   places: PropTypes.array.isRequired,
+  lists: PropTypes.array.isRequired,
   setShowTopNav: PropTypes.func.isRequired,
   currentPlace: PropTypes.object.isRequired,
   text: PropTypes.string

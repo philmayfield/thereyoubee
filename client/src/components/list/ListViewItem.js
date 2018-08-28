@@ -8,6 +8,7 @@ import { flagPlace, setCurrentPlace } from "../../actions/placeActions";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
+import getTextColor from "../../common/getTextColor";
 
 class ListViewItem extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class ListViewItem extends Component {
   }
 
   render() {
-    const { item, list = { name: "Default" } } = this.props;
+    const { item, list = { name: "Default", color: "teal" } } = this.props;
     const {
       // place_id,
       // author,
@@ -56,6 +57,7 @@ class ListViewItem extends Component {
       // latLng = {}
     } = item;
     const { showEditModal } = this.state;
+    const textColor = getTextColor(list.color);
 
     return (
       <CSSTransition
@@ -65,11 +67,11 @@ class ListViewItem extends Component {
         classNames="place-card"
       >
         <div className="card place-card">
-          <div className="card-title-area with-fab teal">
-            <Icon name="place" classes={["mr-2"]} color="white" />
+          <div className={`card-title-area with-fab ${list.color}`}>
+            <Icon name="place" classes={["mr-2"]} color={textColor} />
             <span
               onClick={this.handleViewPlace}
-              className="card-title white-text cursor-pointer"
+              className={`card-title cursor-pointer ${textColor}-text`}
             >
               {suggestion}
             </span>

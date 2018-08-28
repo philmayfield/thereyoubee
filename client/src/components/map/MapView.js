@@ -22,6 +22,7 @@ const MapView = props => {
       <Map
         currentPlace={currentPlace}
         places={places}
+        lists={lists}
         setShowTopNav={setShowTopNav}
       />
       <LocationSearchInput

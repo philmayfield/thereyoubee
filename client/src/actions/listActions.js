@@ -96,18 +96,18 @@ export const deleteList = list => dispatch => {
 };
 
 // save a new list to the database
-export const saveList = ({ _id = "", name }) => dispatch => {
+export const saveList = ({ _id = "", ...rest }, toggleAddForm) => dispatch => {
   const editing = _id ? true : false;
 
   dispatch(clearErrors());
   dispatch(isLoading("saveCurrentList"));
 
   axios
-    .post(`/api/list/${_id}`, { name })
+    .post(`/api/list/${_id}`, { ...rest })
     .then(res => {
       dispatch(
         addToast({
-          value: `${editing ? "Updated" : "Added"} ${name} list`,
+          value: `${editing ? "Updated" : "Added"} ${rest.name} list`,
           icon: "thumb_up"
         })
       );

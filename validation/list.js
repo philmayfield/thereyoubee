@@ -9,10 +9,10 @@ module.exports = function validateListInput(data = {}) {
 
   // name validations
   if (Validator.isEmpty(data.name)) {
-    errors.listname = "A list name is required";
+    errors.listName = "A list name is required";
   }
   if (!Validator.isLength(data.name, { min: 1, max: 40 })) {
-    errors.listname =
+    errors.listName =
       "Sorry, the list name cant be more than 40 characters long";
   }
 

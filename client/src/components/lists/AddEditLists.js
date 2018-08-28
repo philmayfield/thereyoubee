@@ -16,12 +16,14 @@ import Modal from "../common/Modal";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import ListItem from "./ListItem";
+import ListColorPicker from "./ListColorPicker";
 
 class AddEditLists extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listname: "",
+      listName: "",
+      listColor: undefined,
       editListId: "",
       startingListId:
         localStorage.getItem("currentList") || props.currentList._id || "",
@@ -37,10 +39,11 @@ class AddEditLists extends Component {
     this.handleEditList = this.handleEditList.bind(this);
     this.handleDeleteList = this.handleDeleteList.bind(this);
     this.inputChange = this.inputChange.bind(this);
+    this.colorChange = this.colorChange.bind(this);
     this.resetForm = this.resetForm.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const pNum = this.props.lists.length;
     const ppNum = prevProps.lists.length;
     const pListId = this.props.currentList._id;
@@ -99,7 +102,8 @@ class AddEditLists extends Component {
       e.stopPropagation();
       this.toggleAddForm(true);
       this.setState({
-        listname: list.name,
+        listName: list.name,
+        listColor: list.color,
         editListId: list._id
       });
     };
@@ -122,17 +126,26 @@ class AddEditLists extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleAddListSubmit(e) {
+  colorChange(e) {
+    this.setState({ listColor: e.target.value });
+  }
+
+  handleAddEditListSubmit(e) {
     e.preventDefault();
-    this.props.saveList({
-      _id: this.state.editListId,
-      name: this.state.listname
-    });
+    this.props.saveList(
+      {
+        _id: this.state.editListId,
+        name: this.state.listName,
+        color: this.state.listColor || "teal"
+      },
+      this.toggleAddForm
+    );
   }
 
   resetForm() {
     this.setState({
-      listname: "",
+      listName: "",
+      listColor: undefined,
       editListId: ""
     });
     this.props.clearErrors();
@@ -140,7 +153,7 @@ class AddEditLists extends Component {
 
   render() {
     let listOfLists;
-    const { showModal, showAdd } = this.state;
+    const { listColor, showModal, showAdd } = this.state;
     const { lists, currentList, errors, showBtnIcon = false } = this.props;
 
     if (showModal) {
@@ -184,7 +197,7 @@ class AddEditLists extends Component {
                 label: "Save List",
                 show: showAdd,
                 // btnClasses: ["blue"],
-                action: this.handleAddListSubmit.bind(this),
+                action: this.handleAddEditListSubmit.bind(this),
                 toggle: false
               }
             ]}
@@ -192,7 +205,9 @@ class AddEditLists extends Component {
             <h4>Your Place Lists</h4>
 
             <div className="d-flex flex-wrap justify-content-between align-items-end">
-              <h5>Select a specific list to use</h5>
+              <h5>
+                {showAdd ? "Add a new list" : "Select a specific list to use"}
+              </h5>
               <Button
                 clickOrTo={this.toggleAddForm}
                 classes={["btn-flat"]}
@@ -202,15 +217,20 @@ class AddEditLists extends Component {
               </Button>
             </div>
             {showAdd ? (
-              <form onSubmit={this.handleAddListSubmit.bind(this)}>
+              <form onSubmit={this.handleAddEditListSubmit.bind(this)}>
                 <Input
                   label="Your lists name"
-                  name="listname"
+                  name="listName"
                   required={true}
-                  value={this.state.listname}
+                  value={this.state.listName}
                   autoFocus={true}
-                  error={errors.listname}
+                  error={errors.listName}
                   onChange={this.inputChange}
+                  maxLength="40"
+                />
+                <ListColorPicker
+                  selectFn={this.colorChange}
+                  listColor={listColor}
                 />
               </form>
             ) : (

@@ -22,6 +22,7 @@ const MapView = props => {
       <Map
         currentPlace={currentPlace}
         places={places}
+        currentList={currentList}
         lists={lists}
         setShowTopNav={setShowTopNav}
       />

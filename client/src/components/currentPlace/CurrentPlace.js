@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Button from "../common/Button";
-import Icon from "../common/Icon";
+import { PlaceIcon } from "../common/Icon";
 import AddEditLists from "../lists/AddEditLists";
 import { notEmpty } from "../../common/empty";
 
@@ -25,11 +25,11 @@ const CurrentPlace = props => {
     hasStorePlace && lists.find(list => list._id === storePlace.list_id);
   const hasStorePlaceList = notEmpty(storePlaceList);
   const isOnUnknownList = hasStorePlace && !hasStorePlaceList;
-  const listName = hasStorePlaceList
-    ? storePlaceList.name
+  const listDeets = hasStorePlaceList
+    ? { name: storePlaceList.name, color: storePlaceList.color }
     : notEmpty(currentList)
-      ? currentList.name
-      : "Default List";
+      ? { name: currentList.name, color: currentList.color }
+      : { name: "Default List", color: "" };
   const showMessage = !isAuth || hasAnIssue;
   const whatsTheProb =
     showMessage && !isAuth ? (
@@ -45,7 +45,7 @@ const CurrentPlace = props => {
     <div className="add-current-place z-depth-3">
       <h2 className="sr-only">Current Place</h2>
       <div className="add-current-place__place-name">
-        <Icon name={"place"} classes={["place-icon", "mr-2"]} />
+        <PlaceIcon color={listDeets.color} classes={["mr-2"]} />
         {suggestion}
       </div>
       <hr />
@@ -61,7 +61,7 @@ const CurrentPlace = props => {
           ) : (
             <small className="d-flex mb-3 align-items-baseline">
               {storePlaceList ? "Already on the list:" : "Adding to the list:"}
-              <strong className="ml-1 mr-2">{listName}</strong>
+              <strong className="ml-1 mr-2">{listDeets.name}</strong>
               <AddEditLists lists={lists} />
             </small>
           )}

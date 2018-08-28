@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
-import Icon from "../common/Icon";
+import { PlaceIcon } from "../common/Icon";
 import { lightColors } from "../../common/getTextColor";
 
 class ClickablePoint extends Component {
@@ -43,17 +43,9 @@ class ClickablePoint extends Component {
   render() {
     const { text, color } = this.props;
     const { show, transitionIn } = this.state;
-    const isLightColor = lightColors.includes(color);
     return (
       <div onClick={this.handleClick} className="map-point">
-        <Icon
-          name="place"
-          classes={[
-            "map-point__icon",
-            isLightColor ? "place-icon-light" : "place-icon"
-          ]}
-          color={color}
-        />
+        <PlaceIcon color={color} classes={["map-point__icon"]} />
         <CSSTransition in={transitionIn} timeout={0} classNames="growFade">
           <span className={`map-point__text z-depth-1 ${show ? "" : "hide"}`}>
             {text}

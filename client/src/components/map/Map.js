@@ -52,11 +52,13 @@ class Map extends Component {
   }
 
   makePoints(placesArr) {
+    const { lists, currentList = {} } = this.props;
+    const currentColor = currentList.color;
     return placesArr.map(place => {
-      const list = this.props.lists.find(list => {
+      const list = lists.find(list => {
         return list._id === place.list_id;
       });
-      const color = (list && list.color) || "default";
+      const color = (list && list.color) || currentColor || "default";
 
       return (
         <ClickablePoint
@@ -148,6 +150,7 @@ Map.propTypes = {
   places: PropTypes.array.isRequired,
   lists: PropTypes.array.isRequired,
   setShowTopNav: PropTypes.func.isRequired,
+  currentList: PropTypes.object.isRequired,
   currentPlace: PropTypes.object.isRequired,
   text: PropTypes.string
 };

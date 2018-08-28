@@ -27,6 +27,7 @@ export const GET_LISTS = "GET_LISTS";
 export const SET_LIST = "SET_LIST";
 export const RESET_LIST = "RESET_LIST";
 export const SAVE_LIST = "SAVE_LIST";
+export const EDIT_LIST = "EDIT_LIST";
 export const DELETE_LIST = "DELETE_LIST";
 export const RESET_LISTS = "RESET_LISTS";
 export const FLAG_LIST = "FLAG_LIST";

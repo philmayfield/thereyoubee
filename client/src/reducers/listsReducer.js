@@ -1,6 +1,7 @@
 import {
   GET_LISTS,
   SAVE_LIST,
+  EDIT_LIST,
   FLAG_LIST,
   UNFLAG_LIST,
   DELETE_LIST,
@@ -15,6 +16,14 @@ export default (state = [], action) => {
 
     case SAVE_LIST:
       return [...state, action.payload].sort(compare("name"));
+
+    case EDIT_LIST:
+      return state.map(list => {
+        if (list._id === action.payload._id) {
+          return action.payload;
+        }
+        return list;
+      });
 
     case FLAG_LIST:
       return state.map(list => {

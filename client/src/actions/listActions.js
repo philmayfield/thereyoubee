@@ -111,10 +111,14 @@ export const saveList = ({ _id = "", name }) => dispatch => {
         })
       );
       if (editing) {
-        dispatch(resetLists());
-        dispatch(getAllLists());
-        dispatch(setList(res.data));
+        toggleAddForm(false); // toggle hiding the add form
+
+        dispatch({
+          payload: res.data,
+          type: EDIT_LIST
+        });
       } else {
+        // componentDidUpdate handles closing the add form for a new list
         dispatch({
           payload: res.data,
           type: SAVE_LIST

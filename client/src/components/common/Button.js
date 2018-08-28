@@ -61,7 +61,6 @@ class Button extends Component {
       clickOrTo,
       icon,
       iconSide = "left",
-      confirmItem = null,
       value = null,
       fab = false,
       pulse = false,
@@ -84,7 +83,6 @@ class Button extends Component {
           className={className}
           onClick={clickOrTo}
           value={value}
-          data-confirm-item={confirmItem}
         >
           {icon ? <Icon name={icon} classes={[iconSide]} /> : ""}
           {fab ? "" : children}
@@ -102,7 +100,6 @@ Button.propTypes = {
   type: PropTypes.string,
   icon: PropTypes.string,
   iconSide: PropTypes.string,
-  confirmItem: PropTypes.string,
   clickOrTo: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.oneOfType([
     PropTypes.array,

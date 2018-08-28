@@ -1,4 +1,4 @@
-// actions related to the app - confirmation
+// actions related to the app - errors and loading
 
 import {
   GET_ERRORS,

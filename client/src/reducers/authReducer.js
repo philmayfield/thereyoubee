@@ -3,8 +3,7 @@ import { notEmpty } from "../common/empty";
 
 const initialState = {
   isAuth: false,
-  user: {},
-  users: []
+  user: {}
 };
 
 export default function(state = initialState, action) {

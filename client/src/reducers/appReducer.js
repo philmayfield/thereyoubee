@@ -15,8 +15,7 @@ export default (state = defaultState, action) => {
     case NOT_LOADING:
       return {
         ...state,
-        loadingArr: state.loadingArr.filter(item => item !== action.payload),
-        confirmObject: {}
+        loadingArr: state.loadingArr.filter(item => item !== action.payload)
       };
 
     default:

@@ -196,7 +196,6 @@ class AddEditLists extends Component {
               {
                 label: "Save List",
                 show: showAdd,
-                // btnClasses: ["blue"],
                 action: this.handleAddEditListSubmit.bind(this),
                 toggle: false
               }

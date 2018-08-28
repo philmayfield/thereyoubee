@@ -21,6 +21,7 @@ class LocationSearchInput extends Component {
         address: "",
         suggestion: "",
         place_id: "",
+        list_id: "",
         latLng: {}
       }
     };

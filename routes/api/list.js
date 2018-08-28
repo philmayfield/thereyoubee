@@ -66,7 +66,7 @@ router.post(
 
         const { name } = req.body;
 
-        errors.listname = `You've already got a list named ${name} 😎`;
+        errors.listName = `You've already got a list named ${name} 😎`;
 
         return res.status(400).json(errors);
       } else {
@@ -76,6 +76,7 @@ router.post(
         const listFields = {};
         listFields.author = author ? author : "";
         listFields.name = body.name ? body.name : "";
+        listFields.color = body.color ? body.color : "";
 
         // save list to db
         new List(listFields)
@@ -109,7 +110,8 @@ router.post(
 
     // get fields
     const listFields = {
-      name: body.name
+      name: body.name,
+      color: body.color
     };
 
     // check to see if that list name already exists

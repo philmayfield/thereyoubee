@@ -14,6 +14,11 @@ const ListSchema = new Schema({
   name: {
     type: Schema.Types.String,
     required: true
+  },
+  color: {
+    type: Schema.Types.String,
+    required: true,
+    default: "teal"
   }
 });
 

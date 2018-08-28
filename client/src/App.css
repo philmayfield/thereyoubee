@@ -5783,12 +5783,22 @@ i.right {
     opacity: 0;
     transform: scale(0.2) translateX(25px);
     display: inline-block;
-    margin: 0 15px 0 0;
+    margin: 0 0.5rem 0 0;
     transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
   .fab .btn-large + ul {
     right: 5rem; }
   .fab .halfway-fab {
     right: 1rem; }
+  .fab .btn-floating {
+    transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
+
+.halfway-fab, .halfway-fab:hover,
+.halfway-fab ~ ul .btn-floating {
+  box-shadow: 0 0 0 2px white; }
+
+.halfway-fab:hover,
+.halfway-fab ~ ul .btn-floating:hover {
+  transform: scale(1.1); }
 
 .collection .fab {
   position: relative; }

@@ -75,7 +75,7 @@ class Modal extends Component {
 
     return ReactDOM.createPortal(
       <Fragment>
-        <CSSTransition in={show} timeout={0} classNames="growFade">
+        <CSSTransition in={show} timeout={0} classNames="growFadeModal">
           <div className={`modal ${show ? "open" : ""}`}>
             <div className="modal-content">{this.props.children}</div>
             <div className="modal-footer">

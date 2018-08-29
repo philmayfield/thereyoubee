@@ -8,7 +8,7 @@ const ListColorPicker = props => {
 
   return (
     <fieldset className="color-picker">
-      <legend>Choose a label color</legend>
+      <legend>Choose a color for your list</legend>
       <div className="color-picker__colors">{listOfColors}</div>
     </fieldset>
   );

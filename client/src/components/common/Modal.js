@@ -10,6 +10,7 @@ const modalRoot = document.getElementById("modal-root");
 // -----------------
 // toggle: (function) - show / hide the modal
 // onClose: (function) - callback when the modal is closed
+// showRequiredMessage: (bool) - show the * is required message in footer
 // actions: (array) [ - array of actions that get turned into buttons in the footer of the modal
 //   {
 //     label: (string), - label for button
@@ -62,13 +63,13 @@ class Modal extends Component {
 
   render() {
     const { show } = this.state;
-    const { actions = [] } = this.props;
+    const { actions = [], showRequiredMessage = false } = this.props;
     const actionButtons = actions.map(
       ({ show = true, label, toggle = false, action, btnClasses = [] }) => (
         <Button
           key={label}
           clickOrTo={toggle ? this.withRemove(action) : action}
-          classes={[show ? "" : "d-none", ...btnClasses, "ml-2"]}
+          classes={[show ? "" : "d-none", ...btnClasses]}
         >
           {label}
         </Button>
@@ -81,13 +82,18 @@ class Modal extends Component {
           <div className={`modal ${show ? "open" : ""}`}>
             <div className="modal-content">{this.props.children}</div>
             <div className="modal-footer">
-              <Button
-                clickOrTo={this.handleRemove}
-                classes={["btn-flat", "red-text", "ml-2"]}
-              >
-                Close
-              </Button>
-              {actionButtons}
+              <span className="px-2">
+                {showRequiredMessage ? "* Required" : null}
+              </span>
+              <span className="modal-actions ml-auto">
+                <Button
+                  clickOrTo={this.handleRemove}
+                  classes={["btn-flat", "red-text"]}
+                >
+                  Close
+                </Button>
+                {actionButtons}
+              </span>
             </div>
           </div>
         </CSSTransition>
@@ -103,6 +109,7 @@ class Modal extends Component {
 Modal.propTypes = {
   actions: PropTypes.array,
   show: PropTypes.bool,
+  showRequiredMessage: PropTypes.bool,
   onClose: PropTypes.func,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([

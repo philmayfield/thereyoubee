@@ -23,6 +23,19 @@
   & .modal-content {
     padding: $spacer $spacer 0;
   }
+
+  .modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacer / 2;
+    height: auto;
+
+    .btn {
+      margin: 0;
+    }
+  }
 }
 .modal-overlay {
   cursor: not-allowed;

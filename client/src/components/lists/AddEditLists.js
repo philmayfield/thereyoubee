@@ -153,7 +153,7 @@ class AddEditLists extends Component {
 
   render() {
     let listOfLists;
-    const { listColor, showModal, showAdd } = this.state;
+    const { listColor, showModal, showAdd, editListId } = this.state;
     const { lists, currentList, errors, showBtnIcon = false } = this.props;
 
     if (showModal) {
@@ -192,9 +192,10 @@ class AddEditLists extends Component {
           <Modal
             toggle={this.toggleShowModal}
             onClose={this.handleCloseModal}
+            showRequiredMessage={showAdd}
             actions={[
               {
-                label: "Save List",
+                label: `${editListId ? "Save" : "Make New"} List`,
                 show: showAdd,
                 action: this.handleAddEditListSubmit.bind(this),
                 toggle: false
@@ -218,7 +219,7 @@ class AddEditLists extends Component {
             {showAdd ? (
               <form onSubmit={this.handleAddEditListSubmit.bind(this)}>
                 <Input
-                  label="Your lists name"
+                  label="Enter a name for our list"
                   name="listName"
                   required={true}
                   value={this.state.listName}

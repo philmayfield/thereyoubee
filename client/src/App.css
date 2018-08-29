@@ -5746,8 +5746,8 @@ i.right {
   position: absolute; }
   .color-picker input:checked + label {
     border-radius: 2px;
-    transform: scale(1.15);
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3); }
+    transform: scale(1.2);
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3), inset 0 0 0 2px white; }
 
 .color-picker label {
   display: block;
@@ -5758,10 +5758,12 @@ i.right {
 
 .color-picker__colors {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); }
+  grid-template-columns: repeat(5, 1fr);
+  padding: 1rem; }
   @media only screen and (min-width: 601px) {
     .color-picker__colors {
-      grid-template-columns: repeat(10, 1fr); } }
+      grid-template-columns: repeat(10, 1fr);
+      padding: 1rem 2rem; } }
 
 .fab {
   padding: 0;
@@ -5893,6 +5895,15 @@ fieldset {
       width: calc(100% - 1rem); } }
   .modal .modal-content {
     padding: 1rem 1rem 0; }
+  .modal .modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    height: auto; }
+    .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-small {
+      margin: 0; }
 
 .modal-overlay {
   cursor: not-allowed;

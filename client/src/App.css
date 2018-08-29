@@ -5679,7 +5679,7 @@ i.right {
 .register main {
   height: 100vh; }
 
-.landing main,
+.landing-view__scroll,
 .login main,
 .register main,
 .list-view__list {
@@ -5828,9 +5828,9 @@ fieldset {
   border: solid transparent 0px; }
 
 .landing-view__scroll {
-  height: calc(100vh - 3.5rem);
-  overflow-y: scroll;
-  padding-bottom: 48px; }
+  height: calc(100vh - 2.75rem);
+  padding-bottom: calc(48px + 1rem);
+  overflow-y: scroll; }
 
 .tech-logos .tech-icon {
   height: 2rem;

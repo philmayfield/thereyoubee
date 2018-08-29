@@ -1,7 +1,7 @@
 .landing-view__scroll {
-  height: calc(100vh - #{$spacer * 3.5});
+  height: calc(100vh - #{$spacer * 2.75});
+  padding-bottom: calc(48px + #{$spacer});
   overflow-y: scroll;
-  padding-bottom: 48px;
 }
 
 .tech-logos {

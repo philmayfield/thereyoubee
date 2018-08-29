@@ -1,3 +1,6 @@
-.collection-item {
-  position: relative;
+.collection {
+  .collection-item {
+    padding: $spacer;
+    position: relative;
+  }
 }

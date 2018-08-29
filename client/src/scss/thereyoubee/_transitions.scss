@@ -59,7 +59,7 @@
 .growFadeModal-appear-done,
 .growFadeModal-enter-done {
   opacity: 1 !important;
-  transform: scale(1) translateY(-50%) rotate3d(0, 0, 0, 0deg) !important;
+  transform: scale(1) translateY(-50%) !important;
 }
 
 .place-card-enter-done {

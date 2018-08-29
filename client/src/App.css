@@ -5736,13 +5736,14 @@ i.right {
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 0;
-  transition: all 250ms cubic-bezier(0.5, -0.2, 0.5, 1.2); }
+  transition: all 333ms cubic-bezier(0.5, -0.2, 0.5, 1.2); }
   @media screen and (max-width: 540px) {
     .place-card {
       margin-left: -0.75rem;
       margin-right: -0.75rem; } }
 
-.collection-item {
+.collection .collection-item {
+  padding: 1rem;
   position: relative; }
 
 .color-picker input {
@@ -5783,7 +5784,7 @@ i.right {
     opacity: 0;
     transform: scale(0.2) translateX(25px);
     display: inline-block;
-    margin: 0 0.5rem 0 0;
+    margin: 0 0.75rem 0 0;
     transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
   .fab .btn-large + ul {
     right: 5rem; }
@@ -5801,7 +5802,8 @@ i.right {
   transform: scale(1.1); }
 
 .collection .fab {
-  position: relative; }
+  bottom: auto;
+  right: 0.5rem; }
   .collection .fab > .btn, .collection .fab > .btn-large, .collection .fab > .btn-small {
     right: 0;
     bottom: auto; }
@@ -5874,16 +5876,17 @@ fieldset {
   bottom: 0;
   left: 0;
   right: 0;
-  perspective: 120rem; }
+  perspective: 120rem;
+  z-index: 99; }
 
 .modal {
   display: block;
   top: 50%;
-  z-index: 99;
+  max-height: calc(100% - 1rem);
   opacity: 0;
-  transform: scale(0.8) translateY(-70%) rotate3d(1, 0, 0, 60deg);
-  transition: all 250ms cubic-bezier(0.5, -0.2, 0.5, 1.2);
-  transition-duration: 333ms; }
+  transform: scale(0.8) translateY(-70%);
+  transition: all 333ms cubic-bezier(0.5, -0.2, 0.5, 1.2);
+  z-index: 2; }
   @media only screen and (max-width: 600px) {
     .modal {
       width: calc(100% - 1rem); } }
@@ -5895,7 +5898,7 @@ fieldset {
   display: block;
   opacity: 0;
   transition: opacity 250ms ease-in-out;
-  z-index: 98; }
+  z-index: 1; }
 
 .tabs .tab a {
   color: #ee6e73;
@@ -6217,7 +6220,7 @@ fieldset {
 .growFadeModal-appear-done,
 .growFadeModal-enter-done {
   opacity: 1 !important;
-  transform: scale(1) translateY(-50%) rotate3d(0, 0, 0, 0deg) !important; }
+  transform: scale(1) translateY(-50%) !important; }
 
 .place-card-enter-done {
   margin-top: 1rem;

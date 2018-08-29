@@ -18,7 +18,7 @@
     opacity: 0;
     transform: scale(0.2) translateX(25px);
     display: inline-block;
-    margin: 0 $spacer/2 0 0;
+    margin: 0 0.75 * $spacer 0 0;
     transition: $bouncy;
   }
   .btn-large + ul {
@@ -47,7 +47,8 @@
 }
 
 .collection .fab {
-  position: relative;
+  bottom: auto;
+  right: $spacer/2;
 
   & > .btn {
     right: 0;

@@ -6,13 +6,13 @@ import ReactSVG from "react-svg";
 const Landing = () => {
   return (
     <div className="landing-view">
-      <ReactSVG
-        path={getImg("phil")}
-        className="mx-auto d-flex justify-content-center"
-        svgClassName="phil round-img"
-      />
-      <div className="row">
-        <div className="col-11 col-md-8 col-lg-6 mx-auto">
+      <div className="landing-view__scroll">
+        <ReactSVG
+          path={getImg("phil")}
+          className="mx-auto d-flex justify-content-center"
+          svgClassName="phil round-img"
+        />
+        <div className="col-12 col-md-8 col-lg-6 mx-auto">
           <div className="card-panel">
             <h1 className="mt-0">Hello Friends!</h1>
             <p>If you&rsquo;ve found this, then welcome!</p>

@@ -5645,9 +5645,6 @@ body,
 .with-bottom-nav .the-map {
   bottom: 48px; }
 
-.landing-view {
-  overflow-y: scroll; }
-
 .w100 {
   width: 100%; }
 
@@ -5678,7 +5675,6 @@ i.right {
 .no-click {
   pointer-events: none; }
 
-.landing main,
 .login main,
 .register main {
   height: 100vh; }
@@ -5830,6 +5826,11 @@ fieldset {
   margin: 0;
   padding: 0;
   border: solid transparent 0px; }
+
+.landing-view__scroll {
+  height: calc(100vh - 3.5rem);
+  overflow-y: scroll;
+  padding-bottom: 48px; }
 
 .tech-logos .tech-icon {
   height: 2rem;

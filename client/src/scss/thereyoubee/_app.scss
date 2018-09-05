@@ -10,20 +10,6 @@ body,
   overflow: hidden;
 }
 
-.with-bottom-nav {
-  .landing-view,
-  .login-view,
-  .register-view,
-  // .map-view,
-  .list-view {
-    height: calc(100% - 48px);
-  }
-
-  .the-map {
-    bottom: 48px;
-  }
-}
-
 .w100 {
   width: 100%;
 }

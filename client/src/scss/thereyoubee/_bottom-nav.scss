@@ -1,9 +1,66 @@
+$bottomNavHeight: 48px;
+$bottomHeaderHeight: 0;
+$bottomNavHeightMedAndUp: $bottomNavHeight + $bottomHeaderHeight;
+
 .bottom-nav {
-  position: absolute;
   bottom: 0;
+  background-color: white;
+  position: absolute;
 
   .tabs {
     display: flex;
     justify-content: center;
+  }
+}
+
+.bottom-nav__header {
+  display: none;
+
+  @media #{$medium-and-up} {
+    display: flex;
+    height: $bottomHeaderHeight;
+  }
+}
+
+.bottom-nav__header-content {
+  font-size: 75%;
+  padding: $spacer/2 $spacer * 2;
+  background-color: white;
+  border-radius: $button-radius;
+  box-shadow: 0 -1px 7px -3px rgba(black, 0.5);
+  position: relative;
+  bottom: -$spacer/4;
+
+  &::after {
+    content: '';
+    display: block;
+  }
+}
+
+.with-bottom-nav {
+  .landing-view,
+  .login-view,
+  .register-view,
+  // .map-view,
+  .list-view {
+    height: calc(100% - #{$bottomNavHeight});
+  }
+
+  .the-map {
+    bottom: $bottomNavHeight;
+  }
+
+  @media #{$medium-and-up} {
+    .landing-view,
+    .login-view,
+    .register-view,
+    // .map-view,
+    .list-view {
+      height: calc(100% - #{$bottomNavHeightMedAndUp});
+    }
+
+    .the-map {
+      bottom: $bottomNavHeightMedAndUp;
+    }
   }
 }

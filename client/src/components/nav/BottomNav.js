@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { NavLink, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class BottomNav extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class BottomNav extends Component {
         offsetLeft: 0,
         offsetWidth: 0
       },
-      currentLoc: props.location.pathname.replace("/", "") || ""
+      currentLoc: props.location.pathname.replace('/', '') || ''
     };
 
     this.setIndicator = this.setIndicator.bind(this);
@@ -22,7 +22,7 @@ class BottomNav extends Component {
 
   componentDidUpdate() {
     const { currentLoc } = this.state;
-    const pathname = this.props.location.pathname.replace("/", "");
+    const pathname = this.props.location.pathname.replace('/', '');
 
     if (currentLoc !== pathname) {
       this.setState({ currentLoc: pathname });
@@ -37,7 +37,7 @@ class BottomNav extends Component {
       offsetLeft = node.offsetLeft;
       offsetWidth = node.offsetWidth;
     } else {
-      offsetLeft = "50%";
+      offsetLeft = '50%';
       offsetWidth = 0;
     }
 
@@ -49,6 +49,11 @@ class BottomNav extends Component {
 
     return (
       <nav className="bottom-nav vw100 z-depth-3">
+        <div className="bottom-nav__header justify-content-center align-items-end">
+          <h6 className="bottom-nav__header-content m-0">
+            <strong>App Navigation</strong>
+          </h6>
+        </div>
         <ul className="tabs mx-auto">
           <li className="tab">
             <NavLink

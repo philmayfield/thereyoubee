@@ -5636,15 +5636,6 @@ body,
   height: 100%;
   overflow: hidden; }
 
-.with-bottom-nav .landing-view,
-.with-bottom-nav .login-view,
-.with-bottom-nav .register-view,
-.with-bottom-nav .list-view {
-  height: calc(100% - 48px); }
-
-.with-bottom-nav .the-map {
-  bottom: 48px; }
-
 .w100 {
   width: 100%; }
 
@@ -5935,11 +5926,49 @@ fieldset {
   transition: all 250ms cubic-bezier(0.5, -0.4, 0.5, 1.4); }
 
 .bottom-nav {
-  position: absolute;
-  bottom: 0; }
+  bottom: 0;
+  background-color: white;
+  position: absolute; }
   .bottom-nav .tabs {
     display: flex;
     justify-content: center; }
+
+.bottom-nav__header {
+  display: none; }
+  @media only screen and (min-width: 601px) {
+    .bottom-nav__header {
+      display: flex;
+      height: 0; } }
+
+.bottom-nav__header-content {
+  font-size: 75%;
+  padding: 0.5rem 2rem;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 -1px 7px -3px rgba(0, 0, 0, 0.5);
+  position: relative;
+  bottom: -0.25rem; }
+  .bottom-nav__header-content::after {
+    content: '';
+    display: block; }
+
+.with-bottom-nav .landing-view,
+.with-bottom-nav .login-view,
+.with-bottom-nav .register-view,
+.with-bottom-nav .list-view {
+  height: calc(100% - 48px); }
+
+.with-bottom-nav .the-map {
+  bottom: 48px; }
+
+@media only screen and (min-width: 601px) {
+  .with-bottom-nav .landing-view,
+  .with-bottom-nav .login-view,
+  .with-bottom-nav .register-view,
+  .with-bottom-nav .list-view {
+    height: calc(100% - 48px); }
+  .with-bottom-nav .the-map {
+    bottom: 48px; } }
 
 .add-current-place {
   background-color: #fff;

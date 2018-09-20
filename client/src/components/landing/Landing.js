@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import getImg from "../../common/getImg";
-import ReactSVG from "react-svg";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import getImg from '../../common/getImg';
+import ReactSVG from 'react-svg';
 
 const Landing = () => {
   return (
     <div className="landing-view">
       <div className="landing-view__scroll">
         <ReactSVG
-          path={getImg("phil")}
+          src={getImg('phil')}
           className="mx-auto d-flex justify-content-center"
           svgClassName="phil round-img"
         />
@@ -39,9 +39,9 @@ const Landing = () => {
               </li>
             </ol>
             <p>
-              Go ahead and play with it! You{" "}
+              Go ahead and play with it! You{' '}
               <Link to="/register"> can create a login</Link> (no email or
-              anything is required) or just{" "}
+              anything is required) or just{' '}
               <Link to="/login">use a tester account</Link> with these
               credentials&hellip;
             </p>
@@ -55,7 +55,7 @@ const Landing = () => {
               project for me to nerd out on.
             </p>
             <p>
-              If you feel like spooling up your own version, feel free to{" "}
+              If you feel like spooling up your own version, feel free to{' '}
               <a
                 href="https://github.com/philmayfield/thereyoubee"
                 target="_blank"
@@ -68,21 +68,13 @@ const Landing = () => {
 
             <small className="d-block center-align mt-5 mb-3">Built With</small>
             <div className="tech-logos d-flex flex-wrap justify-content-around">
-              {/* <a
-                href="https://getbootstrap.com/"
-                title="Bootstrap 4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ReactSVG className="tech-icon" path={getImg("bootstrap")} />
-              </a> */}
               <a
                 href="https://expressjs.com/"
                 title="Express"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("express")} />
+                <ReactSVG className="tech-icon" src={getImg('express')} />
               </a>
               <a
                 href="https://git-scm.com/"
@@ -90,7 +82,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("git")} />
+                <ReactSVG className="tech-icon" src={getImg('git')} />
               </a>
               <a
                 href="https://www.heroku.com/"
@@ -98,7 +90,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("heroku")} />
+                <ReactSVG className="tech-icon" src={getImg('heroku')} />
               </a>
               <a
                 href="https://www.ecma-international.org/"
@@ -106,7 +98,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("js")} />
+                <ReactSVG className="tech-icon" src={getImg('js')} />
               </a>
               <a
                 href="https://www.mongodb.com/"
@@ -114,7 +106,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("mongo")} />
+                <ReactSVG className="tech-icon" src={getImg('mongo')} />
               </a>
               <a
                 href="https://nodejs.org/"
@@ -122,7 +114,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("node")} />
+                <ReactSVG className="tech-icon" src={getImg('node')} />
               </a>
               <a
                 href="https://reactjs.org/"
@@ -130,7 +122,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("react")} />
+                <ReactSVG className="tech-icon" src={getImg('react')} />
               </a>
               <a
                 href="https://redux.js.org/"
@@ -138,7 +130,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("redux")} />
+                <ReactSVG className="tech-icon" src={getImg('redux')} />
               </a>
               <a
                 href="https://sass-lang.com/"
@@ -146,7 +138,7 @@ const Landing = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ReactSVG className="tech-icon" path={getImg("sass")} />
+                <ReactSVG className="tech-icon" src={getImg('sass')} />
               </a>
             </div>
           </div>

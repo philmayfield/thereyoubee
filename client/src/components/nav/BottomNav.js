@@ -61,7 +61,6 @@ class BottomNav extends Component {
               className="bottom-nav__link"
               activeClassName="active"
               to="/map"
-              onClick={this.handleClick}
             >
               Map View
             </NavLink>
@@ -72,7 +71,6 @@ class BottomNav extends Component {
               className="bottom-nav__link"
               activeClassName="active"
               to="/list"
-              onClick={this.handleClick}
             >
               List View
             </NavLink>
